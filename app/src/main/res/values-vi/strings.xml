@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Âm thanh DSP</string>
+
+    <string name="dsp_aps">Bộ chỉnh âm</string>
+    <string name="dsp_surround_sound">âm thanh vòm</string>
+    <string name="dsp_bass_boost">Tăng âm trầm</string>
+    <string name="dsp_sound">Cài đặt trường âm thanh</string>
+    <string name="dsp_bass_filter">Bộ lọc âm trầm</string>
+    <string name="btn_default">mặc định</string>
+    <string name="btn_setting">thiết lập</string>
+
+    <string name="btn_car">toàn bộ xe hơi</string>
+    <string name="btn_front">phía trước bên trái / phía trước bên phải</string>
+    <string name="btn_rear">phía sau bên trái / phía sau bên phải</string>
+    <string name="btn_previous">trang trước</string>
+    <string name="btn_next">Trang tiếp theo</string>
+
+    <string name="btn_drive_left">trái</string>
+    <string name="btn_drive_right">đúng</string>
+    <string name="btn_drive_center">ở giữa</string>
+    <string name="btn_drive_rear">Phía sau</string>
+    <string name="btn_drive_user1">Chế độ người dùng 1</string>
+    <string name="btn_drive_user2">Chế độ người dùng 2</string>
+
+    <string name="car_front_rear">Điều chỉnh độc lập loa trước và loa sau</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">sừng trước</string>
+    <string name="trumpet_rear">còi sau</string>
+
+    <string name="trumpet_front1">sừng trước</string>
+    <string name="trumpet_rear1">còi sau</string>
+
+    <string-array name="dsp_aps_type">
+        <item> Người dùng </item>
+        <item> Tiêu chuẩn </item>
+        <item> Thưa ngài </item>
+        <item> Phổ biến </item>
+        <item> Đá </item>
+        <item> Cổ điển </item>
+        <item> mềm </item>
+        <item> Tiền sảnh </item>
+        <item> Rạp chiếu phim </item>
+    </string-array>
+
+    <string name="dsp_volume_blance_setting">cân bằng âm lượng</string>
+    <string name="blance_music">Âm nhạc</string>
+    <string name="blance_radio">Đài</string>
+    <string name="blance_bt">Bluetooth</string>
+    <string name="blance_navi">Trang chủ</string>
+    <string name="blance_voice">Giọng nói</string>
+</resources>

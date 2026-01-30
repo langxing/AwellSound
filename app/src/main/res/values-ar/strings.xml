@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">صوت DSP</string>
+
+    <string name="dsp_aps">المعادل</string>
+    <string name="dsp_surround_sound">الصوت المحيط</string>
+    <string name="dsp_bass_boost">تعزيز الجهير</string>
+    <string name="dsp_sound">إعدادات مجال الصوت</string>
+    <string name="dsp_bass_filter">مرشح الجهير</string>
+    <string name="btn_default">إفتراضي</string>
+    <string name="btn_setting">اقامة</string>
+
+    <string name="btn_car">سيارة كاملة</string>
+    <string name="btn_front">اليمين الامامي/اليسار الأمامي</string>
+    <string name="btn_rear">خلفي يسار / خلفي يمين</string>
+    <string name="btn_previous">الصفحة السابقة</string>
+    <string name="btn_next">الصفحة التالية</string>
+
+    <string name="btn_drive_left">وضع القيادة</string>
+    <string name="btn_drive_right">وضع مساعد الطيار</string>
+    <string name="btn_drive_center">وضع السيارة الكامل</string>
+    <string name="btn_drive_rear">وضع الصف الخلفي</string>
+    <string name="btn_drive_user1">وضع المستخدم</string>
+    <string name="btn_drive_user2">وضع المستخدم</string>
+
+    <string name="car_front_rear">الضبط المستقل للسماعات الأمامية والخلفية</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">القرن الأمامي</string>
+    <string name="trumpet_rear">البوق الخلفي</string>
+
+    <string name="trumpet_front1">القرن الأمامي</string>
+    <string name="trumpet_rear1">البوق الخلفي</string>
+
+    <string-array name="dsp_aps_type">
+        <item>المستعمل</item>
+        <item>اساسي</item>
+        <item>موسيقى الجاز</item>
+        <item>شعبية</item>
+        <item>صخر</item>
+        <item>كلاسيكي</item>
+        <item>لين</item>
+        <item>صالة</item>
+        <item>سينما</item>
+    </string-array>
+
+    <string name="dsp_volume_blance_setting">توازن الحجم</string>
+    <string name="blance_music">موسيقى</string>
+    <string name="blance_radio">مذياع</string>
+    <string name="blance_bt">بلوتوث</string>
+    <string name="blance_navi">ملاحة</string>
+    <string name="blance_voice">صوت</string>
+</resources>

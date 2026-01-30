@@ -1,0 +1,2 @@
+com.awell.library
+string app_name

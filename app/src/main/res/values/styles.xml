@@ -1,0 +1,247 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/dsp_bg</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="SplashTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:windowBackground">@color/main_bg</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- dialog style -->
+    <style name="dialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--        <item name="android:windowBackground">@drawable/shape_corner</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@null</item>
+        <item name="android:screenOrientation">landscape</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="NoActionBar" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <!-- <item name="android:windowBackground">@color/transparent</item> -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="NoActionBarFullscreen" parent="@style/NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="aps_sound_image_style_port">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/selector_tab_bg</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="dsp_seekBar_style">
+        <item name="android:thumbOffset">0dp</item>
+        <item name="android:splitTrack">false</item>
+        <item name="android:progressDrawable">@drawable/seekbar_bg</item>
+        <item name="android:thumb">@drawable/dsp_increase_thumb</item>
+        <item name="android:maxHeight">12dp</item>
+        <item name="android:minHeight">12dp</item>
+
+        <item name="android:max">12</item>
+        <item name="android:padding">14dp</item>
+        <item name="seekBarRotation">CW270</item>
+    </style>
+
+    <style name="dsp_seekBar_parent_view_style2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">350dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="dsp_seekBar_style2">
+        <item name="android:thumbOffset">5dp</item>
+        <!--        <item name="android:splitTrack">false</item>-->
+        <item name="android:progressDrawable">@drawable/dsp_increase_seekbar_style</item>
+        <item name="android:thumb">@drawable/dsp_increase_seek_thumb</item>
+        <item name="android:maxHeight">20dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:max">12</item>
+        <!--  <item name="android:padding">14dp</item>-->
+        <item name="seekBarRotation">CW270</item>
+    </style>
+
+<!--    <style name="seek_bar_style">-->
+<!--        &lt;!&ndash; <item name="android:progressDrawable">@drawable/seek_bar_bg</item>&ndash;&gt;-->
+<!--        <item name="android:progressDrawable">@drawable/seekbar_style</item>-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:layout_height">match_parent</item>-->
+<!--        <item name="android:max">24</item>-->
+<!--        &lt;!&ndash;  <item name="android:maxHeight">2dp</item>&ndash;&gt;-->
+<!--        <item name="android:maxHeight">@dimen/dsp_seekbar_max_height</item>-->
+<!--        <item name="android:minHeight">@dimen/dsp_seekbar_max_height</item>-->
+<!--        <item name="android:thumb">@drawable/dsp_thumb_bg</item>-->
+<!--        <item name="android:thumbOffset">0dp</item>-->
+<!--        <item name="android:progress">12</item>-->
+<!--        <item name="android:paddingStart">0dp</item>-->
+<!--        <item name="android:paddingEnd">0dp</item>-->
+<!--        <item name="android:paddingTop">0dp</item>-->
+<!--        <item name="android:paddingBottom">0dp</item>-->
+<!--        <item name="seekBarRotation">CW270</item>-->
+<!--    </style>-->
+
+
+<!--    <style name="dsp_seekBar_style">-->
+<!--        <item name="android:thumbOffset">0dp</item>-->
+<!--        <item name="android:splitTrack">false</item>-->
+<!--        <item name="android:progressDrawable">@drawable/seekbar_style</item>-->
+<!--        <item name="android:thumb">@drawable/dsp_increase_thumb</item>-->
+<!--        <item name="android:maxHeight">12dp</item>-->
+<!--        <item name="android:minHeight">12dp</item>-->
+<!--        <item name="android:max">12</item>-->
+<!--        <item name="android:padding">14dp</item>-->
+<!--        <item name="seekBarRotation">CW270</item>-->
+<!--    </style>-->
+
+    <style name="dsp_seekBar_style1_parent_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+<!--    &lt;!&ndash;新增&ndash;&gt;-->
+<!--    <style name="dsp_seekBar_style1">-->
+<!--        <item name="android:thumbOffset">10dp</item>-->
+<!--        <item name="android:splitTrack">false</item>-->
+<!--        <item name="android:progressDrawable">@drawable/dsp_increase_seekbar_style</item>-->
+<!--        <item name="android:thumb">@drawable/dsp_increase_seek_thumb</item>-->
+<!--        <item name="android:maxHeight">13dp</item>-->
+<!--        <item name="android:minHeight">13dp</item>-->
+<!--        <item name="android:max">36</item>-->
+<!--        <item name="seekBarRotation">CW270</item>-->
+<!--    </style>-->
+
+<!--    <style name="dsp_seekBar_style2">-->
+<!--        <item name="android:thumbOffset">5dp</item>-->
+<!--        &lt;!&ndash;        <item name="android:splitTrack">false</item>&ndash;&gt;-->
+<!--        <item name="android:progressDrawable">@drawable/dsp_increase_seekbar_style</item>-->
+<!--        <item name="android:thumb">@drawable/dsp_increase_seek_thumb</item>-->
+<!--        <item name="android:maxHeight">20dp</item>-->
+<!--        <item name="android:minHeight">20dp</item>-->
+<!--        <item name="android:max">12</item>-->
+<!--        &lt;!&ndash;  <item name="android:padding">14dp</item>&ndash;&gt;-->
+<!--        <item name="seekBarRotation">CW270</item>-->
+<!--    </style>-->
+
+<!--    <style name="dsp_seekBar_style3">-->
+<!--        <item name="android:layout_width">0dp</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:layout_gravity">center</item>-->
+<!--        <item name="android:layout_marginStart">35dp</item>-->
+<!--        <item name="android:layout_marginEnd">35dp</item>-->
+<!--        <item name="android:thumbOffset">5dp</item>-->
+<!--        <item name="android:progressDrawable">@drawable/dsp_increase_seekbar_style</item>-->
+<!--        <item name="android:thumb">@drawable/dsp_increase_seek_thumb</item>-->
+<!--        <item name="android:maxHeight">15dp</item>-->
+<!--        <item name="android:minHeight">15dp</item>-->
+<!--        <item name="android:max">12</item>-->
+<!--    </style>-->
+
+    <style name="aps_btn_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:singleLine">false</item>
+        <item name="paddingStart">0dp</item>
+        <item name="paddingEnd">0dp</item>
+    </style>
+
+    <style name="aps_sound_image_style1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="aps_sound_image_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:background">@drawable/dsp_aps_sound_field_type_no_select_bg_draw</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+<!--    <style name="AnimationPreview">-->
+<!--        <item name="android:windowEnterAnimation">@anim/anim_slide_in</item>-->
+<!--        <item name="android:windowExitAnimation">@anim/anim_slide_out</item>-->
+<!--    </style>-->
+
+<!--    <style name="aps_content_left_style">-->
+<!--        <item name="android:textColor">@color/color_white</item>-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:layout_gravity">center_vertical</item>-->
+<!--        <item name="android:gravity">center_vertical</item>-->
+<!--    </style>-->
+
+<!--    <style name="aps_switch_style">-->
+<!--        <item name="android:layout_width">wrap_content</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:textColor">@android:color/white</item>-->
+<!--        <item name="android:textSize">10sp</item>-->
+<!--        <item name="android:gravity">center_vertical</item>-->
+<!--        <item name="android:layout_marginStart">30dp</item>-->
+<!--        <item name="android:layout_marginEnd">20dp</item>-->
+<!--        &lt;!&ndash;        <item name="android:thumb">@drawable/setting_switch_thumb</item>&ndash;&gt;-->
+<!--        <item name="android:track">@drawable/setting_switch_track</item>-->
+<!--        <item name="android:thumb">@drawable/setting_switch_thumb_d</item>-->
+<!--        <item name="android:showText">false</item>-->
+<!--    </style>-->
+
+<!--    <style name="aps_surround_text_style">-->
+<!--        <item name="android:fontFamily">sans-serif-black</item>-->
+<!--        <item name="android:layout_width">88dp</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--        <item name="android:textColor">@color/color_base_loudness</item>-->
+<!--        <item name="android:singleLine">true</item>-->
+<!--        <item name="android:gravity">center</item>-->
+<!--    </style>-->
+
+    <style name="fragment_increase_hz_text">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

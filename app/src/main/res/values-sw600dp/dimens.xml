@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dsp_volume_margin">30dp</dimen>
+    <dimen name="dsp_volume_sound_margin">10dp</dimen>
+    <dimen name="dsp_increase_seek_height">430dp</dimen>
+    <dimen name="dsp_increase_seek_height1">325dp</dimen>
+
+</resources>

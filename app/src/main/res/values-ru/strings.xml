@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">DSP</string>
+
+    <string name="dsp_aps">Эквалайзер</string>
+    <string name="dsp_surround_sound">Объемный звук</string>
+    <string name="dsp_bass_boost">Усиление басов</string>
+    <string name="dsp_sound">Настройки звукового поля</string>
+    <string name="dsp_bass_filter">басовый фильтр</string>
+    <string name="btn_default">по умолчанию</string>
+    <string name="btn_setting">настройки</string>
+
+    <string name="btn_car">Полный автомобиль</string>
+    <string name="btn_front">Спереди слева/Спереди справа</string>
+    <string name="btn_rear">Задний левый/Задний правый</string>
+    <string name="btn_previous">Предыдущий</string>
+    <string name="btn_next">Далее</string>
+
+    <string name="btn_drive_left">режим вождения</string>
+    <string name="btn_drive_right">Режим штурмана</string>
+    <string name="btn_drive_center">вся машина</string>
+    <string name="btn_drive_rear">задний ряд</string>
+    <string name="btn_drive_user1">Пользовательский режим 1</string>
+    <string name="btn_drive_user2">Пользовательский режим 2</string>
+
+    <string name="car_front_rear">Независимая настройка передних и задних динамиков</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">Фронтальный динамик</string>
+    <string name="trumpet_rear">задний динамик</string>
+
+    <string name="trumpet_front1">Фронтальный динамик</string>
+    <string name="trumpet_rear1">задний динамик</string>
+
+    <string-array name="dsp_aps_type">
+        <item>Пользователь</item>
+        <item>Стандарт</item>
+        <item>Сэр</item>
+        <item>Популярное</item>
+        <item>Рок</item>
+        <item>Классический</item>
+        <item>мягкий</item>
+        <item>Лобби</item>
+        <item>Кино</item>
+    </string-array>
+
+    <string name="dsp_volume_blance_setting">баланс объема</string>
+    <string name="blance_music">Музыка</string>
+    <string name="blance_radio">радио</string>
+    <string name="blance_bt">Bluetooth</string>
+    <string name="blance_navi">Навигация</string>
+    <string name="blance_voice">Голос</string>
+</resources>

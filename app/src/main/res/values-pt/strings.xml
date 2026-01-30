@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Som DSP</string>
+
+    <string name="dsp_aps">Equalizador</string>
+    <string name="dsp_surround_sound">o som ao Redor</string>
+    <string name="dsp_bass_boost">Reforço de graves</string>
+    <string name="dsp_sound">Configurações de campo de som</string>
+    <string name="dsp_bass_filter">Filtro de graves</string>
+    <string name="btn_default">predefinição</string>
+    <string name="btn_setting">configurar</string>
+
+    <string name="btn_car">carro inteiro</string>
+    <string name="btn_front">frente esquerda/frente direita</string>
+    <string name="btn_rear">traseira esquerda/traseira direita</string>
+    <string name="btn_previous">página anterior</string>
+    <string name="btn_next">próxima página</string>
+
+    <string name="btn_drive_left">dirigir</string>
+    <string name="btn_drive_right">co-piloto</string>
+    <string name="btn_drive_center">Centro</string>
+    <string name="btn_drive_rear">Atras do</string>
+    <string name="btn_drive_user1">Modo de utilizador 1</string>
+    <string name="btn_drive_user2">Modo de utilizador 2</string>
+
+    <string name="car_front_rear">Ajuste independente dos alto-falantes dianteiros e traseiros</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">buzina dianteira</string>
+    <string name="trumpet_rear">buzina traseira</string>
+
+    <string name="trumpet_front1">buzina \n dianteira</string>
+    <string name="trumpet_rear1">buzina \n traseira</string>
+
+    <string-array name="dsp_aps_type">
+        <item>do utilizador</item>
+        <item>padrão</item>
+        <item>jazz</item>
+        <item>Popularidade</item>
+        <item>Rocha</item>
+        <item>clássico</item>
+        <item>suave</item>
+        <item>corredor</item>
+        <item>cinema</item>
+    </string-array>
+
+    <string name="dsp_volume_blance_setting">balanço de volume</string>
+    <string name="blance_music">música</string>
+    <string name="blance_radio">Rádio</string>
+    <string name="blance_bt">Bluetooth</string>
+    <string name="blance_navi">Navegação</string>
+    <string name="blance_voice">voz</string>
+</resources>

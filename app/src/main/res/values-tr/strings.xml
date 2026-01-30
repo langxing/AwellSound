@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">DSP sesi</string>
+
+    <string name="dsp_aps">Ekolayzer</string>
+    <string name="dsp_surround_sound">surround ses</string>
+    <string name="dsp_bass_boost">Bas Kuvvetlendirme</string>
+    <string name="dsp_sound">Ses alanı ayarları</string>
+    <string name="dsp_bass_filter">Bas filtresi</string>
+    <string name="btn_default">varsayılan</string>
+    <string name="btn_setting">kurmak</string>
+
+    <string name="btn_car">bütün araba</string>
+    <string name="btn_front">ön sol/ön sağ</string>
+    <string name="btn_rear">arka sol/arka sağ</string>
+    <string name="btn_previous">önceki sayfa</string>
+    <string name="btn_next">sonraki Sayfa</string>
+
+    <string name="btn_drive_left">sürmek</string>
+    <string name="btn_drive_right">yardımcı pilot</string>
+    <string name="btn_drive_center">merkez</string>
+    <string name="btn_drive_rear">Arka</string>
+    <string name="btn_drive_user1">Kullanıcı Modu 1</string>
+    <string name="btn_drive_user2">Kullanıcı modu 2</string>
+
+    <string name="car_front_rear">Ön ve arka hoparlörlerin bağımsız ayarı</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">ön korna</string>
+    <string name="trumpet_rear">arka korna</string>
+
+    <string name="trumpet_front1">ön korna</string>
+    <string name="trumpet_rear1">arka korna</string>
+
+    <string-array name="dsp_aps_type">
+        <item>kullanıcı</item>
+        <item>standart</item>
+        <item>caz</item>
+        <item>Popülerlik</item>
+        <item>kaynak</item>
+        <item>klasik</item>
+        <item>yumuşak</item>
+        <item>salon</item>
+        <item>sinema</item>
+    </string-array>
+
+    <string name="dsp_volume_blance_setting">hacim dengesi</string>
+    <string name="blance_music">yerel müzik</string>
+    <string name="blance_radio">radyo</string>
+    <string name="blance_bt">Bluetooth</string>
+    <string name="blance_navi">Yönlendirme</string>
+    <string name="blance_voice">sesi</string>
+</resources>

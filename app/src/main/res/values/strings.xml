@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">MusicSound</string>
+
+    <string name="dsp_aps">APS</string>
+    <string name="dsp_surround_sound">Surround sound</string>
+    <string name="dsp_bass_boost">Bass boost</string>
+    <string name="dsp_sound">Sound</string>
+    <string name="dsp_bass_filter">Bass \n filter</string>
+    <string name="dsp_volume_blance_setting">Volume blance</string>
+    <string name="btn_default">Default</string>
+    <string name="btn_setting">Setting</string>
+
+    <string name="btn_car">Whole car</string>
+    <string name="btn_front">Front left/Front right</string>
+    <string name="btn_rear">Rear left/Rear right</string>
+    <string name="btn_previous">Previous</string>
+    <string name="btn_next">Next</string>
+
+    <string name="btn_drive_left">Driving mode</string>
+    <string name="btn_drive_right">Co-pilot mode</string>
+    <string name="btn_drive_center">Full car mode</string>
+    <string name="btn_drive_rear">Back mode</string>
+    <string name="btn_drive_user1">User mode 1</string>
+    <string name="btn_drive_user2">User mode 2</string>
+
+    <string name="car_front_rear">Front and rear horn adjustment</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">Front horn</string>
+    <string name="trumpet_rear">Rear horn</string>
+
+    <string name="trumpet_front1">Front \n horn</string>
+    <string name="trumpet_rear1">Rear \n horn</string>
+
+    <string-array name="dsp_aps_type">
+        <item>User</item>
+        <item>Standard</item>
+        <item>Jazz</item>
+        <item>Pop</item>
+        <item>Rock</item>
+        <item>Classical</item>
+        <item>Soft</item>
+        <item>Hall</item>
+        <item>Cinema</item>
+    </string-array>
+
+    <string name="blance_music">Music</string>
+    <string name="blance_radio">Radio</string>
+    <string name="blance_bt">Bluetooth</string>
+    <string name="blance_navi">Navi</string>
+    <string name="blance_voice">Voice</string>
+</resources>

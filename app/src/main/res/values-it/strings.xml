@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Suono DSP</string>
+
+    <string name="dsp_aps">Equalizzatore</string>
+    <string name="dsp_surround_sound">Suono surround</string>
+    <string name="dsp_bass_boost">Aumento dei bassi</string>
+    <string name="dsp_sound">Impostazioni del campo sonoro</string>
+    <string name="dsp_bass_filter">Filtro bassi</string>
+    <string name="btn_default">predefinito</string>
+    <string name="btn_setting">impostare</string>
+
+    <string name="btn_car">intera macchina</string>
+    <string name="btn_front">anteriore sinistro/anteriore destro</string>
+    <string name="btn_rear">posteriore sinistro/posteriore destro</string>
+    <string name="btn_previous">pagina precedente</string>
+    <string name="btn_next">pagina successiva</string>
+
+    <string name="btn_drive_left">viaggio</string>
+    <string name="btn_drive_right">copilota</string>
+    <string name="btn_drive_center">centro</string>
+    <string name="btn_drive_rear">Dietro</string>
+    <string name="btn_drive_user1">Modalità utente 1</string>
+    <string name="btn_drive_user2">Modalità utente 2</string>
+
+    <string name="car_front_rear">Regolazione indipendente degli altoparlanti anteriori e posteriori</string>
+    <string name="car_loudness">BesLoudness</string>
+
+    <string name="trumpet_front">corno anteriore</string>
+    <string name="trumpet_rear">clacson posteriore</string>
+
+    <string name="trumpet_front1">corno \n anteriore</string>
+    <string name="trumpet_rear1">clacson \n posteriore</string>
+
+    <string-array name="dsp_aps_type">
+        <item>utente</item>
+        <item>standard</item>
+        <item>jazz</item>
+        <item>Popolarità</item>
+        <item>roccia</item>
+        <item>classica</item>
+        <item>morbido</item>
+        <item>sala</item>
+        <item>cinema</item>
+    </string-array>
+
+    <string name="dsp_volume_blance_setting">bilanciamento del volume</string>
+    <string name="blance_music">musica</string>
+    <string name="blance_radio">radio</string>
+    <string name="blance_bt">Bluetooth</string>
+    <string name="blance_navi">Navigazione</string>
+    <string name="blance_voice">voce</string>
+</resources>
