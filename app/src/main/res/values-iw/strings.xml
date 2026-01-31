@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">מֵאָחוֹר</string>
     <string name="btn_drive_user1">מצב משתמש 1</string>
     <string name="btn_drive_user2">מצב משתמש 2</string>
+    <string name="loudness_switch">מתג עוצמה</string>
+
+    <string name="high_notes">צלילים גבוהים</string>
+
+    <string name="bass">צלילים נמוכים</string>
 
 </resources>

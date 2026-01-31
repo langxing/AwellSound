@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">Phía sau</string>
     <string name="btn_drive_user1">Chế độ người dùng 1</string>
     <string name="btn_drive_user2">Chế độ người dùng 2</string>
+    <string name="loudness_switch">Công tắc âm lượng</string>
+
+    <string name="high_notes">Nốt cao</string>
+
+    <string name="bass">Nốt thấp</string>
 
 </resources>

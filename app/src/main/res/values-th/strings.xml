@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">โหมดแถวหลัง</string>
     <string name="btn_drive_user1">โหมดผู้ใช้ 1</string>
     <string name="btn_drive_user2">โหมดผู้ใช้ 2</string>
+    <string name="loudness_switch">สวิตช์ปรับระดับเสียง</string>
+
+    <string name="high_notes">เสียงสูง</string>
+
+    <string name="bass">เสียงต่ำ</string>
 
 </resources>

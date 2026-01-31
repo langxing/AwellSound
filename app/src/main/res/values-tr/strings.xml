@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">Arka</string>
     <string name="btn_drive_user1">Kullanıcı Modu 1</string>
     <string name="btn_drive_user2">Kullanıcı modu 2</string>
+    <string name="loudness_switch">Ses yüksekliği anahtarı</string>
+
+    <string name="high_notes">Yüksek notalar</string>
+
+    <string name="bass">Düşük notalar</string>
 
 </resources>

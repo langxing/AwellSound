@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">Atras do</string>
     <string name="btn_drive_user1">Modo de utilizador 1</string>
     <string name="btn_drive_user2">Modo de utilizador 2</string>
+    <string name="loudness_switch">Interruptor de volume</string>
+
+    <string name="high_notes">Notas agudas</string>
+
+    <string name="bass">Notas graves</string>
 
 </resources>

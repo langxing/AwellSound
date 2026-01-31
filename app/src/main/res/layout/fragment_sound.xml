@@ -152,7 +152,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="高音"
+            android:text="@string/high_notes"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/VerticalSeekBarWrapper1" />
@@ -305,7 +305,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="低音"
+            android:text="@string/bass"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/VerticalSeekBarWrapper2" />
@@ -410,7 +410,7 @@
             android:clickable="false"
             android:focusable="false"
             android:gravity="center"
-            android:text="响度开关"
+            android:text="@string/loudness_switch"
             android:textColor="#ffffffff"
             android:textSize="20sp" />
 

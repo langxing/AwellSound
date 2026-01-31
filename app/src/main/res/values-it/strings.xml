@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">Dietro</string>
     <string name="btn_drive_user1">Modalità utente 1</string>
     <string name="btn_drive_user2">Modalità utente 2</string>
+    <string name="loudness_switch">Interruttore di volume</string>
+
+    <string name="high_notes">Note alte</string>
+
+    <string name="bass">Note basse</string>
 
 </resources>

@@ -7,6 +7,9 @@
     <string name="btn_drive_rear">Back mode</string>
     <string name="btn_drive_user1">User mode 1</string>
     <string name="btn_drive_user2">User mode 2</string>
+    <string name="loudness_switch">Loudness switch</string>
+    <string name="high_notes">High notes</string>
+    <string name="bass">Low notes</string>
 
     <string-array name="dsp_aps_type">
         <item>User</item>

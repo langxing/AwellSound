@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">задний ряд</string>
     <string name="btn_drive_user1">Пользовательский режим 1</string>
     <string name="btn_drive_user2">Пользовательский режим 2</string>
+    <string name="loudness_switch">Переключатель громкости</string>
+
+    <string name="high_notes">Высокие ноты</string>
+
+    <string name="bass">Низкие ноты</string>
 
 </resources>

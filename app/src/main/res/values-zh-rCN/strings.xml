@@ -7,6 +7,9 @@
     <string name="btn_drive_rear">后排模式</string>
     <string name="btn_drive_user1">用户模式1</string>
     <string name="btn_drive_user2">用户模式2</string>
+    <string name="loudness_switch">响度开关</string>
+    <string name="high_notes">高音</string>
+    <string name="bass">低音</string>
 
     <string-array name="dsp_aps_type">
         <item>用户</item>

@@ -19,5 +19,8 @@
     <string name="btn_drive_rear">وضع الصف الخلفي</string>
     <string name="btn_drive_user1">وضع المستخدم</string>
     <string name="btn_drive_user2">وضع المستخدم</string>
+    <string name="loudness_switch">مفتاح مستوى الصوت</string>
+    <string name="high_notes">الترددات العالية</string>
+    <string name="bass">الترددات الأساسية</string>
 
 </resources>

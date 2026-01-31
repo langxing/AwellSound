@@ -19,5 +19,10 @@
     <string name="btn_drive_rear">뒷줄 모드</string>
     <string name="btn_drive_user1">사용자 모드 1</string>
     <string name="btn_drive_user2">사용자 모드 2</string>
+    <string name="loudness_switch">음량 조절 스위치</string>
+
+    <string name="high_notes">고음</string>
+
+    <string name="bass">저음</string>
 
 </resources>
