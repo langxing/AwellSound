@@ -2,15 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_high"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:clipChildren="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_loudness_switch">
@@ -25,34 +27,22 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:orientation="vertical"
             android:layout_marginVertical="15dp"
             android:layout_marginStart="18dp"
             android:gravity="end"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/VerticalSeekBarWrapper1"
-            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper1">
+            app:layout_constraintTop_toTopOf="@+id/VerticalSeekBarWrapper1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="15"
+                android:text="14"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -71,54 +61,9 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="10"
+                android:text="7"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/shape_scale_bg"
-                android:gravity="center"
-                android:text="5"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -139,52 +84,7 @@
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/shape_scale_bg"
-                android:gravity="center"
-                android:text="-5"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -203,21 +103,9 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="-10"
+                android:text="-7"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -236,9 +124,9 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="-15"
+                android:text="-14"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
@@ -271,12 +159,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_low"
         android:layout_width="130dp"
-        android:layout_height="@dimen/dsp_increase_seek_height"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:clipChildren="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layout_high"
         app:layout_constraintTop_toBottomOf="@+id/layout_loudness_switch">
 
         <ImageView
@@ -289,34 +178,22 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:orientation="vertical"
             android:layout_marginVertical="15dp"
             android:layout_marginStart="18dp"
             android:gravity="end"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/VerticalSeekBarWrapper2"
-            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper2">
+            app:layout_constraintTop_toTopOf="@+id/VerticalSeekBarWrapper2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="15"
+                android:text="14"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -335,54 +212,9 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="10"
+                android:text="7"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/shape_scale_bg"
-                android:gravity="center"
-                android:text="5"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -403,52 +235,7 @@
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/shape_scale_bg"
-                android:gravity="center"
-                android:text="-5"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -467,21 +254,9 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="-10"
+                android:text="-7"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/shape_scale_bg" />
+                android:textSize="12sp" />
 
             <ImageView
                 android:layout_width="10dp"
@@ -500,9 +275,10 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/shape_scale_bg"
                 android:gravity="center"
-                android:text="-15"
+                android:text="-14"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
+
         </LinearLayout>
 
         <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
@@ -541,16 +317,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_tab"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintStart_toEndOf="@+id/layout_low"
+        app:layout_constraintTop_toBottomOf="@+id/layout_tab">
 
         <ImageButton
             android:id="@+id/dsp_sound_up"
             style="@style/aps_sound_image_style1"
             android:layout_above="@id/aps_sound_range_rl"
             android:layout_centerHorizontal="true"
-            android:padding="20dp"
+            android:padding="@dimen/arrow_padding"
             android:src="@drawable/dsp_sound_up_new"
             app:layout_constraintBottom_toTopOf="@+id/aps_sound_range_rl"
             app:layout_constraintEnd_toEndOf="parent"
@@ -588,7 +363,7 @@
             style="@style/aps_sound_image_style1"
             android:layout_below="@+id/aps_sound_range_rl"
             android:layout_centerHorizontal="true"
-            android:padding="20dp"
+            android:padding="@dimen/arrow_padding"
             android:src="@drawable/dsp_sound_down_new"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -598,7 +373,7 @@
             android:id="@+id/dsp_sound_left"
             style="@style/aps_sound_image_style1"
             android:layout_centerVertical="true"
-            android:padding="20dp"
+            android:padding="@dimen/arrow_padding"
             android:src="@drawable/dsp_sound_left_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/aps_sound_range_rl"
@@ -609,7 +384,7 @@
             style="@style/aps_sound_image_style1"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/aps_sound_range_rl"
-            android:padding="20dp"
+            android:padding="@dimen/arrow_padding"
             android:src="@drawable/dsp_sound_right_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/aps_sound_range_rl"
@@ -623,6 +398,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="@+id/layout_tab"
         app:layout_constraintTop_toBottomOf="@+id/layout_tab">
@@ -631,15 +408,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center"
             android:text="响度开关"
             android:textColor="#ffffffff"
             android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/iv_loudness"
             android:layout_width="75dp"
             android:layout_height="30dp"
             android:background="@drawable/selector_loudness_switch"
+            android:clickable="false"
+            android:focusable="false"
             android:scaleType="centerCrop" />
     </LinearLayout>
 

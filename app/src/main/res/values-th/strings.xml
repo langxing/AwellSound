@@ -1,36 +1,6 @@
 <resources>
     <string name="app_name">เสียง DSP</string>
 
-    <string name="dsp_aps">อีควอไลเซอร์</string>
-    <string name="dsp_surround_sound">เสียงรอบทิศทาง</string>
-    <string name="dsp_bass_boost">เพิ่มเสียงเบส</string>
-    <string name="dsp_sound">การตั้งค่าสนามเสียง</string>
-    <string name="dsp_bass_filter">ตัวกรองเสียงเบส</string>
-    <string name="btn_default">ค่าเริ่มต้น</string>
-    <string name="btn_setting">ติดตั้ง</string>
-
-    <string name="btn_car">ทั้งคัน</string>
-    <string name="btn_front">หน้าซ้าย/หน้าขวา</string>
-    <string name="btn_rear">ด้านหลังซ้าย/ด้านหลังขวา</string>
-    <string name="btn_previous">หน้าที่แล้ว</string>
-    <string name="btn_next">หน้าต่อไป</string>
-
-    <string name="btn_drive_left">โหมดการขับขี่</string>
-    <string name="btn_drive_right">โหมดนักบินร่วม</string>
-    <string name="btn_drive_center">โหมดเต็มรถ</string>
-    <string name="btn_drive_rear">โหมดแถวหลัง</string>
-    <string name="btn_drive_user1">โหมดผู้ใช้ 1</string>
-    <string name="btn_drive_user2">โหมดผู้ใช้ 2</string>
-
-    <string name="car_front_rear">การปรับอิสระของลำโพงหน้าและหลัง</string>
-    <string name="car_loudness">BesLoudness</string>
-
-    <string name="trumpet_front">แตรหน้า</string>
-    <string name="trumpet_rear">แตรหลัง</string>
-
-    <string name="trumpet_front1">แตรหน้า</string>
-    <string name="trumpet_rear1">แตรหลัง</string>
-
     <string-array name="dsp_aps_type">
         <item>ผู้ใช้</item>
         <item>มาตรฐาน</item>
@@ -43,10 +13,4 @@
         <item>โรงหนัง</item>
     </string-array>
 
-    <string name="dsp_volume_blance_setting">ความสมดุลของปริมาณ</string>
-    <string name="blance_music">เพลงท้องถิ่น</string>
-    <string name="blance_radio">วิทยุ</string>
-    <string name="blance_bt">บลูทู ธ</string>
-    <string name="blance_navi">การนำทาง</string>
-    <string name="blance_voice">เสียงพูด</string>
 </resources>

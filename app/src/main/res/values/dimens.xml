@@ -8,12 +8,13 @@
 
     <dimen name="dsp_range_ball_width">276dp</dimen>
 
-    <dimen name="dsp_sound_fragment_ball_layout_width">336dp</dimen>
-    <dimen name="dsp_sound_fragment_ball_layout_height">336dp</dimen>
+    <dimen name="dsp_sound_fragment_ball_layout_width">325dp</dimen>
+    <dimen name="dsp_sound_fragment_ball_layout_height">325dp</dimen>
 
 
     <dimen name="dsp_sound_width">800dp</dimen>
     <dimen name="radius_16dp">16dp</dimen>
     <dimen name="increase_fragment_adapter_width_54dp">54dp</dimen>
     <dimen name="increase_fragment_adapter_width_40dp">40dp</dimen>
+    <dimen name="arrow_padding">0dp</dimen>
 </resources>

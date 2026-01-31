@@ -1,36 +1,6 @@
 <resources>
     <string name="app_name">צליל DSP</string>
 
-    <string name="dsp_aps">שַׁויָן</string>
-    <string name="dsp_surround_sound">קול היקפי</string>
-    <string name="dsp_bass_boost">הגברת בס</string>
-    <string name="dsp_sound">הגדרות שדה קול</string>
-    <string name="dsp_bass_filter">מסנן בס</string>
-    <string name="btn_default">בְּרִירַת מֶחדָל</string>
-    <string name="btn_setting">להכין</string>
-
-    <string name="btn_car">מכונית שלמה</string>
-    <string name="btn_front">שמאל קדמי/ ימין קדמי</string>
-    <string name="btn_rear">אחורי שמאל/אחורי ימין</string>
-    <string name="btn_previous">עמוד קודם</string>
-    <string name="btn_next">עמוד הבא</string>
-
-    <string name="btn_drive_left">מצב נהיגה</string>
-    <string name="btn_drive_right">מצב טייס משנה</string>
-    <string name="btn_drive_center">מצב רכב מלא</string>
-    <string name="btn_drive_rear">מֵאָחוֹר</string>
-    <string name="btn_drive_user1">מצב משתמש 1</string>
-    <string name="btn_drive_user2">מצב משתמש 2</string>
-
-    <string name="car_front_rear">התאמה עצמאית של הרמקולים הקדמיים והאחוריים</string>
-    <string name="car_loudness">BesLoudness</string>
-
-    <string name="trumpet_front">צופר קדמי</string>
-    <string name="trumpet_rear">צופר אחורי</string>
-
-    <string name="trumpet_front1">צופר קדמי</string>
-    <string name="trumpet_rear1">צופר אחורי</string>
-
     <string-array name="dsp_aps_type">
         <item>"מִשׁתַמֵשׁ"</item>
         <item>"תֶקֶן"</item>
@@ -43,10 +13,4 @@
         <item>"קולנוע"</item>
     </string-array>
 
-    <string name="dsp_volume_blance_setting">איזון נפח</string>
-    <string name="blance_music">מוּסִיקָה</string>
-    <string name="blance_radio">רָדִיוֹ</string>
-    <string name="blance_bt">בלוטוס</string>
-    <string name="blance_navi">ניווג</string>
-    <string name="blance_voice">קול</string>
 </resources>

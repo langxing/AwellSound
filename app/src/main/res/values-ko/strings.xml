@@ -1,36 +1,6 @@
 <resources>
     <string name="app_name">DSP 사운드</string>
 
-    <string name="dsp_aps">평형 장치</string>
-    <string name="dsp_surround_sound">서라운드 사운드</string>
-    <string name="dsp_bass_boost">베이스 부스트</string>
-    <string name="dsp_sound">음장 설정</string>
-    <string name="dsp_bass_filter">베이스 필터</string>
-    <string name="btn_default">기본</string>
-    <string name="btn_setting">설정</string>
-
-    <string name="btn_car">전체 차</string>
-    <string name="btn_front">앞 왼쪽/앞 오른쪽</string>
-    <string name="btn_rear">후방 좌측/후방 우측</string>
-    <string name="btn_previous">이전 페이지</string>
-    <string name="btn_next">다음 페이지</string>
-
-    <string name="btn_drive_left">운전 모드</string>
-    <string name="btn_drive_right">부조종사 모드</string>
-    <string name="btn_drive_center">풀카 모드</string>
-    <string name="btn_drive_rear">뒷줄 모드</string>
-    <string name="btn_drive_user1">사용자 모드 1</string>
-    <string name="btn_drive_user2">사용자 모드 2</string>
-
-    <string name="car_front_rear">전면 및 후면 스피커의 개별 조정</string>
-    <string name="car_loudness">BesLoudness</string>
-
-    <string name="trumpet_front">앞뿔</string>
-    <string name="trumpet_rear">리어혼</string>
-
-    <string name="trumpet_front1">앞뿔</string>
-    <string name="trumpet_rear1">리어혼</string>
-
     <string-array name="dsp_aps_type">
         <item>사용자</item>
         <item>기준</item>
@@ -43,10 +13,4 @@
         <item>영화</item>
     </string-array>
 
-    <string name="dsp_volume_blance_setting">음량 균형</string>
-    <string name="blance_music">음악</string>
-    <string name="blance_radio">라디오</string>
-    <string name="blance_bt">블루투스</string>
-    <string name="blance_navi">탐색</string>
-    <string name="blance_voice">음성</string>
 </resources>

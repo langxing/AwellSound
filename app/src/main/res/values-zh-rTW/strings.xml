@@ -1,37 +1,6 @@
 <resources>
     <string name="app_name">DSP音效</string>
 
-    <string name="dsp_aps">均衡器</string>
-    <string name="dsp_surround_sound">環繞聲</string>
-    <string name="dsp_bass_boost">低音增強</string>
-    <string name="dsp_volume_blance_setting">音量平衡</string>
-    <string name="dsp_sound">聲場設置</string>
-    <string name="dsp_bass_filter">低音過濾</string>
-    <string name="btn_default">默認</string>
-    <string name="btn_setting">設置</string>
-
-    <string name="btn_car">全車</string>
-    <string name="btn_front">前左/前右</string>
-    <string name="btn_rear">後左/後右</string>
-    <string name="btn_previous">上一頁</string>
-    <string name="btn_next">下一頁</string>
-
-    <string name="btn_drive_left">駕駛模式</string>
-    <string name="btn_drive_right">副駕模式</string>
-    <string name="btn_drive_center">全車模式</string>
-    <string name="btn_drive_rear">後排模式</string>
-    <string name="btn_drive_user1">用戶模式1</string>
-    <string name="btn_drive_user2">用戶模式2</string>
-
-    <string name="car_front_rear">前後喇叭獨立調節</string>
-    <string name="car_loudness">BesLoudness</string>
-
-    <string name="trumpet_front">前喇叭</string>
-    <string name="trumpet_rear">後喇叭</string>
-
-    <string name="trumpet_front1">前\n喇\n叭</string>
-    <string name="trumpet_rear1">後\n喇\n叭</string>
-
     <string-array name="dsp_aps_type">
         <item>用戶</item>
         <item>標準</item>
@@ -44,9 +13,4 @@
         <item>影院</item>
     </string-array>
 
-    <string name="blance_music">音樂</string>
-    <string name="blance_radio">收音機</string>
-    <string name="blance_bt">藍牙</string>
-    <string name="blance_navi">導航</string>
-    <string name="blance_voice">語音</string>
 </resources>
