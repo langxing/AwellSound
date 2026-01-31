@@ -1,7 +1,8 @@
 package com.awell.app.utils;
 
-import android.os.SystemProperties;
 import android.util.Log;
+
+import com.awell.app.BuildConfig;
 
 /**
  * Logging utility
@@ -9,14 +10,13 @@ import android.util.Log;
 public class LogUtil {
     private static final String TAG = "AwellAutoDsp";
 
-    private static int logswitch = Integer.parseInt(SystemProperties.get("persist.sys.awell.logswitch", "1"));
-    private static boolean isDebuggable = (logswitch == 1);
+    private static boolean isDebuggable = BuildConfig.DEBUG;
 
     private static String methodName = null, filename = null, msg = null;
     private static int lineno = 0;
 
     private LogUtil() {
-        return;
+
     }
 
     public static void i(final String message) {
@@ -72,4 +72,5 @@ public class LogUtil {
         buffer.append(log);
         return buffer.toString();
     }
+
 }

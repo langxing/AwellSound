@@ -10,16 +10,6 @@ public class ApsData {
 
     private static ApsData apsData = null;
 
-    /**
-     * Hz
-     */
-    public int[] apsFreq = {20, 30, 40, 50, 60, 70, 80, 95, 110, 125,   //10
-            150, 175, 200, 235, 275, 315, 375, 435, 500, 600,           //10
-            700, 800, 860, 920, 1000, 1100, 1200, 1300, 1500, 1700, 2000, 2400, 2800, 3200,     //14
-            3800, 4400, 5000, 6000, 7000, 8000, 9500, 11000, 12500, 14000,      //10
-            15000, 16000, 17000, 18000};
-
-
     private int[] apsFreqSend; //实际频率
     /**
      * 底部Q值增益
@@ -40,10 +30,6 @@ public class ApsData {
      * Q值范围
      */
     public static float[] apsQRange;
-
-//    private int[] typeId = {R.array.aps_default, R.array.aps_default, R.array.aps_jazz,
-//            R.array.aps_pop, R.array.aps_rock, R.array.aps_classical, R.array.aps_soft,
-//            R.array.aps_hall, R.array.aps_cinema};
 
     public static ApsData getInstance() {
         if (apsData == null)
@@ -110,22 +96,6 @@ public class ApsData {
                 apsQRange = DefaultData.apsQRange.clone();
         }
     }
-
-//    public int[][] getTypeValue(Context context) {
-//        if (typeValue != null)
-//            return typeValue;
-//        String[] typeStrings = context.getResources().getStringArray(R.array.dsp_aps_type);
-//        int i, j;
-//        int size = typeStrings.length;
-//        typeValue = new int[size][apsFreq.length];
-//        for (i = 0; i < size; i++) {
-//            typeValue[i] = context.getResources().getIntArray(typeId[i]);
-//            for (j = 0; j < apsFreq.length; j++) {
-//                typeValue[i][j] = typeValue[i][j] - (12 - apsData.gainMax);
-//            }
-//        }
-//        return typeValue;
-//    }
 
     public interface DefaultData {
         int[] apsFreqSend = {20, 31, 50, 80, 125, 200, 315, 500, 800, 1250, 2000, 3150, 5000, 8000, 12500, 20000};

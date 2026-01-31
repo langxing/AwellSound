@@ -11,6 +11,7 @@ local.properties
 .gradle/
 .navigation/
 captures/
+release/
 
 # 忽略任何位置下的 build 文件夹
 build/

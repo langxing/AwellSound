@@ -13,4 +13,11 @@
         <item>sinema</item>
     </string-array>
 
+    <string name="btn_drive_left">sürmek</string>
+    <string name="btn_drive_right">yardımcı pilot</string>
+    <string name="btn_drive_center">merkez</string>
+    <string name="btn_drive_rear">Arka</string>
+    <string name="btn_drive_user1">Kullanıcı Modu 1</string>
+    <string name="btn_drive_user2">Kullanıcı modu 2</string>
+
 </resources>

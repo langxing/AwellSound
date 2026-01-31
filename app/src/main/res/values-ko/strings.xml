@@ -13,4 +13,11 @@
         <item>영화</item>
     </string-array>
 
+    <string name="btn_drive_left">운전 모드</string>
+    <string name="btn_drive_right">부조종사 모드</string>
+    <string name="btn_drive_center">풀카 모드</string>
+    <string name="btn_drive_rear">뒷줄 모드</string>
+    <string name="btn_drive_user1">사용자 모드 1</string>
+    <string name="btn_drive_user2">사용자 모드 2</string>
+
 </resources>

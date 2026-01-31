@@ -13,4 +13,11 @@
         <item>Кино</item>
     </string-array>
 
+    <string name="btn_drive_left">режим вождения</string>
+    <string name="btn_drive_right">Режим штурмана</string>
+    <string name="btn_drive_center">вся машина</string>
+    <string name="btn_drive_rear">задний ряд</string>
+    <string name="btn_drive_user1">Пользовательский режим 1</string>
+    <string name="btn_drive_user2">Пользовательский режим 2</string>
+
 </resources>

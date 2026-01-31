@@ -13,4 +13,11 @@
         <item>"קולנוע"</item>
     </string-array>
 
+    <string name="btn_drive_left">מצב נהיגה</string>
+    <string name="btn_drive_right">מצב טייס משנה</string>
+    <string name="btn_drive_center">מצב רכב מלא</string>
+    <string name="btn_drive_rear">מֵאָחוֹר</string>
+    <string name="btn_drive_user1">מצב משתמש 1</string>
+    <string name="btn_drive_user2">מצב משתמש 2</string>
+
 </resources>

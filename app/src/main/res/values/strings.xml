@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">MusicSound</string>
 
+    <string name="btn_drive_left">Driving mode</string>
+    <string name="btn_drive_right">Co-pilot mode</string>
+    <string name="btn_drive_center">Full car mode</string>
+    <string name="btn_drive_rear">Back mode</string>
+    <string name="btn_drive_user1">User mode 1</string>
+    <string name="btn_drive_user2">User mode 2</string>
+
     <string-array name="dsp_aps_type">
         <item>User</item>
         <item>Standard</item>

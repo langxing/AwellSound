@@ -13,4 +13,11 @@
         <item> Rạp chiếu phim </item>
     </string-array>
 
+    <string name="btn_drive_left">trái</string>
+    <string name="btn_drive_right">đúng</string>
+    <string name="btn_drive_center">ở giữa</string>
+    <string name="btn_drive_rear">Phía sau</string>
+    <string name="btn_drive_user1">Chế độ người dùng 1</string>
+    <string name="btn_drive_user2">Chế độ người dùng 2</string>
+
 </resources>

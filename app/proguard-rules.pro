@@ -30,3 +30,6 @@
 # 可选：保留所有内部类（避免漏写）
 -keepattributes InnerClasses
 -keepattributes EnclosingMethod
+
+-dontwarn android.os.ServiceManager
+-dontwarn android.os.SystemProperties

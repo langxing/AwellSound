@@ -13,4 +13,11 @@
         <item>โรงหนัง</item>
     </string-array>
 
+    <string name="btn_drive_left">โหมดการขับขี่</string>
+    <string name="btn_drive_right">โหมดนักบินร่วม</string>
+    <string name="btn_drive_center">โหมดเต็มรถ</string>
+    <string name="btn_drive_rear">โหมดแถวหลัง</string>
+    <string name="btn_drive_user1">โหมดผู้ใช้ 1</string>
+    <string name="btn_drive_user2">โหมดผู้ใช้ 2</string>
+
 </resources>

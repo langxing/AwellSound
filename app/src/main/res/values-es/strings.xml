@@ -13,4 +13,11 @@
         <item>cine</item>
     </string-array>
 
+    <string name="btn_drive_left">conducir</string>
+    <string name="btn_drive_right">copiloto</string>
+    <string name="btn_drive_center">medio</string>
+    <string name="btn_drive_rear">Detrás</string>
+    <string name="btn_drive_user1">Modo de usuario 1</string>
+    <string name="btn_drive_user2">Modo de usuario 2</string>
+
 </resources>

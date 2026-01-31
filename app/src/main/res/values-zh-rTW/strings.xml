@@ -13,4 +13,11 @@
         <item>影院</item>
     </string-array>
 
+    <string name="btn_drive_left">駕駛模式</string>
+    <string name="btn_drive_right">副駕模式</string>
+    <string name="btn_drive_center">全車模式</string>
+    <string name="btn_drive_rear">後排模式</string>
+    <string name="btn_drive_user1">用戶模式1</string>
+    <string name="btn_drive_user2">用戶模式2</string>
+
 </resources>

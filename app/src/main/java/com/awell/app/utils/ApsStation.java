@@ -18,13 +18,10 @@ public class ApsStation {
     public static final int NAME_GAIN = 10;
     //改为需要发送的实际值
     public static final int NAME_GAIN_CUSTOM = 20;
-    //    public static final int NAME_GAIN_CUSTOM_FRONT = 11;
     public static final int NAME_GAIN_REAR = 20;  //改为需要发送的实际值
-    //    public static final int NAME_GAIN_CUSTOM_REAR = 21;
     public static final int NAME_Q_FRONT = 30;  //改为显示
     public static final int NAME_Q_DEFAULT_FRONT = 31;
     public static final int NAME_Q_REAR = 40;  //改为需要发送的实际值
-//    public static final int NAME_Q_DEFAULT_REAR = 41;
 
     //sound
     public static final int NAME_LAYOUT = 100;

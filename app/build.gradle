@@ -63,7 +63,6 @@ dependencies {
     implementation fileTree(include: ['*.aar', '*.jar'], exclude: [], dir: 'libs')
     implementation libs.appcompat
     implementation libs.material
-    implementation project(':AwellLibrary')
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
