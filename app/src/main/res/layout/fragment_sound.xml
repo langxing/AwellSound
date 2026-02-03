@@ -11,10 +11,10 @@
         android:id="@+id/layout_high"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:clipChildren="false"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layout_low"
         app:layout_constraintTop_toBottomOf="@+id/layout_loudness_switch">
 
         <ImageView
@@ -162,10 +162,10 @@
         android:id="@+id/layout_low"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="40dp"
         android:clipChildren="false"
-        app:layout_constraintStart_toEndOf="@+id/layout_high"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_loudness_switch">
 
         <ImageView
@@ -397,8 +397,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:focusable="true"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="@+id/layout_tab"
         app:layout_constraintTop_toBottomOf="@+id/layout_tab">
@@ -407,22 +405,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:clickable="false"
-            android:focusable="false"
             android:gravity="center"
             android:text="@string/loudness_switch"
             android:textColor="#ffffffff"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/iv_loudness"
-            android:layout_width="75dp"
-            android:layout_height="30dp"
-            android:background="@drawable/selector_loudness_switch"
-            android:clickable="false"
-            android:focusable="false"
-            android:scaleType="centerCrop" />
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sb_loudness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:checked="false"
+            app:kswThumbDrawable="@drawable/ic_switch_button"
+            app:kswBackDrawable="@drawable/selector_loudness_switch" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="8dp"
+        android:drawableRight="@drawable/ic_default"
+        android:gravity="center"
+        android:textColor="#ffffffff"
+        android:textSize="16sp"
+        android:text="恢复默认"
+        app:layout_constraintEnd_toEndOf="@+id/layout_tab"
+        app:layout_constraintTop_toBottomOf="@+id/layout_tab">
+    </TextView>
 
     <LinearLayout
         android:id="@+id/layout_tab"

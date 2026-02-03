@@ -70,7 +70,7 @@ public class ApsService extends Service {
     //Boot initialization
     private void setInitData(){
         int[] dsp = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETDSP.code, null);
-        if (dsp == null || (dsp[0] != Constant.IAUDIOCONTROL.DSP.IC37033.code&&dsp[0] != Constant.IAUDIOCONTROL.DSP.IC37534.code)){
+        if (dsp == null || (dsp[0] != Constant.IAUDIOCONTROL.DSP.IC2313.code)){
             return;
         }
 
@@ -81,14 +81,12 @@ public class ApsService extends Service {
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
-        //gain
-        int[] gain = ApsStation.getApsGain(this,ApsStation.NAME_GAIN);
 
-        if (gain != null){
-            for (i = 0; i < apsFreq.length; i++){
-                setPlay(apsFreq[i],gain[i],gainMax);
-            }
-        }
+
+        int bass = ToolClass.getBassGain(this);
+        int treble = ToolClass.getTrebleGain(this);
+        setPlay(apsFreq[0], bass, gainMax);
+        setPlay(apsFreq[1], treble, gainMax);
 
         //sound
         int[] sound = ApsStation.getSoundData(this,ApsStation.NAME_SEND);
@@ -100,11 +98,6 @@ public class ApsService extends Service {
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLROUTFADER.code, new int[]{sound[2]},1);
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETRROUTFADER.code, new int[]{sound[3]},1);
         }
-
-        // besLoudness
-        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        boolean besLoudness = mAudioManager.getParameters(ToolClass.GET_BESLOUDNESS_STATUS).equals(ToolClass.GET_BESLOUDNESS_STATUS_ENABLED);
-        mAudioManager.setParameters(besLoudness ? ToolClass.SET_BESLOUDNESS_ENABLED : ToolClass.SET_BESLOUDNESS_DISABLED);
 
     }
 
