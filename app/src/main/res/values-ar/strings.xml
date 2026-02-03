@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">صوت DSP</string>
+    <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
         <item>المستعمل</item>
@@ -22,5 +22,6 @@
     <string name="loudness_switch">مفتاح مستوى الصوت</string>
     <string name="high_notes">الترددات العالية</string>
     <string name="bass">الترددات الأساسية</string>
+    <string name="reset_default">استعادة الإعدادات الافتراضية</string>
 
 </resources>

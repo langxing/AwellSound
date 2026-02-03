@@ -48,7 +48,7 @@ public class ApsService extends Service {
             mNotificationManager.createNotificationChannel(channel);
         }
         mBuilder = new NotificationCompat.Builder(this,"awell_asp")
-                .setSmallIcon(R.drawable.ic_launcher_background);
+                .setSmallIcon(R.drawable.ic_logo);
         Notification notification = mBuilder.build();
         notification.clone();
         notification.flags = Notification.FLAG_ONGOING_EVENT;
@@ -76,12 +76,11 @@ public class ApsService extends Service {
 
         int[] apsFreq = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDS.code, null);
         int[] apsGainRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDLEVELRANGE.code, null);
-        int i,gainMax = 0;
+        int gainMax = 0;
         if (apsGainRange.length > 1) {
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
-
 
         int bass = ToolClass.getBassGain(this);
         int treble = ToolClass.getTrebleGain(this);
@@ -99,6 +98,15 @@ public class ApsService extends Service {
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETRROUTFADER.code, new int[]{sound[3]},1);
         }
 
+        // besLoudness
+        boolean besLoudness = ToolClass.getLoudnessGain(this) == 1;
+        if (besLoudness){
+            AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{1}, 1);
+            ToolClass.setLoudnessGain(this, 1);
+        } else {
+            AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{0}, 1);
+            ToolClass.setLoudnessGain(this, 0);
+        }
     }
 
     private void setPlay(int freq, int gain, int gainMax) {

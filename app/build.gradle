@@ -54,6 +54,13 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "AwellAutoEq2313.apk"
+            }
+    }
+
     kotlinOptions {
         jvmTarget = '11'
     }

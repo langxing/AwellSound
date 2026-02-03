@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DSP音效</string>
+    <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
         <item>用戶</item>
@@ -23,5 +23,6 @@
     <string name="loudness_switch">響度開關</string>
     <string name="high_notes">高音</string>
     <string name="bass">低音</string>
+    <string name="reset_default">恢復預設</string>
 
 </resources>

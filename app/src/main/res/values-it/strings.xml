@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Suono DSP</string>
+    <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
         <item>utente</item>
@@ -24,5 +24,6 @@
     <string name="high_notes">Note alte</string>
 
     <string name="bass">Note basse</string>
+    <string name="reset_default">Ripristina predefinito</string>
 
 </resources>

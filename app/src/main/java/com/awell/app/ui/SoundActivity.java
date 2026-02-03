@@ -146,6 +146,12 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         init();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        ToolClass.setLocationFlag(this, location);
+    }
+
     private void init() {
         aps_sound_range.postDelayed(() -> {
             range_w = aps_sound_range.getWidth();
@@ -461,6 +467,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
 
     private void loudnessSwitch() {
         mIvLoudness.setChecked(mLoudnessOpen);
+        LogUtil.d("Loudness =" + mLoudnessOpen);
         if (mLoudnessOpen){
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{1}, 1);
             ToolClass.setLoudnessGain(this, 1);

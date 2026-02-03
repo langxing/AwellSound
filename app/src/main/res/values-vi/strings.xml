@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Âm thanh DSP</string>
+    <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
         <item> Người dùng </item>
@@ -24,5 +24,6 @@
     <string name="high_notes">Nốt cao</string>
 
     <string name="bass">Nốt thấp</string>
+    <string name="reset_default">Khôi phục mặc định</string>
 
 </resources>

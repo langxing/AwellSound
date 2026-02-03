@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MusicSound</string>
+    <string name="app_name">AwellAutoEq2313</string>
 
     <string name="btn_drive_left">Driving mode</string>
     <string name="btn_drive_right">Co-pilot mode</string>
@@ -10,6 +10,7 @@
     <string name="loudness_switch">Loudness switch</string>
     <string name="high_notes">Treble</string>
     <string name="bass">Bass</string>
+    <string name="reset_default">Restore default</string>
 
     <string-array name="dsp_aps_type">
         <item>User</item>

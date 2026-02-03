@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sonido DSP</string>
+    <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
         <item>usuario</item>
@@ -20,7 +20,8 @@
     <string name="btn_drive_user1">Modo de usuario 1</string>
     <string name="btn_drive_user2">Modo de usuario 2</string>
     <string name="loudness_switch">Loudness switch</string>
-    <string name="high_notes">High notes</string>
-    <string name="bass">Low notes</string>
+    <string name="high_notes">Notas altas</string>
+    <string name="bass">bajo</string>
+    <string name="reset_default">Restaurar valores predeterminados</string>
 
 </resources>
