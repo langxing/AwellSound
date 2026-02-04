@@ -56,6 +56,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     private float center_w, center_h, dataScale_w = 0f, dataScale_h = 0f;
     private boolean mLoudnessOpen = false;
     private int gainMax = 0;
+    private boolean isFirst = true;
     private SoundHandler soundHandler;
     private final int APS_SOUND_LONG = 0x10;
     private boolean isSoundLong = false;
@@ -99,6 +100,10 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         mLowSeekBar.setOnSeekBarChangeListener(this);
         mTvDefault.setOnClickListener(this);
         mIvLoudness.setOnCheckedChangeListener((compoundButton, checked) -> {
+            if (isFirst) {
+                isFirst = false;
+                return;
+            }
             mLoudnessOpen = checked;
             loudnessSwitch();
         });
