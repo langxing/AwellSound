@@ -410,13 +410,13 @@
             android:textColor="#ffffffff"
             android:textSize="16sp" />
 
-        <com.kyleduo.switchbutton.SwitchButton
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/sb_loudness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:checked="false"
-            app:kswThumbDrawable="@drawable/ic_switch_button"
-            app:kswBackDrawable="@drawable/selector_loudness_switch" />
+            android:thumb="@drawable/ic_switch_button"
+            app:track="@drawable/selector_loudness_switch"
+            tools:checked="false"/>
     </LinearLayout>
 
     <TextView

@@ -1,8 +1,6 @@
 package com.awell.app.ui;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -10,15 +8,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.awell.app.R;
 import com.awell.app.model.ApsData;
@@ -29,7 +26,6 @@ import com.awell.app.utils.ToolClass;
 import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
-import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.Arrays;
 
@@ -44,7 +40,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     private TextView[] buttons;
     private RelativeLayout aps_sound_range;
     private ImageView aps_car_ball;
-    private SwitchButton mIvLoudness;
+    private SwitchCompat mIvLoudness;
     private TextView mTvDefault;
     private VerticalSeekBar mHighSeekbar, mLowSeekBar;
     private int ball_w, ball_h, range_w, range_h;
@@ -56,7 +52,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     private float center_w, center_h, dataScale_w = 0f, dataScale_h = 0f;
     private boolean mLoudnessOpen = false;
     private int gainMax = 0;
-    private boolean isFirst = true;
+    private boolean isFirst = false;
     private SoundHandler soundHandler;
     private final int APS_SOUND_LONG = 0x10;
     private boolean isSoundLong = false;
@@ -100,8 +96,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         mLowSeekBar.setOnSeekBarChangeListener(this);
         mTvDefault.setOnClickListener(this);
         mIvLoudness.setOnCheckedChangeListener((compoundButton, checked) -> {
-            if (isFirst) {
-                isFirst = false;
+            if (!isFirst) {
                 return;
             }
             mLoudnessOpen = checked;
@@ -149,6 +144,12 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         }
         LogUtil.d("soundRange[0] = " + soundRange[0] + " soundRange[1] = " + soundRange[1]);
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isFirst = true;
     }
 
     @Override
