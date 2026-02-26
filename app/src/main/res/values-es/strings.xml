@@ -2,15 +2,20 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>usuario</item>
-        <item>estándar</item>
-        <item>jazz</item>
-        <item>Popularidad</item>
-        <item>roca</item>
-        <item>clásico</item>
-        <item>suave</item>
-        <item>salón</item>
-        <item>cine</item>
+
+        <item>Estándar</item>
+
+        <item>Jazz</item>
+
+        <item>Pop</item>
+
+        <item>Rock</item>
+
+        <item>Clásica</item>
+
+        <item>Bajo</item>
+
+        <item>Agudos</item>
     </string-array>
 
     <string name="btn_drive_left">conducir</string>

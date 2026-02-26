@@ -2,15 +2,19 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>ผู้ใช้</item>
         <item>มาตรฐาน</item>
+
         <item>แจ๊ส</item>
-        <item>ความนิยม</item>
-        <item>หิน</item>
+
+        <item>ป๊อป</item>
+
+        <item>ร็อก</item>
+
         <item>คลาสสิก</item>
-        <item>อ่อน</item>
-        <item>ห้องโถง</item>
-        <item>โรงหนัง</item>
+
+        <item>เบส</item>
+
+        <item>เสียงแหลม</item>
     </string-array>
 
     <string name="btn_drive_left">โหมดการขับขี่</string>

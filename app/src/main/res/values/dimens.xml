@@ -5,4 +5,5 @@
     <dimen name="dsp_sound_fragment_ball_layout_height">320dp</dimen>
 
     <dimen name="arrow_padding">0dp</dimen>
+    <dimen name="wave_height">130dp</dimen>
 </resources>

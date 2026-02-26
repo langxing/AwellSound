@@ -19,9 +19,8 @@
         <item>Pop</item>
         <item>Rock</item>
         <item>Classical</item>
-        <item>Soft</item>
-        <item>Hall</item>
-        <item>Cinema</item>
+        <item>Bass</item>
+        <item>Treble</item>
     </string-array>
 
 </resources>

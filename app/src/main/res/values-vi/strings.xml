@@ -2,15 +2,19 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item> Người dùng </item>
-        <item> Tiêu chuẩn </item>
-        <item> Thưa ngài </item>
-        <item> Phổ biến </item>
-        <item> Đá </item>
-        <item> Cổ điển </item>
-        <item> mềm </item>
-        <item> Tiền sảnh </item>
-        <item> Rạp chiếu phim </item>
+        <item>Nhạc tiêu chuẩn</item>
+
+        <item>Nhạc Jazz</item>
+
+        <item>Nhạc Pop</item>
+
+        <item>Nhạc Rock</item>
+
+        <item>Nhạc cổ điển</item>
+
+        <item>Bass</item>
+
+        <item>Treble</item>
     </string-array>
 
     <string name="btn_drive_left">trái</string>

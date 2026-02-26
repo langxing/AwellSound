@@ -2,15 +2,19 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>"מִשׁתַמֵשׁ"</item>
-        <item>"תֶקֶן"</item>
-        <item>"אדוני"</item>
-        <item>"פופולרי"</item>
-        <item>"רוק"</item>
-        <item>"קלאסי"</item>
-        <item>"רך"</item>
-        <item>"לובי"</item>
-        <item>"קולנוע"</item>
+        <item>סטנדרטי</item>
+
+        <item>ג\'אז</item>
+
+        <item>פופ</item>
+
+        <item>רוק</item>
+
+        <item>קלאסי</item>
+
+        <item>בס</item>
+
+        <item>טרבל</item>
     </string-array>
 
     <string name="btn_drive_left">מצב נהיגה</string>

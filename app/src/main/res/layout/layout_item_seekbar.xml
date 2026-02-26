@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        tools:text="15" />
+
+    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+        android:id="@+id/VerticalSeekBarWrapper"
+        style="@style/dsp_seekBar_parent_view_style"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+            android:id="@+id/seekbar"
+            style="@style/dsp_seekBar_style"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+    <TextView
+        android:id="@+id/tv_hz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="20hz" />
+</LinearLayout>

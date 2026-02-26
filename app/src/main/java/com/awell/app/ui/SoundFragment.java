@@ -6,16 +6,19 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
 
 import com.awell.app.R;
 import com.awell.app.model.ApsData;
@@ -29,8 +32,8 @@ import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
 
 import java.util.Arrays;
 
-public class SoundActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
-    private static final String TAG = SoundActivity.class.getSimpleName();
+public class SoundFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
+    private static final String TAG = SoundFragment.class.getSimpleName();
     private final int[] btnId = {R.id.btn_drive_left,
             R.id.btn_drive_right,
             R.id.btn_drive_center,
@@ -42,6 +45,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     private ImageView aps_car_ball;
     private SwitchCompat mIvLoudness;
     private TextView mTvDefault;
+    private View mContentView;
     private VerticalSeekBar mHighSeekbar, mLowSeekBar;
     private int ball_w, ball_h, range_w, range_h;
     /**
@@ -62,33 +66,40 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
 
     private int location;
     private int[] sounds = new int[4];
-    private final float APS = 30 / 80f;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mContentView == null) {
+            mContentView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_sound, null);
+        }
+        return mContentView;
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_sound);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView();
         initData();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     protected void initView() {
-        aps_sound_range = findViewById(R.id.aps_sound_range);
-        mHighSeekbar = findViewById(R.id.seekbar_high);
-        mTvDefault = findViewById(R.id.tv_default);
-        mLowSeekBar = findViewById(R.id.seekbar_low);
-        aps_car_ball = findViewById(R.id.aps_car_ball);
-        mIvLoudness = findViewById(R.id.sb_loudness);
+        aps_sound_range = mContentView.findViewById(R.id.aps_sound_range);
+        mHighSeekbar = mContentView.findViewById(R.id.seekbar_high);
+        mTvDefault = mContentView.findViewById(R.id.tv_default);
+        mLowSeekBar = mContentView.findViewById(R.id.seekbar_low);
+        aps_car_ball = mContentView.findViewById(R.id.aps_car_ball);
+        mIvLoudness = mContentView.findViewById(R.id.sb_loudness);
         aps_sound_range.setOnTouchListener(this);
 
         for (int i = 0; i < size; i++) {
-            findViewById(btnKey[i]).setOnTouchListener(this);
+            mContentView.findViewById(btnKey[i]).setOnTouchListener(this);
         }
 
         buttons = new TextView[btnId.length];
         for (int i = 0; i < btnId.length; i++) {
-            buttons[i] = findViewById(btnId[i]);
+            buttons[i] = mContentView.findViewById(btnId[i]);
             buttons[i].setOnClickListener(this);
         }
 
@@ -109,8 +120,8 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         handlerThread.start();
         soundHandler = new SoundHandler(handlerThread.getLooper());
 
-        ball = ApsStation.getSoundData(this, ApsStation.NAME_LAYOUT);
-        location = ToolClass.getLocationFlag(this);
+        ball = ApsStation.getSoundData(requireContext(), ApsStation.NAME_LAYOUT);
+        location = ToolClass.getLocationFlag(requireContext());
 
         int[] apsGainRange = null;
         try {
@@ -131,12 +142,12 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         mHighSeekbar.setMax(gainMax);
         mLowSeekBar.setMax(gainMax);
 
-        int bass = ToolClass.getBassGain(this);
-        int treble = ToolClass.getTrebleGain(this);
+        int bass = ToolClass.getBassGain(requireContext());
+        int treble = ToolClass.getTrebleGain(requireContext());
         mHighSeekbar.setProgress(treble);
         mLowSeekBar.setProgress(bass);
         apsSound = new int[4][4];
-        mLoudnessOpen = ToolClass.getLoudnessGain(this) == 1;
+        mLoudnessOpen = ToolClass.getLoudnessGain(requireContext()) == 1;
         mIvLoudness.setChecked(mLoudnessOpen);
         soundRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETSOUNDFIELDRANGE.code, null);
         if (soundRange == null) {
@@ -147,7 +158,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         isFirst = true;
     }
@@ -155,7 +166,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onPause() {
         super.onPause();
-        ToolClass.setLocationFlag(this, location);
+        ToolClass.setLocationFlag(requireContext(), location);
     }
 
     private void init() {
@@ -174,7 +185,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
 
             setFixedValue();
 
-            runOnUiThread(() -> {
+            requireActivity().runOnUiThread(() -> {
                 LogUtil.i("location = " + location);
                 buttons[location].setSelected(true);
                 if (location >= 4) {
@@ -196,17 +207,17 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
      * 显示用户模式 sound
      */
     private void setSounds() {
-        sounds = ApsStation.getSoundData(this, location == 4 ? ApsStation.USER_MODE_1 : ApsStation.USER_MODE_2);
+        sounds = ApsStation.getSoundData(requireContext(), location == 4 ? ApsStation.USER_MODE_1 : ApsStation.USER_MODE_2);
         LogUtil.i(Arrays.toString(sounds));
         if (sounds == null) {
             sounds = new int[]{soundRange[1], soundRange[1], soundRange[1], soundRange[1]};
-            ApsStation.insertSoundToDb(this, sounds, location == 4 ? ApsStation.USER_MODE_1 : ApsStation.USER_MODE_2);
+            ApsStation.insertSoundToDb(requireContext(), sounds, location == 4 ? ApsStation.USER_MODE_1 : ApsStation.USER_MODE_2);
         }
         setUserBall();
     }
 
     private void setUserBall() {
-        ball = ApsStation.getSoundData(this, location == 4 ? ApsStation.USER_MODE_LAYOUT_1 : ApsStation.USER_MODE_LAYOUT_2);
+        ball = ApsStation.getSoundData(requireContext(), location == 4 ? ApsStation.USER_MODE_LAYOUT_1 : ApsStation.USER_MODE_LAYOUT_2);
         if (ball == null) ball = apsSound[2].clone();
     }
 
@@ -376,10 +387,10 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void saveSQL(int layout, int send) {
-        ApsStation.deleteSoundInDb(this, layout);
-        ApsStation.deleteSoundInDb(this, send);
-        ApsStation.insertSoundToDb(this, ball, layout);
-        ApsStation.insertSoundToDb(this, sounds, send);
+        ApsStation.deleteSoundInDb(requireContext(), layout);
+        ApsStation.deleteSoundInDb(requireContext(), send);
+        ApsStation.insertSoundToDb(requireContext(), ball, layout);
+        ApsStation.insertSoundToDb(requireContext(), sounds, send);
     }
 
     /**
@@ -463,7 +474,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         saveBallData(apsSound[i]);
                     }
-                    ToolClass.setLocationFlag(this, location);
+                    ToolClass.setLocationFlag(requireContext(), location);
                 } else {
                     buttons[i].setSelected(false);
                 }
@@ -476,10 +487,10 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         LogUtil.d("Loudness =" + mLoudnessOpen);
         if (mLoudnessOpen){
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{1}, 1);
-            ToolClass.setLoudnessGain(this, 1);
+            ToolClass.setLoudnessGain(requireContext(), 1);
         } else {
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{0}, 1);
-            ToolClass.setLoudnessGain(this, 0);
+            ToolClass.setLoudnessGain(requireContext(), 0);
         }
     }
 
@@ -488,13 +499,13 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         mLoudnessOpen = true;
         mIvLoudness.setChecked(true);
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{0}, 1);
-        ToolClass.setLoudnessGain(this, 1);
+        ToolClass.setLoudnessGain(requireContext(), 1);
         // 高音
         mHighSeekbar.setProgress(gainMax/2);
-        ToolClass.setTrebleGain(this, gainMax/2);
+        ToolClass.setTrebleGain(requireContext(), gainMax/2);
         saveGain(2, gainMax/2);
         mLowSeekBar.setProgress(gainMax/2);
-        ToolClass.setBassGain(this, gainMax/2);
+        ToolClass.setBassGain(requireContext(), gainMax/2);
         saveGain(1, gainMax/2);
         // 模式
         soundRange = ApsData.DefaultData.soundRange.clone();
@@ -507,7 +518,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
                 buttons[i].setSelected(false);
             }
         }
-        ToolClass.setLocationFlag(this, location);
+        ToolClass.setLocationFlag(requireContext(), location);
         saveBallData(apsSound[2]);
     }
 
@@ -543,10 +554,10 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (!fromUser) return;
         if (seekBar == mHighSeekbar) {
-            ToolClass.setTrebleGain(this, progress);
+            ToolClass.setTrebleGain(requireContext(), progress);
             saveGain(2, progress);
         } else if (seekBar == mLowSeekBar) {
-            ToolClass.setBassGain(this, progress);
+            ToolClass.setBassGain(requireContext(), progress);
             saveGain(1, progress);
         }
 
@@ -596,7 +607,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
                 LogUtil.d("index = " + index);
                 while (index > 0) {
                     try {
-                        runOnUiThread(() -> setBallData(status));
+                        requireActivity().runOnUiThread(() -> setBallData(status));
                         Thread.sleep(30);
                         if (!isSoundLong) break;
                     } catch (InterruptedException e) {

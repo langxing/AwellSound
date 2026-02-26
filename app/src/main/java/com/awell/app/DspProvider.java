@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
+import com.awell.app.model.ApsData;
 import com.awell.app.utils.ApsStation;
 import com.awell.app.utils.LogUtil;
 
@@ -76,7 +77,7 @@ public class DspProvider extends ContentProvider {
             StringBuilder sb = new StringBuilder();
             sb.append(ApsStation.Station._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,");
             sb.append(ApsStation.Station.APS_NAME + " INTEGER UNIQUE");
-            for (int i = 0; i < 48; i++) {
+            for (int i = 0; i < ApsData.getInstance().apsFreq.length; i++) {
                 sb.append("," + ApsStation.Station.APS_SEEK + i + " INTEGER DEFAULT 0");
             }
             return sb;

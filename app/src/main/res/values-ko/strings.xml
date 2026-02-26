@@ -2,15 +2,19 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>사용자</item>
-        <item>기준</item>
+        <item>스탠다드</item>
+
         <item>재즈</item>
-        <item>인기</item>
-        <item>바위</item>
-        <item>고전</item>
-        <item>부드러운</item>
-        <item>홀</item>
-        <item>영화</item>
+
+        <item>팝</item>
+
+        <item>록</item>
+
+        <item>클래식</item>
+
+        <item>베이스</item>
+
+        <item>트레블</item>
     </string-array>
 
     <string name="btn_drive_left">운전 모드</string>

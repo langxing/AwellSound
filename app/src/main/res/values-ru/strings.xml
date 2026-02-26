@@ -2,15 +2,19 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>Пользователь</item>
         <item>Стандарт</item>
-        <item>Сэр</item>
-        <item>Популярное</item>
+
+        <item>Джаз</item>
+
+        <item>Поп</item>
+
         <item>Рок</item>
-        <item>Классический</item>
-        <item>мягкий</item>
-        <item>Лобби</item>
-        <item>Кино</item>
+
+        <item>Классическая музыка</item>
+
+        <item>Бас</item>
+
+        <item>Высокие частоты</item>
     </string-array>
 
     <string name="btn_drive_left">режим вождения</string>

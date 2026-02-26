@@ -2,15 +2,14 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>用戶</item>
+        <item>使用者</item>
         <item>標準</item>
         <item>爵士</item>
         <item>流行</item>
         <item>搖滾</item>
         <item>古典</item>
-        <item>柔和</item>
-        <item>大廳</item>
-        <item>影院</item>
+        <item>低音</item>
+        <item>高音</item>
     </string-array>
 
     <string name="btn_drive_left">駕駛模式</string>

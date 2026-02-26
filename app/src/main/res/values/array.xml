@@ -1,8 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="aps_default">
-        <item>14</item>
-        <item>14</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
     </array>
+
+    <integer-array name="aps_normal">
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+    </integer-array>
+
+    <integer-array name="aps_jazz">
+        <item>14</item>
+        <item>16</item>
+        <item>15</item>
+        <item>14</item>
+
+        <item>33</item>
+        <item>38</item>
+        <item>30</item>
+        <item>30</item>
+
+        <item>8</item>
+        <item>17</item>
+        <item>25</item>
+        <item>22</item>
+    </integer-array>
+
+    <integer-array name="aps_pop">
+        <item>29</item>
+        <item>20</item>
+        <item>18</item>
+        <item>24</item>
+
+        <item>27</item>
+        <item>20</item>
+        <item>14</item>
+        <item>22</item>
+
+        <item>27</item>
+        <item>17</item>
+        <item>20</item>
+        <item>33</item>
+    </integer-array>
+
+    <integer-array name="aps_rock">
+        <item>27</item>
+        <item>24</item>
+        <item>26</item>
+        <item>27</item>
+
+        <item>27</item>
+        <item>16</item>
+        <item>16</item>
+        <item>20</item>
+
+        <item>16</item>
+        <item>22</item>
+        <item>33</item>
+        <item>12</item>
+    </integer-array>
+
+    <integer-array name="aps_classical">
+        <item>16</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+
+        <item>27</item>
+        <item>16</item>
+        <item>22</item>
+        <item>24</item>
+
+        <item>11</item>
+        <item>22</item>
+        <item>22</item>
+        <item>32</item>
+    </integer-array>
+
+    <integer-array name="aps_bass">
+        <item>38</item>
+        <item>36</item>
+        <item>34</item>
+        <item>30</item>
+
+        <item>28</item>
+        <item>26</item>
+        <item>24</item>
+        <item>20</item>
+
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+    </integer-array>
+
+    <integer-array name="aps_treble">
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+
+        <item>20</item>
+        <item>24</item>
+        <item>26</item>
+        <item>28</item>
+
+        <item>30</item>
+        <item>34</item>
+        <item>36</item>
+        <item>38</item>
+    </integer-array>
 
 </resources>

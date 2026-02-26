@@ -1,5 +1,8 @@
 package com.awell.app.model;
 
+import android.content.Context;
+
+import com.awell.app.R;
 import com.awell.app.utils.LogUtil;
 import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
@@ -16,16 +19,19 @@ public class ApsData {
      */
     private float[] apsQ;
     private int[] apsGainRange; //增益范围
+    private int apsGain;//增益
+    private int defaultGain = 20;
     /**
      * 用户模式选择
      * 标准-爵士-流行-...
      */
     private int[][] typeValue;
-
+    public int[] apsFreq = {20, 80, 230, 910, 1500, 3600, 7500, 14000};
     public static int gainRange = 10;
-    public static int gainMax = 5;
-    public static int gainMin = -5;
-
+    public static int gainMax = 38;
+    public static int gainMin = 0;
+    private int[] typeId = {R.array.aps_default, R.array.aps_normal, R.array.aps_jazz, R.array.aps_pop,
+            R.array.aps_rock, R.array.aps_classical, R.array.aps_bass, R.array.aps_treble};
     /**
      * Q值范围
      */
@@ -37,8 +43,14 @@ public class ApsData {
         return apsData;
     }
 
-    private ApsData() {
+    private ApsData() {}
 
+    public int getApsGain() {
+        return apsGain;
+    }
+
+    public void setApsGain(int apsGain) {
+        this.apsGain = apsGain;
     }
 
     //    [20, 31, 50, 80, 125, 200, 315, 500, 800, 1250, 2000, 3150, 5000, 8000, 12500, 20000]
@@ -78,8 +90,8 @@ public class ApsData {
                 if (apsGainRange1 != null && apsGainRange1.length > 1) {
                     apsGainRange[i] = apsGainRange1[1] - apsGainRange1[0];
                     gainRange = apsGainRange[i];
-                    gainMax = apsGainRange1[1];
-                    gainMin = apsGainRange1[0];
+//                    gainMax = apsGainRange1[1];
+//                    gainMin = apsGainRange1[0];
                 }
             }
         }
@@ -97,10 +109,26 @@ public class ApsData {
         }
     }
 
+    public int[][] getTypeValue(Context context) {
+        if (typeValue != null)
+            return typeValue;
+        String[] typeStrings = context.getResources().getStringArray(R.array.dsp_aps_type);
+        int i, j;
+        int size = typeStrings.length;
+        typeValue = new int[size][apsFreq.length];
+        for (i = 0; i < size; i++) {
+            typeValue[i] = context.getResources().getIntArray(typeId[i]);
+            for (j = 0; j < apsFreq.length; j++) {
+                // 20是默认值
+                typeValue[i][j] = gainMax - defaultGain;
+            }
+        }
+        return typeValue;
+    }
+
     public interface DefaultData {
-        int[] apsFreqSend = {20, 31, 50, 80, 125, 200, 315, 500, 800, 1250, 2000, 3150, 5000, 8000, 12500, 20000};
+        int[] apsFreqSend = {20, 80, 230, 910, 1500, 3600, 7500, 14000};
         int[] surroundRange = {21};
-        int[] apsFreq = {54, 68, 86, 108, 134, 172, 214};
         float[] apsQRange = {0.7f, 1.7f, 2.7f, 3.7f, 4.7f, 5.7f, 6.7f};
         int[] soundRange = {0, 79};
         int[] apsFreqFilter = {0, 25, 31, 40, 50, 63, 80, 100, 125, 160, 200, 250};

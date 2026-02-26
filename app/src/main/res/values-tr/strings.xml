@@ -2,15 +2,19 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>kullanıcı</item>
-        <item>standart</item>
-        <item>caz</item>
-        <item>Popülerlik</item>
-        <item>kaynak</item>
-        <item>klasik</item>
-        <item>yumuşak</item>
-        <item>salon</item>
-        <item>sinema</item>
+        <item>Standart</item>
+
+        <item>Caz</item>
+
+        <item>Pop</item>
+
+        <item>Rock</item>
+
+        <item>Klasik</item>
+
+        <item>Bas</item>
+
+        <item>Tiz</item>
     </string-array>
 
     <string name="btn_drive_left">sürmek</string>

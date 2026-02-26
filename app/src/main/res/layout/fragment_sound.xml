@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginVertical="15dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="25dp"
             android:gravity="end"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper1"
@@ -179,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginVertical="15dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="25dp"
             android:gravity="end"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper2"
@@ -416,7 +416,7 @@
             android:layout_height="wrap_content"
             android:thumb="@drawable/ic_switch_button"
             app:track="@drawable/selector_loudness_switch"
-            tools:checked="false"/>
+            tools:checked="false" />
     </LinearLayout>
 
     <TextView
@@ -432,8 +432,7 @@
         android:textSize="16sp"
         android:text="@string/reset_default"
         app:layout_constraintEnd_toEndOf="@+id/layout_tab"
-        app:layout_constraintTop_toBottomOf="@+id/layout_tab">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/layout_tab"></TextView>
 
     <LinearLayout
         android:id="@+id/layout_tab"

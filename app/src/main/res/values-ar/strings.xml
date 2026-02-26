@@ -2,15 +2,21 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>المستعمل</item>
-        <item>اساسي</item>
-        <item>موسيقى الجاز</item>
-        <item>شعبية</item>
-        <item>صخر</item>
+        <item>مستخدم</item>
+
+        <item>قياسي</item>
+
+        <item>جاز</item>
+
+        <item>بوب</item>
+
+        <item>روك</item>
+
         <item>كلاسيكي</item>
-        <item>لين</item>
-        <item>صالة</item>
-        <item>سينما</item>
+
+        <item>باس</item>
+
+        <item>تريبل</item>
     </string-array>
 
     <string name="btn_drive_left">وضع القيادة</string>

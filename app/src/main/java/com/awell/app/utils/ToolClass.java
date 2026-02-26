@@ -31,7 +31,7 @@ public class ToolClass {
     public static final String SET_BESLOUDNESS_DISABLED = "SetBesLoudnessStatus=0";
     private static final String TAG = ToolClass.class.getSimpleName();
 
-    public static final int[] apsGainRange = {-14, 14};
+    public static final int[] apsGainRange = {0, 30};
 
     public static void showToast(Context context, String msg) {
         if (toast == null) {
