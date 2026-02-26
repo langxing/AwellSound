@@ -43,6 +43,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      */
     private int[] apsGain, apsFreq;
     private int mCurrentType = 0;
+    private int gainMax = 0;
     private int[][] mDataArray;
     private Contract.EqualPresenter mPresenter;
 
@@ -59,7 +60,6 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBinding.waveview.setMaxGain(ApsData.gainMax);
         mBinding.waveview.setOnGainChange((index, progress) -> {
             try {
                 View seekbarLayout = mBinding.layoutSeekbar.getChildAt(index);
@@ -78,6 +78,22 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
 
     @SuppressLint("SetTextI18n")
     private void initData() {
+        int[] apsGainRange = null;
+        try {
+            apsGainRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDLEVELRANGE.code, null);
+        }catch (Exception e){
+            LogUtil.e("Exception = " + e);
+        }
+        if (apsGainRange == null){
+            LogUtil.e("apsGainRange is null");
+            apsGainRange = ToolClass.apsGainRange.clone();
+        }
+
+        if (apsGainRange.length > 1) {
+            LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
+            gainMax = apsGainRange[1] - apsGainRange[0];
+        }
+        mBinding.waveview.setMaxGain(gainMax);
         mPresenter = new EqualPresenterImpl();
         mPresenter.setContext(requireContext());
         mPresenter.setView(this);

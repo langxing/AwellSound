@@ -1,21 +1,12 @@
 package com.awell.app.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Environment;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class ToolClass {
@@ -25,13 +16,9 @@ public class ToolClass {
 
     private static Toast toast;
 
-    public static final String GET_BESLOUDNESS_STATUS = "GetBesLoudnessStatus";
-    public static final String GET_BESLOUDNESS_STATUS_ENABLED = "GetBesLoudnessStatus=1";
-    public static final String SET_BESLOUDNESS_ENABLED = "SetBesLoudnessStatus=1";
-    public static final String SET_BESLOUDNESS_DISABLED = "SetBesLoudnessStatus=0";
     private static final String TAG = ToolClass.class.getSimpleName();
 
-    public static final int[] apsGainRange = {0, 30};
+    public static final int[] apsGainRange = {0, 38};
 
     public static void showToast(Context context, String msg) {
         if (toast == null) {
