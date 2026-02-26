@@ -51,21 +51,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_equalizer:
+            case R.id.btn_sound:
+                switchPage(view.getId());
+            break;
+            case R.id.layout_custom:
+                showTypeWindow();
+                break;
+        }
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    private void switchPage(int id) {
         mBinding.btnEqualizer.setSelected(false);
         mBinding.btnSound.setSelected(false);
-        switch (view.getId()) {
+        switch (id) {
             case R.id.btn_equalizer:
                 mBinding.btnEqualizer.setSelected(true);
                 mBinding.viewPager.setCurrentItem(0);
                 mBinding.layoutCustom.setVisibility(View.VISIBLE);
-            break;
+                break;
             case R.id.btn_sound:
                 mBinding.btnSound.setSelected(true);
                 mBinding.viewPager.setCurrentItem(1);
                 mBinding.layoutCustom.setVisibility(View.GONE);
-            break;
-            case R.id.layout_custom:
-                showTypeWindow();
                 break;
         }
     }
