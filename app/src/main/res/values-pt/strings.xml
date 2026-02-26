@@ -2,7 +2,9 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>Standard</item>
+        <item>Utilizador</item>
+
+        <item>Padrão</item>
 
         <item>Jazz</item>
 
@@ -10,11 +12,11 @@
 
         <item>Rock</item>
 
-        <item>Clássico</item>
+        <item>Clássica</item>
 
-        <item>Bass</item>
+        <item>Baixo</item>
 
-        <item>Teble</item>
+        <item>Agudo</item>
     </string-array>
 
     <string name="btn_drive_left">dirigir</string>
@@ -29,5 +31,8 @@
 
     <string name="bass">Notas graves</string>
     <string name="reset_default">Restaurar padrão</string>
+    <string name="equalizer">Equalizador</string>
+
+    <string name="sound_mode">Equilíbrio do Campo Sonoro</string>
 
 </resources>

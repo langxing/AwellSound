@@ -29,5 +29,7 @@
     <string name="high_notes">الترددات العالية</string>
     <string name="bass">الترددات الأساسية</string>
     <string name="reset_default">استعادة الإعدادات الافتراضية</string>
+    <string name="equalizer">معادل الصوت</string>
+    <string name="sound_mode">موازنة مجال الصوت</string>
 
 </resources>

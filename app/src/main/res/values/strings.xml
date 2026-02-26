@@ -11,6 +11,8 @@
     <string name="high_notes">Treble</string>
     <string name="bass">Bass</string>
     <string name="reset_default">Restore default</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="sound_mode">sound field</string>
 
     <string-array name="dsp_aps_type">
         <item>User</item>

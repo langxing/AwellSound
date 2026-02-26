@@ -2,7 +2,9 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>스탠다드</item>
+        <item>사용자</item>
+
+        <item>표준</item>
 
         <item>재즈</item>
 
@@ -29,5 +31,8 @@
 
     <string name="bass">저음</string>
     <string name="reset_default">기본값 복원</string>
+    <string name="equalizer">이퀄라이저</string>
+
+    <string name="sound_mode">사운드 필드 밸런스</string>
 
 </resources>

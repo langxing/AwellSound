@@ -11,6 +11,8 @@
     <string name="high_notes">高音</string>
     <string name="bass">低音</string>
     <string name="reset_default">恢复默认</string>
+    <string name="equalizer">均衡器</string>
+    <string name="sound_mode">声场平衡</string>
 
     <string-array name="dsp_aps_type">
         <item>用户</item>

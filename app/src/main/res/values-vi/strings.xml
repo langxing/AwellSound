@@ -2,19 +2,23 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
-        <item>Nhạc tiêu chuẩn</item>
 
-        <item>Nhạc Jazz</item>
+        <item>Người dùng</item>
 
-        <item>Nhạc Pop</item>
+        <item>Tiêu chuẩn</item>
 
-        <item>Nhạc Rock</item>
+        <item>Jazz</item>
 
-        <item>Nhạc cổ điển</item>
+        <item>Pop</item>
+
+        <item>Rock</item>
+
+        <item>Cổ điển</item>
 
         <item>Bass</item>
 
         <item>Treble</item>
+
     </string-array>
 
     <string name="btn_drive_left">trái</string>
@@ -29,5 +33,8 @@
 
     <string name="bass">Nốt thấp</string>
     <string name="reset_default">Khôi phục mặc định</string>
+    <string name="equalizer">Bộ cân bằng</string>
+
+    <string name="sound_mode">Cân bằng trường âm thanh</string>
 
 </resources>

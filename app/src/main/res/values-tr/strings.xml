@@ -2,6 +2,8 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
+        <item>Kullanıcı</item>
+
         <item>Standart</item>
 
         <item>Caz</item>
@@ -29,5 +31,8 @@
 
     <string name="bass">Düşük notalar</string>
     <string name="reset_default">Varsayılan ayarları geri yükle</string>
+    <string name="equalizer">Ekolayzer</string>
+
+    <string name="sound_mode">Ses Alanı Dengesi</string>
 
 </resources>

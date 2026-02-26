@@ -26,14 +26,14 @@
             style="@style/aps_sound_image_style_port"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="均衡器" />
+            android:text="@string/equalizer" />
 
         <TextView
             android:id="@+id/btn_sound"
             style="@style/aps_sound_image_style_port"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="声场平衡" />
+            android:text="@string/sound_mode" />
 
     </LinearLayout>
 

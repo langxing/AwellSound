@@ -1,6 +1,8 @@
 package com.awell.app.windows;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,12 @@ public class EqualizerTypeWindow extends PopupWindow implements View.OnClickList
     }
 
     private void initView(View contentView) {
+        // 1. 必须设置背景，哪怕是透明的（针对老版本系统）
+        setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 2. 设置点击外部消失
+        setOutsideTouchable(true);
+        // 3. 设置能够响应物理返回键
+        setFocusable(true);
         mBinding = LayoutEqualizerWindowBinding.bind(contentView);
         mApsType = mContext.getResources().getStringArray(R.array.dsp_aps_type);
         mBinding.layoutType.removeAllViews();

@@ -2,6 +2,7 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
+        <item>Usuario</item>
 
         <item>Estándar</item>
 
@@ -28,5 +29,8 @@
     <string name="high_notes">Notas altas</string>
     <string name="bass">bajo</string>
     <string name="reset_default">Restaurar valores predeterminados</string>
+    <string name="equalizer">Ecualizador</string>
+
+    <string name="sound_mode">Balance del campo sonoro</string>
 
 </resources>

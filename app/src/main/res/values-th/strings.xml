@@ -2,6 +2,8 @@
     <string name="app_name">AwellAutoEq2313</string>
 
     <string-array name="dsp_aps_type">
+        <item>ผู้ใช้</item>
+
         <item>มาตรฐาน</item>
 
         <item>แจ๊ส</item>
@@ -29,5 +31,8 @@
 
     <string name="bass">เสียงต่ำ</string>
     <string name="reset_default">คืนค่าเป็นค่าเริ่มต้น</string>
+    <string name="equalizer">อีควอไลเซอร์</string>
+
+    <string name="sound_mode">สมดุลเสียง</string>
 
 </resources>
