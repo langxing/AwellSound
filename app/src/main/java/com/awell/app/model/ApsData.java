@@ -26,7 +26,7 @@ public class ApsData {
      * 标准-爵士-流行-...
      */
     private int[][] typeValue;
-    public int[] apsFreq = {20, 80, 230, 910, 1500, 3600, 7500, 14000};
+    public int[] apsFreq = {60, 80, 100, 120, 500, 1000, 1500, 2500, 7500, 10000, 12500, 15000};
     public static int gainRange = 10;
     public static int gainMax = 38;
     public static int gainMin = 0;
@@ -57,7 +57,7 @@ public class ApsData {
     public int[] getApsFreqSend() {
         if (apsFreqSend == null) {
             apsFreqSend = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDS.code, null);
-            if (apsFreqSend == null) {
+            if (apsFreqSend == null || apsFreqSend.length != DefaultData.apsFreqSend.length) {
                 apsFreqSend = DefaultData.apsFreqSend.clone();
             }
         }
@@ -127,7 +127,7 @@ public class ApsData {
     }
 
     public interface DefaultData {
-        int[] apsFreqSend = {20, 80, 230, 910, 1500, 3600, 7500, 14000};
+        int[] apsFreqSend = {60, 80, 100, 120, 500, 1000, 1500, 2500, 7500, 10000, 12500, 15000};
         int[] surroundRange = {21};
         float[] apsQRange = {0.7f, 1.7f, 2.7f, 3.7f, 4.7f, 5.7f, 6.7f};
         int[] soundRange = {0, 79};

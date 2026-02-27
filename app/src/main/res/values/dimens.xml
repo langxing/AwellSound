@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="dsp_sound_fragment_ball_layout_width">320dp</dimen>
-    <dimen name="dsp_sound_fragment_ball_layout_height">320dp</dimen>
+    <dimen name="dsp_sound_fragment_ball_layout_width">265dp</dimen>
+    <dimen name="dsp_sound_fragment_ball_layout_height">265dp</dimen>
 
     <dimen name="arrow_padding">0dp</dimen>
     <dimen name="wave_height">130dp</dimen>
+    <dimen name="sound_seekbar_width">105dp</dimen>
 </resources>

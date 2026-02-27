@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:paddingHorizontal="20dp"
+    android:paddingHorizontal="10dp"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="14sp"
         tools:text="15" />
 
     <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:text="20hz" />
 </LinearLayout>

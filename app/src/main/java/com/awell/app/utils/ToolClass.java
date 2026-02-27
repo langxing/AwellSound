@@ -18,7 +18,7 @@ public class ToolClass {
 
     private static final String TAG = ToolClass.class.getSimpleName();
 
-    public static final int[] apsGainRange = {0, 38};
+    public static final int[] apsGainRange = {-14, 14};
 
     public static void showToast(Context context, String msg) {
         if (toast == null) {

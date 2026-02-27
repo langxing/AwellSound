@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showTypeWindow() {
-        mBinding.ivCustom.setRotation(180);
+        mBinding.ivCustom.setRotation(0);
         EqualizerTypeWindow typeWindow = new EqualizerTypeWindow(this);
         typeWindow.setSelectedPosition(mCurrentTypePosition);
         typeWindow.setListener(this);
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onEqualizerTypeClick(int position, String type) {
-        mBinding.ivCustom.setRotation(0);
+        mBinding.ivCustom.setRotation(180);
         mBinding.tvCustom.setText(type);
         if (mEqualFragment != null && mCurrentTypePosition != position) {
             mEqualFragment.setType(position);

@@ -24,22 +24,18 @@ import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-import kotlin.jvm.functions.Function2;
 
 public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private final ArrayList<Integer> list = new ArrayList<>();
     private FragmentSoundEqualBinding mBinding;
     private ApsData apsData;
     /**
-     * apsGain:当前seekbar的值，为增益值 0-40范围
-     * length 8
+     * apsGain:当前seekbar的值
      * apsFreq:底部HZ显示值
-     * length 8
      */
     private int[] apsGain, apsFreq;
     private int mCurrentType = 0;
@@ -93,7 +89,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
-        mBinding.waveview.setMaxGain(gainMax);
+        mBinding.waveview.setMaxGain(Math.max(gainMax, ApsData.gainMax));
         mPresenter = new EqualPresenterImpl();
         mPresenter.setContext(requireContext());
         mPresenter.setView(this);
@@ -103,7 +99,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     @SuppressLint("SetTextI18n")
     private void updateSeekBar(int[] apsGain, boolean changeSeekbar) {
         mBinding.layoutSeekbar.removeAllViews();
-        for (int i = 0; i < apsGain.length; i++) {
+        for (int i = 0; i < apsFreq.length; i++) {
             View view = LayoutInflater.from(requireContext()).inflate(R.layout.layout_item_seekbar, null);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
@@ -115,10 +111,17 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             TextView tvValue = view.findViewById(R.id.tv_value);
             TextView tvHz = view.findViewById(R.id.tv_hz);
             tvValue.setText(apsGain[i] + "");
-            seekBar.setMax(ApsData.gainMax);
+            seekBar.setMax(Math.max(gainMax, ApsData.gainMax));
             seekBar.setProgress(apsGain[i]);
             if (apsFreq != null) {
-                tvHz.setText(apsFreq[i] + "Hz");
+                int apsHz = apsFreq[i];
+                if (apsHz < 1000) {
+                    tvHz.setText(apsFreq[i] + "Hz");
+                } else {
+                    float hzValue = new BigDecimal(apsHz).divide(new BigDecimal(1000), 1, RoundingMode.DOWN)
+                            .floatValue();
+                    tvHz.setText(hzValue + "kHz");
+                }
             }
             seekBar.setEnabled(changeSeekbar);
             mBinding.waveview.setNeedIntercept(changeSeekbar);
@@ -176,6 +179,9 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         mCurrentType = position;
         if (position == 0) {
             int[] apsGainCustom = ApsStation.getApsGain(requireContext(), ApsStation.NAME_GAIN_CUSTOM);
+            if (apsGainCustom == null) {
+                apsGainCustom = mDataArray[position];
+            }
             setData(apsGainCustom, false);
         } else {
             setData(mDataArray[position], false);
@@ -196,7 +202,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         }
         list.clear();
         updateSeekBar(data, mCurrentType == 0);
-        for (int i = 0; i < data.length; i++) {
+        for (int i = 0; i < apsFreq.length; i++) {
             setPlayGain(i, data[i]);
             list.add(data[i]);
         }
@@ -211,9 +217,11 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      */
     private void setPlayGain(int index, int gain) {
         ApsStation.updateApsInDb(requireContext(), index, gain, ApsStation.NAME_GAIN);
-        int freq = apsData.getApsFreqSend()[index];
-        LogUtil.i("index = " + index + "  freq = " + freq + " gain = " + gain);
-        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, new int[]{freq, gain, 1}, 4);
+        int apsHz = apsFreq[index];
+        gain = gain - gainMax / 2;
+        LogUtil.d("index = " + apsHz + " gain = " + gain + " gainMax = " + gainMax);
+        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code,
+                new int[]{apsHz, gain}, 2);
     }
 
     @Override
@@ -221,14 +229,18 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         mDataArray = data;
         apsData = ApsData.getInstance();
         LogUtil.i(Arrays.toString(apsData.getApsFreqSend()));//获取实际频率
-        apsFreq = apsData.apsFreq.clone();
+        apsFreq = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDS.code, null);
+        if (apsFreq == null || apsFreq.length != ApsData.getInstance().apsFreq.length){
+            LogUtil.e("apsFreq is null ");
+            apsFreq = ApsData.getInstance().apsFreq.clone();
+        }
         final int position = ToolClass.getTypeFlag(requireContext());
         apsGain = ApsStation.getApsGain(getContext(), ApsStation.NAME_GAIN);
         LogUtil.i("apsGain = " + Arrays.toString(apsGain));
         if (apsGain == null) {
             apsGain = mDataArray[0];
             ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN);
-            ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN_REAR);
+            ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN_CUSTOM);
         }
         for (int gain : apsGain) {
             list.add(gain);

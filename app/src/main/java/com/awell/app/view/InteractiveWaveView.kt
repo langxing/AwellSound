@@ -31,10 +31,8 @@ class InteractiveWaveView @JvmOverloads constructor(
         style = Paint.Style.FILL
     }
     private val random = java.util.Random(16)
-        // 对应音效的柱子数量
-    private val APS_COUNT = 8
     // 初始坡度点的高度 (dp)
-    private var slopeHeightsDp = floatArrayOf(100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f)
+    private var slopeHeightsDp = floatArrayOf(100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f)
     // 在 InteractiveWaveView 类定义处添加
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.parseColor("#AAAAAA") // 文字颜色
@@ -66,7 +64,7 @@ class InteractiveWaveView @JvmOverloads constructor(
             strokeCap = Paint.Cap.ROUND
         }
         gridPaint.apply {
-            color = Color.parseColor("#E0E0E0")
+            color = Color.TRANSPARENT
             style = Paint.Style.STROKE
             strokeWidth = dpToPx(0.5f)
         }
@@ -74,7 +72,6 @@ class InteractiveWaveView @JvmOverloads constructor(
             color = Color.parseColor("#181717")
             style = Paint.Style.FILL
         }
-        COLUMN_WIDTH_DP = (context.resources.displayMetrics.widthPixels/APS_COUNT).toFloat()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -101,7 +98,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     }
 
     private fun updateWaveHeight(touchX: Float, touchY: Float) {
-        val gridW = dpToPx(COLUMN_WIDTH_DP) * (mDataList.size - 1)
+        val gridW = context.resources.displayMetrics.widthPixels
         val segmentWidth = gridW / (mDataList.size - 1)
         // 修正：减去左侧留白，得到相对于网格起点(0,0)的坐标
         val relativeX = touchX - paddingLeft
@@ -123,7 +120,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         // 重新计算当前的网格尺寸，确保它不随 View 宽度拉伸
-        val gridW = dpToPx(COLUMN_WIDTH_DP) * (mDataList.size - 1)
+        val gridW = context.resources.displayMetrics.widthPixels.toFloat()
         val gridH = height.toFloat() - paddingBottom - TOP_OFFSET
 
         canvas.save()
@@ -140,7 +137,7 @@ class InteractiveWaveView @JvmOverloads constructor(
         fillPaint.shader = gradient
 
         // 3. 计算波浪点间距
-        val segmentWidth = gridW / (APS_COUNT - 1)
+        val segmentWidth = gridW / (mDataList.size - 1)
 
         buildWavePath(gridW, gridH, segmentWidth)
         canvas.drawPath(wavePath, fillPaint)
@@ -170,11 +167,11 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        // 根据 X 轴数组长度计算总网格宽度，应该取mDataList长度，但此时还未传参
-        val gridW = dpToPx(COLUMN_WIDTH_DP) * (APS_COUNT - 1)
-        // 总宽度 = 网格宽 + 左留白 + 右侧余量
-        val totalWidth = (gridW + paddingLeft + dpToPx(20f)).toInt()
-
+//        // 根据 X 轴数组长度计算总网格宽度，应该取mDataList长度，但此时还未传参
+//        val gridW = dpToPx(COLUMN_WIDTH_DP) * (APS_COUNT - 1)
+//        // 总宽度 = 网格宽 + 左留白 + 右侧余量
+//        val totalWidth = (gridW + paddingLeft + dpToPx(20f)).toInt()
+        val totalWidth = MeasureSpec.getSize(widthMeasureSpec)
         val totalHeight = MeasureSpec.getSize(heightMeasureSpec)
         setMeasuredDimension(totalWidth, totalHeight)
 
@@ -189,7 +186,7 @@ class InteractiveWaveView @JvmOverloads constructor(
         }
     }
 
-    fun reset() {
+    private fun reset() {
         // 默认
         for (i in slopeHeightsDp.indices) {
             slopeHeightsDp[i] = maxHeightPx/2
@@ -294,6 +291,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     fun updateList(list: List<Int>) {
         mDataList.clear()
         mDataList.addAll(list)
+//        COLUMN_WIDTH_DP = (context.resources.displayMetrics.widthPixels/list.size).toFloat()
         if (measuredWidth > 0){
             drawView()
         } else {
@@ -309,7 +307,7 @@ class InteractiveWaveView @JvmOverloads constructor(
                 val high = BigDecimal(apsModel).divide(BigDecimal(maxGain), 2, RoundingMode.HALF_DOWN)
                     .multiply(BigDecimal(maxHeightPx.toInt()))
                     .toFloat()
-                slopeHeightsDp[i] = high
+                slopeHeightsDp[i] = if (high < maxHeightPx) high else maxHeightPx
             }
             postInvalidate()
         } else {
