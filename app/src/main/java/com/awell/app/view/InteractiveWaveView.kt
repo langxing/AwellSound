@@ -86,7 +86,7 @@ class InteractiveWaveView @JvmOverloads constructor(
                 return true
             }
             MotionEvent.ACTION_UP -> {
-//                spawnParticles(event.x, event.y)
+                spawnParticles(event.x, event.y)
                 parent.requestDisallowInterceptTouchEvent(false) // 恢复拦截
                 return true
             }
@@ -267,10 +267,10 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     // 添加一个触发粒子爆炸的方法
     private fun spawnParticles(centerX: Float, centerY: Float) {
-        repeat(200) { // 150个点足以产生铺满感
+        repeat(300) { // 150个点足以产生铺满感
             // 在点击点周围的矩形区域内随机选点
-            val offsetX = (random.nextGaussian() * dpToPx(8f)).toFloat() // X轴 扩散略大
-            val offsetY = (random.nextGaussian() * dpToPx(20f)).toFloat() // Y轴 扩散略小，形成长条
+            val offsetX = (random.nextGaussian() * dpToPx(12f)).toFloat() // X轴 扩散略大
+            val offsetY = (random.nextGaussian() * dpToPx(25f)).toFloat() // Y轴 扩散略小，形成长条
 
             // 速度给得很小，让它们只是微颤
             val vx = (Math.random().toFloat() - 0.5f) * 2f

@@ -10,7 +10,7 @@ class Particle(
 ) {
     var alpha: Int = 255
     // 随机的消失速度，让粒子群产生层次感
-    private val fadeSpeed = (Math.random() * 3 + 3).toInt()
+    private val fadeSpeed = (Math.random() * 8 + 8).toInt()
 
     fun update() {
         x += vx

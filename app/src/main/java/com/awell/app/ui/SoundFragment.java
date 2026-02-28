@@ -574,11 +574,11 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
     }
 
     private void saveGain(int index, int progress) {
-        int[] gains = new int[2];
-        gains[0] = index;
-        gains[1] = progress - gainMax / 2;
-        LogUtil.d(Arrays.toString(gains));
-        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, gains, 2);
+//        int[] gains = new int[2];
+//        gains[0] = index;
+//        gains[1] = progress - gainMax / 2;
+//        LogUtil.d(Arrays.toString(gains));
+//        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, gains, 2);
     }
 
     private class SoundHandler extends Handler {

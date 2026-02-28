@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:clipChildren="false"
         app:layout_constraintStart_toEndOf="@+id/layout_low"
         app:layout_constraintTop_toBottomOf="@+id/layout_loudness_switch">
@@ -164,6 +165,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:clipChildren="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_loudness_switch">
@@ -432,7 +434,7 @@
         android:textSize="16sp"
         android:text="@string/reset_default"
         app:layout_constraintEnd_toEndOf="@+id/layout_tab"
-        app:layout_constraintTop_toBottomOf="@+id/layout_tab"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/layout_tab" />
 
     <LinearLayout
         android:id="@+id/layout_tab"

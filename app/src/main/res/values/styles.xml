@@ -13,6 +13,16 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:windowBackground">@color/main_bg</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <!-- dialog style -->
 
     <style name="aps_sound_image_style_port">

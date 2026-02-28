@@ -32,7 +32,6 @@ import java.util.Arrays;
 public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private final ArrayList<Integer> list = new ArrayList<>();
     private FragmentSoundEqualBinding mBinding;
-    private ApsData apsData;
     /**
      * apsGain:当前seekbar的值
      * apsFreq:底部HZ显示值
@@ -40,6 +39,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private int[] apsGain, apsFreq;
     private int mCurrentType = 0;
     private int gainMax = 0;
+    private int[] mUserGain;
     private int[][] mDataArray;
     private Contract.EqualPresenter mPresenter;
 
@@ -89,7 +89,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
-        mBinding.waveview.setMaxGain(Math.max(gainMax, ApsData.gainMax));
+        mBinding.waveview.setMaxGain(gainMax);
         mPresenter = new EqualPresenterImpl();
         mPresenter.setContext(requireContext());
         mPresenter.setView(this);
@@ -98,6 +98,9 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
 
     @SuppressLint("SetTextI18n")
     private void updateSeekBar(int[] apsGain, boolean changeSeekbar) {
+        if (mUserGain == null) {
+            mUserGain = new int[]{ToolClass.getBassGain(requireContext()), ToolClass.getTrebleGain(requireContext())};
+        }
         mBinding.layoutSeekbar.removeAllViews();
         for (int i = 0; i < apsFreq.length; i++) {
             View view = LayoutInflater.from(requireContext()).inflate(R.layout.layout_item_seekbar, null);
@@ -111,7 +114,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             TextView tvValue = view.findViewById(R.id.tv_value);
             TextView tvHz = view.findViewById(R.id.tv_hz);
             tvValue.setText(apsGain[i] + "");
-            seekBar.setMax(Math.max(gainMax, ApsData.gainMax));
+            seekBar.setMax(gainMax);
             seekBar.setProgress(apsGain[i]);
             if (apsFreq != null) {
                 int apsHz = apsFreq[i];
@@ -161,10 +164,20 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     @SuppressLint("SetTextI18n")
     private void setDataView(int index, int progress, boolean updateWaveView) {
         list.set(index, progress);
+        if (index >= list.size()/2) {
+            // 高音
+            mUserGain[1] = progress;
+            ToolClass.setTrebleGain(requireContext(), progress);
+        } else {
+            // 低音
+            mUserGain[0] = progress;
+            ToolClass.setBassGain(requireContext(), progress);
+        }
+        LogUtil.d("index = " + index + " progress = " + progress + "userGain = " + Arrays.toString(mUserGain));
         if (updateWaveView) {
             mBinding.waveview.updateList(list);
         }
-        setPlayGain(index, progress);
+        saveGain(index, progress);
         View itemView = mBinding.layoutSeekbar.getChildAt(index);
         TextView tvValue = itemView.findViewById(R.id.tv_value);
         tvValue.setText(progress + "");
@@ -201,11 +214,21 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             ApsStation.insertApsToDb(context, data, ApsStation.NAME_GAIN_REAR);
         }
         list.clear();
-        updateSeekBar(data, mCurrentType == 0);
-        for (int i = 0; i < apsFreq.length; i++) {
-            setPlayGain(i, data[i]);
-            list.add(data[i]);
+        for (int i = 0; i < ApsData.DefaultData.apsFreqSend.length; i++) {
+            int gain = data[i];
+            list.add(gain);
+            if (mUserGain != null) {
+                if (mCurrentType == 0) {
+                    if (i >= ApsData.DefaultData.apsFreqSend.length/2) {
+                        gain = mUserGain[1];
+                    } else {
+                        gain = mUserGain[0];
+                    }
+                }
+                saveGain(i, gain);
+            }
         }
+        updateSeekBar(data, mCurrentType == 0);
         mBinding.waveview.updateList(list);
     }
 
@@ -213,22 +236,23 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      * 发送增益更新数据库值
      *
      * @param index
-     * @param gain
      */
-    private void setPlayGain(int index, int gain) {
-        ApsStation.updateApsInDb(requireContext(), index, gain, ApsStation.NAME_GAIN);
-        int apsHz = apsFreq[index];
-        gain = gain - gainMax / 2;
-        LogUtil.d("index = " + apsHz + " gain = " + gain + " gainMax = " + gainMax);
-        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code,
-                new int[]{apsHz, gain}, 2);
+    private void saveGain(int index, int progress) {
+        ApsStation.updateApsInDb(requireContext(), index, progress, ApsStation.NAME_GAIN);
+        int[] gains = new int[2];
+        int gainIndex = 1;
+        if (index >= ApsData.DefaultData.apsFreqSend.length/2) {
+            gainIndex = 2;
+        }
+        gains[0] = gainIndex;
+        gains[1] = progress - gainMax / 2;
+        LogUtil.d(Arrays.toString(gains));
+        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, gains, 2);
     }
 
     @Override
     public void setData(int[][] data) {
         mDataArray = data;
-        apsData = ApsData.getInstance();
-        LogUtil.i(Arrays.toString(apsData.getApsFreqSend()));//获取实际频率
         apsFreq = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDS.code, null);
         if (apsFreq == null || apsFreq.length != ApsData.getInstance().apsFreq.length){
             LogUtil.e("apsFreq is null ");
@@ -241,9 +265,6 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             apsGain = mDataArray[0];
             ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN);
             ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN_CUSTOM);
-        }
-        for (int gain : apsGain) {
-            list.add(gain);
         }
         setType(position);
     }
