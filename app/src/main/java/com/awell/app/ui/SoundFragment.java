@@ -501,12 +501,12 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{0}, 1);
         ToolClass.setLoudnessGain(requireContext(), 1);
         // 高音
-        mHighSeekbar.setProgress(gainMax/2);
-        ToolClass.setTrebleGain(requireContext(), gainMax/2);
-        saveGain(2, gainMax/2);
-        mLowSeekBar.setProgress(gainMax/2);
-        ToolClass.setBassGain(requireContext(), gainMax/2);
-        saveGain(1, gainMax/2);
+//        mHighSeekbar.setProgress(gainMax/2);
+//        ToolClass.setTrebleGain(requireContext(), gainMax/2);
+//        saveGain(2, gainMax/2);
+//        mLowSeekBar.setProgress(gainMax/2);
+//        ToolClass.setBassGain(requireContext(), gainMax/2);
+//        saveGain(1, gainMax/2);
         // 模式
         soundRange = ApsData.DefaultData.soundRange.clone();
         ball = new int[4];
