@@ -51,11 +51,11 @@ public class ToolClass {
     }
 
     public static int getTypeFlag(Context context) {
-        return android.provider.Settings.System.getInt(context.getContentResolver(), "DspApsTypeFlag", 0);//模式 爵士 流行 等
+        return android.provider.Settings.System.getInt(context.getContentResolver(), "SoundApsTypeFlag", 0);//模式 爵士 流行 等
     }
 
     public static void setTypeFlag(Context context, int value) {
-        android.provider.Settings.System.putInt(context.getContentResolver(), "DspApsTypeFlag", value);//模式 爵士 流行 等
+        android.provider.Settings.System.putInt(context.getContentResolver(), "SoundApsTypeFlag", value);//模式 爵士 流行 等
     }
 
     public static int getLocationFlag(Context context) {
