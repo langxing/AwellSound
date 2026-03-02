@@ -41,7 +41,6 @@ class InteractiveWaveView @JvmOverloads constructor(
     }
     private var COLUMN_WIDTH_DP = 0f // 每一格的固定宽度
     private var mPendingUpdate = false
-    private var targetIndex = 0
     // 定义留白的宽度
     private val TOP_OFFSET = dpToPx(0f)
     private val paddingLeft = dpToPx(0f)   // 给左侧 Y 轴文字留空间
@@ -88,8 +87,6 @@ class InteractiveWaveView @JvmOverloads constructor(
             }
             MotionEvent.ACTION_UP -> {
                 spawnParticles(event.x, event.y)
-                val gain = (slopeHeightsDp[targetIndex] / maxHeightPx * maxGain).roundToInt()
-                onGainChange?.invoke(targetIndex, gain)
                 parent.requestDisallowInterceptTouchEvent(false) // 恢复拦截
                 return true
             }
@@ -106,13 +103,15 @@ class InteractiveWaveView @JvmOverloads constructor(
         // 修正：减去左侧留白，得到相对于网格起点(0,0)的坐标
         val relativeX = touchX - paddingLeft
         // 1. 找到当前手指最接近的点
-        targetIndex = (relativeX / segmentWidth).roundToInt().coerceIn(0, mDataList.size - 1)
+        val targetIndex = (relativeX / segmentWidth).roundToInt().coerceIn(0, mDataList.size - 1)
         // 这样可以防止在两个格子中间滑动时，数值跳变太剧烈
         val dist = abs(relativeX - targetIndex * segmentWidth)
         if (dist < segmentWidth * 0.8f) {
             val h = height.toFloat()
             val newHeightPx = (h - paddingBottom - touchY + TOP_OFFSET).coerceIn(minHeightPx, maxHeightPx)
             slopeHeightsDp[targetIndex] = newHeightPx / context.resources.displayMetrics.density
+            val gain = (slopeHeightsDp[targetIndex] / maxHeightPx * maxGain).roundToInt()
+            onGainChange?.invoke(targetIndex, gain)
             invalidate()
         }
     }

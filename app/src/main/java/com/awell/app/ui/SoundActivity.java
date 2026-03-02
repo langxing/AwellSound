@@ -19,7 +19,7 @@ import com.awell.app.windows.EqualizerTypeWindow;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, EqualizerTypeWindow.OnEqualizerTypeClickListener {
+public class SoundActivity extends AppCompatActivity implements View.OnClickListener, EqualizerTypeWindow.OnEqualizerTypeClickListener {
     private MainFragmentAdapter mFragmentAdapter;
     private ActivityMainBinding mBinding;
     private SoundEqualFragment mEqualFragment;
