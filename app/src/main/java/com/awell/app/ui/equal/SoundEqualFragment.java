@@ -108,7 +108,6 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
                     LinearLayout.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
             view.setLayoutParams(layoutParams);
-            view.setLayoutParams(layoutParams);
             mBinding.layoutSeekbar.addView(view);
             VerticalSeekBar seekBar = view.findViewById(R.id.seekbar);
             TextView tvValue = view.findViewById(R.id.tv_value);
