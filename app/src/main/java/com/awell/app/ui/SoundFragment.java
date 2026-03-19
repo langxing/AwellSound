@@ -483,7 +483,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
     }
 
     private void loudnessSwitch() {
-        mIvLoudness.setChecked(mLoudnessOpen);
         LogUtil.d("Loudness =" + mLoudnessOpen);
         if (mLoudnessOpen){
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{1}, 1);
@@ -498,8 +497,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         // 响度开
         mLoudnessOpen = true;
         mIvLoudness.setChecked(true);
-        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{0}, 1);
-        ToolClass.setLoudnessGain(requireContext(), 1);
         // 高音
 //        mHighSeekbar.setProgress(gainMax/2);
 //        ToolClass.setTrebleGain(requireContext(), gainMax/2);
