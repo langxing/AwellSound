@@ -39,7 +39,6 @@ public class ApsService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.i("onStartCommand");
 
-        flags = START_STICKY;
         mNotificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
         //Android 8.0开始要设置通知渠道
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -56,8 +55,9 @@ public class ApsService extends Service {
         notification.flags |= Notification.FLAG_FOREGROUND_SERVICE;
         startForeground(28, notification);
         setInitData();
-        stopSelf();
-        return super.onStartCommand(intent, flags, startId);
+        stopForeground(true);
+        stopSelf(startId);
+        return START_NOT_STICKY;
     }
 
     @Override
