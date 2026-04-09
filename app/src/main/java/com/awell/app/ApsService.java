@@ -7,11 +7,8 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.IBinder;
-
-import androidx.core.app.NotificationCompat;
 
 import com.awell.app.utils.ApsStation;
 import com.awell.app.utils.LogUtil;
@@ -20,8 +17,10 @@ import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
 
 public class ApsService extends Service {
-    private NotificationManager mNotificationManager;
-    private NotificationCompat.Builder mBuilder;
+
+    private static final int APS_FG_NOTIFICATION_ID = 28;
+    private static final String APS_FG_CHANNEL_ID = "awell_asp";
+
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -38,33 +37,40 @@ public class ApsService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.i("onStartCommand");
-
-        mNotificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
-        //Android 8.0开始要设置通知渠道
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("awell_asp",
-                    "asp",NotificationManager.IMPORTANCE_DEFAULT);
-            mNotificationManager.createNotificationChannel(channel);
+        startAsForeground();
+        try {
+            setInitData();
+        } catch (Throwable e) {
+            LogUtil.i("onStartCommand error = " + e);
+        } finally {
+            stopForeground(true);
+            stopSelf(startId);
         }
-        mBuilder = new NotificationCompat.Builder(this,"awell_asp")
-                .setSmallIcon(R.drawable.ic_logo);
-        Notification notification = mBuilder.build();
-        notification.clone();
-        notification.flags = Notification.FLAG_ONGOING_EVENT;
-        notification.flags |= Notification.FLAG_NO_CLEAR;
-        notification.flags |= Notification.FLAG_FOREGROUND_SERVICE;
-        startForeground(28, notification);
-        setInitData();
-        stopForeground(true);
-        stopSelf(startId);
         return START_NOT_STICKY;
+    }
+
+    private void startAsForeground() {
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && manager != null) {
+            NotificationChannel channel = new NotificationChannel(
+                    APS_FG_CHANNEL_ID, "asp", NotificationManager.IMPORTANCE_LOW);
+            manager.createNotificationChannel(channel);
+        }
+        android.app.Notification.Builder builder = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+                ? new android.app.Notification.Builder(this, APS_FG_CHANNEL_ID)
+                : new android.app.Notification.Builder(this);
+        Notification notification = builder
+                .setSmallIcon(R.drawable.ic_logo)
+                .setContentTitle(getString(R.string.app_name))
+                .setShowWhen(false)
+                .build();
+        startForeground(APS_FG_NOTIFICATION_ID, notification);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         LogUtil.i("onDestroy");
-        System.exit(0);
     }
 
     //Boot initialization
