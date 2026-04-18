@@ -216,19 +216,51 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         for (int i = 0; i < ApsData.DefaultData.apsFreqSend.length; i++) {
             int gain = data[i];
             list.add(gain);
-            if (mUserGain != null) {
-                if (mCurrentType == 0) {
-                    if (i >= ApsData.DefaultData.apsFreqSend.length/2) {
-                        gain = mUserGain[1];
-                    } else {
-                        gain = mUserGain[0];
-                    }
+            if (mUserGain != null && mCurrentType == 0) {
+                if (i >= ApsData.DefaultData.apsFreqSend.length/2) {
+                    gain = mUserGain[1];
+                } else {
+                    gain = mUserGain[0];
                 }
+                saveGain(i, gain);
+            } else if (mCurrentType == 6 || mCurrentType == 7) {
                 saveGain(i, gain);
             }
         }
+        switch (mCurrentType) {
+            case 1: // 标准
+                sendGain(0x67, 0X77);
+                break;
+            case 2: // 爵士
+                sendGain(0x67, 0X7D);
+                break;
+            case 3: // 流行
+                sendGain(0x6B, 0x7D);
+                break;
+            case 4: // 摇滚
+                sendGain(0x6A, 0x7A);
+                break;
+            case 5: // 古典
+                sendGain(0x6B, 0x75);
+                break;
+        }
         updateSeekBar(data, mCurrentType == 0);
         mBinding.waveview.updateList(list);
+    }
+
+    private void sendGain(int lowValue, int highValue) {
+        // 低音
+        int[] lowGains = new int[2];
+        lowGains[0] = 1;
+        lowGains[1] = lowValue;
+        LogUtil.d(Arrays.toString(lowGains));
+        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, lowGains, 2);
+        // 高音
+        int[] highGains = new int[2];
+        highGains[0] = 2;
+        highGains[1] = highValue;
+        LogUtil.d(Arrays.toString(highGains));
+        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, highGains, 2);
     }
 
     /**
@@ -241,6 +273,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         int[] gains = new int[2];
         int gainIndex = 1;
         if (index >= ApsData.DefaultData.apsFreqSend.length/2) {
+            // 高音
             gainIndex = 2;
         }
         gains[0] = gainIndex;

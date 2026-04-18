@@ -83,15 +83,18 @@ public class ApsService extends Service {
         int[] apsFreq = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDS.code, null);
         int[] apsGainRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDLEVELRANGE.code, null);
         int gainMax = 0;
-        if (apsGainRange.length > 1) {
+        if (apsGainRange != null && apsGainRange.length > 1) {
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
 
         int bass = ToolClass.getBassGain(this);
         int treble = ToolClass.getTrebleGain(this);
-        setPlay(apsFreq[0], bass, gainMax);
-        setPlay(apsFreq[1], treble, gainMax);
+        LogUtil.i("freq = " + apsFreq);
+        if (apsFreq != null && apsFreq.length > 1) {
+            setPlay(apsFreq[0], bass, gainMax);
+            setPlay(apsFreq[1], treble, gainMax);
+        }
 
         //sound
         int[] sound = ApsStation.getSoundData(this,ApsStation.NAME_SEND);
