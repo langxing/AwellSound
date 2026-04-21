@@ -2,6 +2,7 @@ package com.awell.app.ui.equal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private int[] mUserGain;
     private int[][] mDataArray;
     private Contract.EqualPresenter mPresenter;
+    private SharedPreferences sp;
 
     @Nullable
     @Override
@@ -74,6 +76,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
 
     @SuppressLint("SetTextI18n")
     private void initData() {
+        sp = requireContext().getSharedPreferences("eq_gain", Context.MODE_PRIVATE);
         int[] apsGainRange = null;
         try {
             apsGainRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDLEVELRANGE.code, null);
@@ -112,9 +115,9 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             VerticalSeekBar seekBar = view.findViewById(R.id.seekbar);
             TextView tvValue = view.findViewById(R.id.tv_value);
             TextView tvHz = view.findViewById(R.id.tv_hz);
-            tvValue.setText(apsGain[i] + "");
             seekBar.setMax(gainMax);
             seekBar.setProgress(apsGain[i]);
+            tvValue.setText("" + (apsGain[i] - gainMax/2));
             if (apsFreq != null) {
                 int apsHz = apsFreq[i];
                 if (apsHz < 1000) {
@@ -138,6 +141,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
+                    LogUtil.i("type = " + mCurrentType + " ---- index = " + index + " ---- progress = " + progress);
                     setDataView(index, progress, true);
                 }
             }
@@ -172,14 +176,19 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             mUserGain[0] = progress;
             ToolClass.setBassGain(requireContext(), progress);
         }
-        LogUtil.d("index = " + index + " progress = " + progress + "userGain = " + Arrays.toString(mUserGain));
+        LogUtil.d("type = " + mCurrentType + " index = " + index + " progress = " + progress + " userGain = " + Arrays.toString(mUserGain));
         if (updateWaveView) {
             mBinding.waveview.updateList(list);
         }
         saveGain(index, progress);
+        int high = 0;
+        if (index >= ApsData.DefaultData.apsFreqSend.length/2) {
+            high = 1;
+        }
+        saveGain(mCurrentType, high, progress);
         View itemView = mBinding.layoutSeekbar.getChildAt(index);
         TextView tvValue = itemView.findViewById(R.id.tv_value);
-        tvValue.setText(progress + "");
+        tvValue.setText("" + (progress - gainMax/2));
         ApsStation.updateApsInDb(requireContext(), index, progress, ApsStation.NAME_GAIN_CUSTOM);
     }
 
@@ -213,37 +222,55 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             ApsStation.insertApsToDb(context, data, ApsStation.NAME_GAIN_REAR);
         }
         list.clear();
-        for (int i = 0; i < ApsData.DefaultData.apsFreqSend.length; i++) {
+        int size = ApsData.DefaultData.apsFreqSend.length;
+        for (int i = 0; i < size; i++) {
             int gain = data[i];
             list.add(gain);
             if (mUserGain != null && mCurrentType == 0) {
-                if (i >= ApsData.DefaultData.apsFreqSend.length/2) {
+                if (i == size - 1) {
                     gain = mUserGain[1];
-                } else {
+                    saveGain(i, gain);
+                } else if (i == (size/2) - 1){
                     gain = mUserGain[0];
+                    saveGain(i, gain);
                 }
-                saveGain(i, gain);
-            } else if (mCurrentType == 6 || mCurrentType == 7) {
-                saveGain(i, gain);
+            } else if (mCurrentType == 0 || mCurrentType == 6 || mCurrentType == 7) {
+                // 只有2位数字是真正有效的，所以取第一段、第二段结尾数字
+                if (i == size - 1 || i == (size/2) - 1) {
+                    saveGain(i, gain);
+                }
             }
         }
+        int lowGain = 0;
+        int highGain = 0;
         switch (mCurrentType) {
             case 1: // 标准
-                sendGain(0x67, 0X77);
+                lowGain = 14;
+                highGain = 14;
+                sendGain(lowGain, highGain);
                 break;
             case 2: // 爵士
-                sendGain(0x67, 0X7D);
+                lowGain = 4;
+                highGain = 28;
+                sendGain(lowGain, highGain);
                 break;
             case 3: // 流行
-                sendGain(0x6B, 0x7D);
+                lowGain = 20;
+                highGain = 19;
+                sendGain(lowGain, highGain);
                 break;
             case 4: // 摇滚
-                sendGain(0x6A, 0x7A);
+                lowGain = 28;
+                highGain = 24;
+                sendGain(lowGain, highGain);
                 break;
             case 5: // 古典
-                sendGain(0x6B, 0x75);
+                lowGain = 26;
+                highGain = 14;
+                sendGain(lowGain, highGain);
                 break;
         }
+        LogUtil.i("curType = " + mCurrentType + " low = " + lowGain + " high = " + highGain);
         updateSeekBar(data, mCurrentType == 0);
         mBinding.waveview.updateList(list);
     }
@@ -252,13 +279,13 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         // 低音
         int[] lowGains = new int[2];
         lowGains[0] = 1;
-        lowGains[1] = lowValue;
+        lowGains[1] = lowValue - gainMax / 2;
         LogUtil.d(Arrays.toString(lowGains));
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, lowGains, 2);
         // 高音
         int[] highGains = new int[2];
         highGains[0] = 2;
-        highGains[1] = highValue;
+        highGains[1] = highValue - gainMax / 2;
         LogUtil.d(Arrays.toString(highGains));
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, highGains, 2);
     }
@@ -299,6 +326,18 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN_CUSTOM);
         }
         setType(position);
+    }
+
+    private void saveGain(int type, int high, int gain) {
+        sp.edit().putInt(type + "_" + high, gain).apply();
+    }
+
+    private int getLow(int def) {
+        return sp.getInt(mCurrentType + "_" + 0, def);
+    }
+
+    private int getHigh(int def) {
+        return sp.getInt(mCurrentType + "_" + 1, def);
     }
 
 }
