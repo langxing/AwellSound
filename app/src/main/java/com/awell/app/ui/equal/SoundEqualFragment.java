@@ -101,9 +101,6 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
 
     @SuppressLint("SetTextI18n")
     private void updateSeekBar(int[] apsGain, boolean changeSeekbar) {
-        if (mUserGain == null) {
-            mUserGain = new int[]{ToolClass.getBassGain(requireContext()), ToolClass.getTrebleGain(requireContext())};
-        }
         mBinding.layoutSeekbar.removeAllViews();
         for (int i = 0; i < apsFreq.length; i++) {
             View view = LayoutInflater.from(requireContext()).inflate(R.layout.layout_item_seekbar, null);
@@ -223,10 +220,13 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         }
         list.clear();
         int size = ApsData.DefaultData.apsFreqSend.length;
+        if (mUserGain == null) {
+            mUserGain = new int[]{ToolClass.getBassGain(requireContext()), ToolClass.getTrebleGain(requireContext())};
+        }
         for (int i = 0; i < size; i++) {
             int gain = data[i];
             list.add(gain);
-            if (mUserGain != null && mCurrentType == 0) {
+            if (mCurrentType == 0) {
                 if (i == size - 1) {
                     gain = mUserGain[1];
                     saveGain(i, gain);
@@ -234,7 +234,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
                     gain = mUserGain[0];
                     saveGain(i, gain);
                 }
-            } else if (mCurrentType == 0 || mCurrentType == 6 || mCurrentType == 7) {
+            } else if (mCurrentType == 6 || mCurrentType == 7) {
                 // 只有2位数字是真正有效的，所以取第一段、第二段结尾数字
                 if (i == size - 1 || i == (size/2) - 1) {
                     saveGain(i, gain);
