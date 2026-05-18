@@ -64,6 +64,17 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    flavorDimensions "brand"
+    productFlavors {
+        gongban {
+            dimension "brand"
+            buildConfigField "Boolean", "showLogo", "true"
+        }
+        zhiyue {
+            dimension "brand"
+            buildConfigField "Boolean", "showLogo", "false"
+        }
+    }
 }
 
 dependencies {

@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.awell.app.BuildConfig;
 import com.awell.app.R;
 import com.awell.app.databinding.FragmentSoundEqualBinding;
 import com.awell.app.model.ApsData;
@@ -58,6 +59,12 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        LogUtil.i("FLAVOR:" + BuildConfig.FLAVOR);
+        if (BuildConfig.showLogo) {
+            mBinding.ivLogo.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.ivLogo.setVisibility(View.GONE);
+        }
         mBinding.waveview.setOnGainChange((index, progress) -> {
             try {
                 View seekbarLayout = mBinding.layoutSeekbar.getChildAt(index);
