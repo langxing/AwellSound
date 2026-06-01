@@ -43,6 +43,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private int gainMax = 0;
     private int[] mUserGain;
     private int[][] mDataArray;
+    private boolean isInit = false;
     private Contract.EqualPresenter mPresenter;
     private SharedPreferences sp;
 
@@ -233,20 +234,6 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         for (int i = 0; i < size; i++) {
             int gain = data[i];
             list.add(gain);
-            if (mCurrentType == 0) {
-                if (i == size - 1) {
-                    gain = mUserGain[1];
-                    saveGain(i, gain);
-                } else if (i == (size/2) - 1){
-                    gain = mUserGain[0];
-                    saveGain(i, gain);
-                }
-            } else if (mCurrentType == 6 || mCurrentType == 7) {
-                // 只有2位数字是真正有效的，所以取第一段、第二段结尾数字
-                if (i == size - 1 || i == (size/2) - 1) {
-                    saveGain(i, gain);
-                }
-            }
         }
         int lowGain = 0;
         int highGain = 0;
@@ -276,6 +263,17 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
                 highGain = 14;
                 sendGain(lowGain, highGain);
                 break;
+            default:
+                if (size < 2) return;
+                if (mCurrentType == 0) {
+                    sendGain(mUserGain[0], mUserGain[1]);
+                    break;
+                } else if (mCurrentType == 6 || mCurrentType == 7) {
+                    // 只有2位数字是真正有效的，所以取第一段、第二段结尾数字
+                    sendGain(data[(size/2) - 1], data[size - 1]);
+                    break;
+                }
+                break;
         }
         LogUtil.i("curType = " + mCurrentType + " low = " + lowGain + " high = " + highGain);
         updateSeekBar(data, mCurrentType == 0);
@@ -283,6 +281,10 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     }
 
     private void sendGain(int lowValue, int highValue) {
+        if (!isInit) {
+            isInit = true;
+            return;
+        }
         // 低音
         int[] lowGains = new int[2];
         lowGains[0] = 1;
@@ -293,7 +295,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         int[] highGains = new int[2];
         highGains[0] = 2;
         highGains[1] = highValue - gainMax / 2;
-        LogUtil.d(Arrays.toString(highGains));
+        LogUtil.i("gains = " + Arrays.toString(highGains));
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, highGains, 2);
     }
 
@@ -312,7 +314,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         }
         gains[0] = gainIndex;
         gains[1] = progress - gainMax / 2;
-        LogUtil.d(Arrays.toString(gains));
+        LogUtil.i("gains = " + Arrays.toString(gains));
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, gains, 2);
     }
 

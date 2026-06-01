@@ -30,6 +30,8 @@ import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class SoundFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
@@ -127,7 +129,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         try {
             apsGainRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDLEVELRANGE.code, null);
         }catch (Exception e){
-            LogUtil.e("Exception = " + e.toString());
+            LogUtil.e("Exception = " + e);
         }
         if (apsGainRange == null){
             LogUtil.e("apsGainRange is null");
@@ -365,10 +367,11 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
 
             LogUtil.i("x = " + x + " y = " + y + "  lf = " + lf + " rf = " + rf + " lr = " + lr + " rr = " + rr);
             sounds = new int[4];
-            sounds[0] = (int) (lf / dataScale_h);
-            sounds[1] = (int) (rf / dataScale_h);
-            sounds[2] = (int) (lr / dataScale_w);
-            sounds[3] = (int) (rr / dataScale_w);
+
+            sounds[0] = new BigDecimal(lf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
+            sounds[1] = new BigDecimal(rf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
+            sounds[2] = new BigDecimal(lr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
+            sounds[3] = new BigDecimal(rr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
         }
         if (!send) return;
         LogUtil.i("sound[0] = " + sounds[0] + " sound[1] = " + sounds[1] + " sound[2] = " + sounds[2] + " sound[3] = " + sounds[3]);
