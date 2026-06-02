@@ -195,8 +195,8 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
                     setLayout();
                 } else {
                     if (ball == null) {
-                        ball = new int[4];
-                        saveBallData(apsSound[2]);
+                        ball = apsSound[2].clone();
+                        setLayout(false, true);
                     } else {
                         setLayout(false, true);
                     }
