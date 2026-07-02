@@ -39,7 +39,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     // 在 InteractiveWaveView 类定义处添加
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = "#AAAAAA".toColorInt() // 文字颜色
-        textSize = dpToPx(15f)              // 文字大小
+        textSize = dpToPx(18f)              // 文字大小
         textAlign = Paint.Align.RIGHT       // 左侧文字右对齐，方便贴合线条
     }
     private var COLUMN_WIDTH_DP = 0f // 每一格的固定宽度

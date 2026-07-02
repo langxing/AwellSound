@@ -183,7 +183,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      * @param progress
      */
     @SuppressLint("SetTextI18n")
-    private void setDataView(int index, int progress, boolean updateWaveView) {
+    protected void setDataView(int index, int progress, boolean updateWaveView) {
         list.set(index, progress);
         if (index >= list.size()/2) {
             // 高音
@@ -204,9 +204,11 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             high = 1;
         }
         saveGain(mCurrentType, high, progress);
-        View itemView = layoutSeekbar.getChildAt(index);
-        TextView tvValue = itemView.findViewById(R.id.tv_value);
-        tvValue.setText("" + (progress - gainMax/2));
+        if (layoutSeekbar.getChildCount() > index) {
+            View itemView = layoutSeekbar.getChildAt(index);
+            TextView tvValue = itemView.findViewById(R.id.tv_value);
+            tvValue.setText("" + (progress - gainMax/2));
+        }
         ApsStation.updateApsInDb(requireContext(), index, progress, ApsStation.NAME_GAIN_CUSTOM);
     }
 

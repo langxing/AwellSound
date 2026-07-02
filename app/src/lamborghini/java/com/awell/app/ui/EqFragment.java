@@ -46,6 +46,7 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         return mContentView;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,6 +74,14 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         // 2. 画渐变
         waveview.setWaveFillGradient(new int[]{Color.parseColor("#66ffe866"),
                 Color.TRANSPARENT}, high, 0);
+        waveview.setOnGainChange((index, progress) -> {
+            try {
+                setDataView(index, progress, false);
+            } catch (Exception e) {
+                LogUtil.e("onGainChange："+ e.getMessage());
+            }
+            return null;
+        });
         mIvLoudness.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (!isFirst) {
                 return;
