@@ -74,6 +74,10 @@ android {
             dimension "brand"
             buildConfigField "Boolean", "showLogo", "false"
         }
+        lamborghini {
+            dimension "brand"
+            buildConfigField "Boolean", "showLogo", "false"
+        }
     }
 }
 

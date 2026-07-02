@@ -11,19 +11,13 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
-    <queries>
-        <!-- android13需要配置第三方包名才能打开 -->
-        <package android:name="com.awell.localmusic" />
-    </queries>
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.SoundActivity"
+        <activity android:name=".ui.LamborghiniActivity"
             android:configChanges="locale|layoutDirection"
             android:exported="true"
             android:launchMode="singleInstance"
@@ -35,19 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".ApsService"
-            android:foregroundServiceType="dataSync"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.apsservice" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
-        <provider
-            android:name=".DspProvider"
-            android:authorities="com.awell.app"
-            android:exported="false" />
+        <activity android:name=".ui.BallActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.EqActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

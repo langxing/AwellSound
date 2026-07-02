@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg">
+
+    <LinearLayout
+        android:id="@+id/layout_tab"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:background="@drawable/ic_tab_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/btn_drive_left"
+            style="@style/aps_sound_image_style_port"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_drive_left" />
+
+        <TextView
+            android:id="@+id/btn_drive_right"
+            style="@style/aps_sound_image_style_port"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_drive_right" />
+
+        <TextView
+            android:id="@+id/btn_drive_center"
+            style="@style/aps_sound_image_style_port"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_drive_center" />
+
+        <TextView
+            android:id="@+id/btn_drive_rear"
+            style="@style/aps_sound_image_style_port"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_drive_rear" />
+
+        <TextView
+            android:id="@+id/btn_drive_user1"
+            style="@style/aps_sound_image_style_port"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_drive_user1" />
+
+        <TextView
+            android:id="@+id/btn_drive_user2"
+            style="@style/aps_sound_image_style_port"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_drive_user2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_loudness_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/layout_tab"
+        app:layout_constraintTop_toBottomOf="@+id/layout_tab">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="@string/loudness_switch"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sb_loudness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/ic_switch_button"
+            app:track="@drawable/selector_loudness_switch"
+            tools:checked="false" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_fl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="100dp"
+        android:enabled="false"
+        android:textColor="@color/white"
+        android:text="FL 100%"
+        android:textSize="25sp"
+        android:background="@drawable/selector_btn_ball"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_fr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="100dp"
+        android:enabled="false"
+        android:textColor="@color/white"
+        android:text="FR 100%"
+        android:textSize="25sp"
+        android:background="@drawable/selector_btn_ball"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/dsp_sound_up"
+        style="@style/aps_sound_image_style1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/dsp_sound_up_new"
+        app:layout_constraintBottom_toTopOf="@+id/iv_chair"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_chair"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_sound_car"
+        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/aps_sound_range"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/iv_chair"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_chair"
+        app:layout_constraintStart_toStartOf="@+id/iv_chair"
+        app:layout_constraintEnd_toEndOf="@+id/iv_chair">
+        <com.awell.app.view.CrosshairView
+            android:id="@+id/lineView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/aps_car_ball"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fg_soundwave"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="@+id/iv_chair"
+            app:layout_constraintEnd_toEndOf="@+id/iv_chair"
+            app:layout_constraintTop_toTopOf="@+id/iv_chair"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_chair"/>
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/dsp_sound_down"
+        style="@style/aps_sound_image_style1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/dsp_sound_down_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_chair" />
+
+    <ImageButton
+        android:id="@+id/dsp_sound_left"
+        style="@style/aps_sound_image_style1"
+        android:layout_centerVertical="true"
+        android:src="@drawable/dsp_sound_left_new"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_chair"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/dsp_sound_right"
+        style="@style/aps_sound_image_style1"
+        android:layout_centerVertical="true"
+        android:src="@drawable/dsp_sound_right_new"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_chair"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="20dp"
+        android:enabled="false"
+        android:textColor="@color/white"
+        android:text="RL 100%"
+        android:textSize="25sp"
+        android:background="@drawable/selector_btn_ball"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_rr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="20dp"
+        android:enabled="false"
+        android:textColor="@color/white"
+        android:text="RR 100%"
+        android:textSize="25sp"
+        android:background="@drawable/selector_btn_ball"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_default"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
+        android:paddingHorizontal="12dp"
+        android:gravity="center"
+        android:drawableStart="@drawable/ic_reset_image"
+        android:background="@drawable/selector_btn_reset"
+        android:text="Reset"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

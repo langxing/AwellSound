@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -28,13 +28,12 @@ import com.awell.app.utils.NoFastClickUtils;
 import com.awell.app.utils.ToolClass;
 import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
-import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-public class SoundFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
+public class SoundFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
     private static final String TAG = SoundFragment.class.getSimpleName();
     private final int[] btnId = {R.id.btn_drive_left,
             R.id.btn_drive_right,
@@ -43,12 +42,11 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             R.id.btn_drive_user1,
             R.id.btn_drive_user2};
     private TextView[] buttons;
-    private RelativeLayout aps_sound_range;
-    private ImageView aps_car_ball;
+    protected FrameLayout aps_sound_range;
+    protected ImageView aps_car_ball;
     private SwitchCompat mIvLoudness;
     private TextView mTvDefault;
-    private View mContentView;
-    private VerticalSeekBar mHighSeekbar, mLowSeekBar;
+    protected View mContentView;
     private int ball_w, ball_h, range_w, range_h;
     /**
      * ball 小球的边框: 左、上、右、下
@@ -88,9 +86,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
     @SuppressLint("ClickableViewAccessibility")
     protected void initView() {
         aps_sound_range = mContentView.findViewById(R.id.aps_sound_range);
-        mHighSeekbar = mContentView.findViewById(R.id.seekbar_high);
         mTvDefault = mContentView.findViewById(R.id.tv_default);
-        mLowSeekBar = mContentView.findViewById(R.id.seekbar_low);
         aps_car_ball = mContentView.findViewById(R.id.aps_car_ball);
         mIvLoudness = mContentView.findViewById(R.id.sb_loudness);
         aps_sound_range.setOnTouchListener(this);
@@ -104,9 +100,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             buttons[i] = mContentView.findViewById(btnId[i]);
             buttons[i].setOnClickListener(this);
         }
-
-        mHighSeekbar.setOnSeekBarChangeListener(this);
-        mLowSeekBar.setOnSeekBarChangeListener(this);
         mTvDefault.setOnClickListener(this);
         mIvLoudness.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (!isFirst) {
@@ -140,14 +133,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
-
-        mHighSeekbar.setMax(gainMax);
-        mLowSeekBar.setMax(gainMax);
-
-        int bass = ToolClass.getBassGain(requireContext());
-        int treble = ToolClass.getTrebleGain(requireContext());
-        mHighSeekbar.setProgress(treble);
-        mLowSeekBar.setProgress(bass);
         apsSound = new int[4][4];
         mLoudnessOpen = ToolClass.getLoudnessGain(requireContext()) == 1;
         mIvLoudness.setChecked(mLoudnessOpen);
@@ -548,37 +533,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             setLongClick(v, event.getAction());
         }
         return true;
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if (!fromUser) return;
-        if (seekBar == mHighSeekbar) {
-            ToolClass.setTrebleGain(requireContext(), progress);
-            saveGain(2, progress);
-        } else if (seekBar == mLowSeekBar) {
-            ToolClass.setBassGain(requireContext(), progress);
-            saveGain(1, progress);
-        }
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    private void saveGain(int index, int progress) {
-//        int[] gains = new int[2];
-//        gains[0] = index;
-//        gains[1] = progress - gainMax / 2;
-//        LogUtil.d(Arrays.toString(gains));
-//        AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, gains, 2);
     }
 
     private class SoundHandler extends Handler {

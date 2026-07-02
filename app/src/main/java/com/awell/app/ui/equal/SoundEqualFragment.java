@@ -3,10 +3,12 @@ package com.awell.app.ui.equal;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -17,11 +19,11 @@ import androidx.fragment.app.Fragment;
 
 import com.awell.app.BuildConfig;
 import com.awell.app.R;
-import com.awell.app.databinding.FragmentSoundEqualBinding;
 import com.awell.app.model.ApsData;
 import com.awell.app.utils.ApsStation;
 import com.awell.app.utils.LogUtil;
 import com.awell.app.utils.ToolClass;
+import com.awell.app.view.InteractiveWaveView;
 import com.awell.kpslibrary.Constant;
 import com.awell.kpslibrary.module.AwellAudio;
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar;
@@ -33,14 +35,17 @@ import java.util.Arrays;
 
 public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private final ArrayList<Integer> list = new ArrayList<>();
-    private FragmentSoundEqualBinding mBinding;
+    protected View mContentView;
+    private ImageView ivLogo;
+    protected ViewGroup layoutSeekbar;
+    protected InteractiveWaveView waveview;
     /**
      * apsGain:当前seekbar的值
      * apsFreq:底部HZ显示值
      */
-    private int[] apsGain, apsFreq;
+    protected int[] apsGain, apsFreq;
     private int mCurrentType = 0;
-    private int gainMax = 0;
+    protected int gainMax = 0;
     private int[] mUserGain;
     private int[][] mDataArray;
     private boolean isInit = false;
@@ -50,10 +55,10 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (mBinding == null) {
-            mBinding = FragmentSoundEqualBinding.inflate(inflater, container, false);
+        if (mContentView == null) {
+            mContentView = inflater.inflate(R.layout.fragment_sound_equal, container, false);
         }
-        return mBinding.getRoot();
+        return mContentView;
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,14 +66,22 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LogUtil.i("FLAVOR:" + BuildConfig.FLAVOR);
+        ivLogo = mContentView.findViewById(R.id.iv_logo);
+        waveview = mContentView.findViewById(R.id.waveview);
+        layoutSeekbar = mContentView.findViewById(R.id.layout_seekbar);
         if (BuildConfig.showLogo) {
-            mBinding.ivLogo.setVisibility(View.VISIBLE);
+            ivLogo.setVisibility(View.VISIBLE);
         } else {
-            mBinding.ivLogo.setVisibility(View.GONE);
+            ivLogo.setVisibility(View.GONE);
         }
-        mBinding.waveview.setOnGainChange((index, progress) -> {
+        int gridW = requireContext().getResources().getDisplayMetrics().widthPixels;
+        // 2. 画渐变
+        waveview.setWaveFillGradient(new int[] {Color.parseColor("#0036FF"),
+                Color.parseColor("#00FF5A"),
+                Color.parseColor("#C5CF20")}, 0, gridW);
+        waveview.setOnGainChange((index, progress) -> {
             try {
-                View seekbarLayout = mBinding.layoutSeekbar.getChildAt(index);
+                View seekbarLayout = layoutSeekbar.getChildAt(index);
                 if (seekbarLayout != null) {
                     VerticalSeekBar seekBar = seekbarLayout.findViewById(R.id.seekbar);
                     seekBar.setProgress(progress);
@@ -100,7 +113,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             LogUtil.i("apsGainRange[0] = " + apsGainRange[0] + " apsGainRange[1] = " + apsGainRange[1]);
             gainMax = apsGainRange[1] - apsGainRange[0];
         }
-        mBinding.waveview.setMaxGain(gainMax);
+        waveview.setMaxGain(gainMax);
         mPresenter = new EqualPresenterImpl();
         mPresenter.setContext(requireContext());
         mPresenter.setView(this);
@@ -108,15 +121,15 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateSeekBar(int[] apsGain, boolean changeSeekbar) {
-        mBinding.layoutSeekbar.removeAllViews();
+    protected void updateSeekBar(int[] apsGain, boolean changeSeekbar) {
+        layoutSeekbar.removeAllViews();
         for (int i = 0; i < apsFreq.length; i++) {
             View view = LayoutInflater.from(requireContext()).inflate(R.layout.layout_item_seekbar, null);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
             view.setLayoutParams(layoutParams);
-            mBinding.layoutSeekbar.addView(view);
+            layoutSeekbar.addView(view);
             VerticalSeekBar seekBar = view.findViewById(R.id.seekbar);
             TextView tvValue = view.findViewById(R.id.tv_value);
             TextView tvHz = view.findViewById(R.id.tv_hz);
@@ -134,7 +147,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
                 }
             }
             seekBar.setEnabled(changeSeekbar);
-            mBinding.waveview.setNeedIntercept(changeSeekbar);
+            waveview.setNeedIntercept(changeSeekbar);
             if (changeSeekbar) {
                 setSeekbarListener(seekBar, i);
             }
@@ -183,7 +196,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         }
         LogUtil.d("type = " + mCurrentType + " index = " + index + " progress = " + progress + " userGain = " + Arrays.toString(mUserGain));
         if (updateWaveView) {
-            mBinding.waveview.updateList(list);
+            waveview.updateList(list);
         }
         saveGain(index, progress);
         int high = 0;
@@ -191,7 +204,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             high = 1;
         }
         saveGain(mCurrentType, high, progress);
-        View itemView = mBinding.layoutSeekbar.getChildAt(index);
+        View itemView = layoutSeekbar.getChildAt(index);
         TextView tvValue = itemView.findViewById(R.id.tv_value);
         tvValue.setText("" + (progress - gainMax/2));
         ApsStation.updateApsInDb(requireContext(), index, progress, ApsStation.NAME_GAIN_CUSTOM);
@@ -277,7 +290,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         }
         LogUtil.i("curType = " + mCurrentType + " low = " + lowGain + " high = " + highGain);
         updateSeekBar(data, mCurrentType == 0);
-        mBinding.waveview.updateList(list);
+        waveview.updateList(list);
     }
 
     private void sendGain(int lowValue, int highValue) {

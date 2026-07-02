@@ -90,4 +90,8 @@ public class ToolClass {
         android.provider.Settings.System.putInt(context.getContentResolver(), "DspBassGain", value);
     }
 
+    public static float dp2px(Context context, float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
+    }
+
 }

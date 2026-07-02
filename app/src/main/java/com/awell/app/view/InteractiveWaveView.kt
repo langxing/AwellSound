@@ -16,16 +16,19 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.abs
 import kotlin.math.roundToInt
+import androidx.core.graphics.toColorInt
+import com.awell.app.utils.LogUtil
 
 class InteractiveWaveView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val qBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    val qBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val wavePath = Path()
+    private var freqArray: IntArray? = null
     private val particles = mutableListOf<Particle>()
     private val particlePaint = Paint().apply {
         style = Paint.Style.FILL
@@ -35,16 +38,24 @@ class InteractiveWaveView @JvmOverloads constructor(
     private var slopeHeightsDp = floatArrayOf(100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f, 100f)
     // 在 InteractiveWaveView 类定义处添加
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#AAAAAA") // 文字颜色
-        textSize = dpToPx(10f)              // 文字大小
+        color = "#AAAAAA".toColorInt() // 文字颜色
+        textSize = dpToPx(15f)              // 文字大小
         textAlign = Paint.Align.RIGHT       // 左侧文字右对齐，方便贴合线条
     }
     private var COLUMN_WIDTH_DP = 0f // 每一格的固定宽度
     private var mPendingUpdate = false
     // 定义留白的宽度
-    private val TOP_OFFSET = dpToPx(0f)
+    var topOffset = dpToPx(0f)
     private val paddingLeft = dpToPx(0f)   // 给左侧 Y 轴文字留空间
-    private val paddingBottom = dpToPx(0f) // 给底部 X 轴文字留空间
+    // 左右两侧的物理安全留白（留出空间给最左和最右的文字）
+    private val paddingLeftRight = dpToPx(24f)
+    var paddingBottom = dpToPx(0f) // 给底部 X 轴文字留空间
+    // 是否绘制横线
+    var showHorizontalLine = false
+    // 是否绘制竖线
+    var showVerticalLine = false
+    // 是否显示顶部的值
+    var showTopValue = false
     var maxGain = 0
     //
     private val yAxisValues = arrayOf("+15", "+10", "+5", "0", "-5", "-10", "-15") // 对应 6 行
@@ -58,7 +69,7 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     init {
         borderPaint.apply {
-            color = Color.parseColor("#888888")
+            color = "#888888".toColorInt()
             style = Paint.Style.STROKE
             strokeWidth = dpToPx(1.5f)
             strokeCap = Paint.Cap.ROUND
@@ -69,9 +80,10 @@ class InteractiveWaveView @JvmOverloads constructor(
             strokeWidth = dpToPx(0.5f)
         }
         qBgPaint.apply {
-            color = Color.parseColor("#181717")
+            color = "#181717".toColorInt()
             style = Paint.Style.FILL
         }
+        setLayerType(LAYER_TYPE_SOFTWARE, null)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -79,6 +91,9 @@ class InteractiveWaveView @JvmOverloads constructor(
         if (!needIntercept) {
             return false
         }
+//        if (event.action == MotionEvent.ACTION_DOWN && event.y < topOffset) {
+//            return false
+//        }
         when (event.action) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                 parent.requestDisallowInterceptTouchEvent(true) // 禁止父布局拦截滑动
@@ -98,19 +113,20 @@ class InteractiveWaveView @JvmOverloads constructor(
     }
 
     private fun updateWaveHeight(touchX: Float, touchY: Float) {
-        val gridW = context.resources.displayMetrics.widthPixels
+        val topLimit = if (showTopValue) topOffset else 0f
+        val clampedY = touchY.coerceAtLeast(topLimit)
+
+        val gridW = width.toFloat()
         val segmentWidth = gridW / (mDataList.size - 1)
-        // 修正：减去左侧留白，得到相对于网格起点(0,0)的坐标
         val relativeX = touchX - paddingLeft
-        // 1. 找到当前手指最接近的点
         val targetIndex = (relativeX / segmentWidth).roundToInt().coerceIn(0, mDataList.size - 1)
-        // 这样可以防止在两个格子中间滑动时，数值跳变太剧烈
         val dist = abs(relativeX - targetIndex * segmentWidth)
         if (dist < segmentWidth * 0.8f) {
             val h = height.toFloat()
-            val newHeightPx = (h - paddingBottom - touchY + TOP_OFFSET).coerceIn(minHeightPx, maxHeightPx)
-            slopeHeightsDp[targetIndex] = newHeightPx / context.resources.displayMetrics.density
+            val newHeightPx = (h - paddingBottom - clampedY + topLimit).coerceIn(minHeightPx, maxHeightPx)
+            slopeHeightsDp[targetIndex] = newHeightPx
             val gain = (slopeHeightsDp[targetIndex] / maxHeightPx * maxGain).roundToInt()
+            mDataList[targetIndex] = gain
             onGainChange?.invoke(targetIndex, gain)
             invalidate()
         }
@@ -119,32 +135,54 @@ class InteractiveWaveView @JvmOverloads constructor(
     @SuppressLint("DrawAllocation", "UseKtx")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        // 重新计算当前的网格尺寸，确保它不随 View 宽度拉伸
-        val gridW = context.resources.displayMetrics.widthPixels.toFloat()
-        val gridH = height.toFloat() - paddingBottom - TOP_OFFSET
+        val gridW = width.toFloat()
+        // gridH 代表网格的实际物理高度
+        val gridH = height.toFloat() - paddingBottom - topOffset
 
         canvas.save()
-        canvas.translate(paddingLeft, TOP_OFFSET)
+        // X 轴平移留白，Y 轴在绘制内部通过 topOffset 统一处理，不再全局平移 Y
+        canvas.translate(paddingLeft, 0f)
 
-        // 1. 画格子（列数直接用数组长度 - 1）
-        drawGrid(canvas, gridW, gridH, 2, mDataList.size - 1)
+        val gridWidth = if (showVerticalLine) gridW - (paddingLeftRight * 2) else gridW
+        drawGrid(canvas, gridWidth, gridH, 2, mDataList.size - 1)
 
-        // 2. 画渐变
-        val gradient = LinearGradient(0f, 0f, gridW, 0f,
-            intArrayOf(Color.parseColor("#0036FF"),
-                Color.parseColor("#00FF5A"),
-                Color.parseColor("#C5CF20")), null, Shader.TileMode.CLAMP)
-        fillPaint.shader = gradient
+        // ================== [ 2. 精准裁剪并绘制波纹 ] ==================
+        // 计算波浪点间距
+        val startX = paddingLeftRight
+        val endX = gridW
+        val segmentWidth = (endX - startX) / (mDataList.size - 1)
 
-        // 3. 计算波浪点间距
-        val segmentWidth = gridW / (mDataList.size - 1)
+        // 🌟【核心改变】：只针对波纹的填充和边框进行局部裁剪上锁
+        canvas.save()
+        // 限制绘制区间：从 TOP_OFFSET 到 View 底部，物理上绝对禁止波纹冲到 TOP_OFFSET 上方
+        canvas.clipRect(0f, topOffset, width.toFloat(), height.toFloat() - paddingBottom)
 
+        // 绘制填充面
         buildWavePath(gridW, gridH, segmentWidth)
         canvas.drawPath(wavePath, fillPaint)
 
+        // 绘制顶部边框线
         drawTopOutline(canvas, gridH, segmentWidth)
+
+        // 释放波纹的裁剪锁
         canvas.restore()
+
+        // =========================================================
+        canvas.restore()
+
+        // 3. 绘制粒子
         drawParticles(canvas)
+    }
+
+    /**
+     * 供外界动态修改填充渐变色的接口
+     */
+    fun setWaveFillGradient(colors: IntArray, heightPx: Float, widthPx: Float) {
+        fillPaint.shader = LinearGradient(
+            0f, 0f, widthPx, heightPx,
+            colors, null, Shader.TileMode.CLAMP
+        )
+        invalidate()
     }
 
     private fun drawParticles(canvas: Canvas) {
@@ -175,7 +213,7 @@ class InteractiveWaveView @JvmOverloads constructor(
         val totalHeight = MeasureSpec.getSize(heightMeasureSpec)
         setMeasuredDimension(totalWidth, totalHeight)
 
-        maxHeightPx = totalHeight.toFloat() - paddingBottom - TOP_OFFSET
+        maxHeightPx = totalHeight.toFloat() - paddingBottom - topOffset
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -197,38 +235,37 @@ class InteractiveWaveView @JvmOverloads constructor(
     private fun drawGrid(canvas: Canvas, gridWidth: Float, gridHeight: Float, rows: Int, cols: Int) {
         val columnWidth = gridWidth / cols
         val rowHeight = gridHeight / rows
-        val qPaddingH = dpToPx(7f)
-        val qPaddingV = dpToPx(4f)
         // 1. 绘制垂直线及底部文字
-//        textPaint.textAlign = Paint.Align.CENTER
+        textPaint.textAlign = Paint.Align.CENTER
         for (i in 0..cols) {
-            val x = i * columnWidth
+            val x = (i * columnWidth) + paddingLeftRight
+            // 在格子外面绘制 X 轴文字
+            if (i < (freqArray?.size ?: 0)) {
+                // gridHeight + 偏移量，使文字出现在线条下方
+                val hz = freqArray!![i]
+                LogUtil.i("hz = $hz k")
+                val text = if (hz < 1000) {
+                    hz.toString()
+                } else {
+                    (hz / 1000f).toString() + "k"
+                }
+                val textY = dpToPx(20f)
+                if (showTopValue) {
+                    val value = if (mDataList[i] > maxGain/2) {
+                        "+${mDataList[i] - (maxGain/2)}"
+                    } else if (mDataList[i] < maxGain/2) {
+                        "-${mDataList[i] - (maxGain/2)}"
+                    } else {
+                        "0"
+                    }
+                    canvas.drawText(value, x, textY, textPaint)
+                }
+                canvas.drawText(text, x, gridHeight + topOffset + textY, textPaint)
+            }
             // 画线
-            canvas.drawLine(x, 0f, x, gridHeight, gridPaint)
-//            // 测量文字宽度
-//            val textWidth = dpToPx(20f)
-//            // 2. 获取文字的高度信息（包括上行间距和下行间距）
-//            val fontMetrics = textPaint.fontMetrics
-//            // 在格子外面绘制 X 轴文字
-//            if (i > 0 && i < mDataList.size) {
-//                // gridHeight + 偏移量，使文字出现在线条下方
-//                val hz = mDataList[i].apsFreq
-//                val text = if (hz < 1000) {
-//                    hz.toString()
-//                } else {
-//                    (hz / 1000f).toString() + "k"
-//                }
-//                canvas.drawText(text, x, gridHeight + dpToPx(18f), textPaint)
-//                // 绘制q值背景
-//                val left = x - (textWidth/2) - qPaddingH
-//                val right = x + (textWidth/2) + qPaddingH
-//                val top = gridHeight + dpToPx(40f) + fontMetrics.ascent - qPaddingV
-//                val bottom = gridHeight + dpToPx(40f) + qPaddingV + fontMetrics.descent
-//                // 4. 绘制圆角矩形背景
-//                val cornerRadius = dpToPx(10f) // 圆角半径
-//                canvas.drawRoundRect(left, top, right, bottom, cornerRadius, cornerRadius, qBgPaint)
-//                canvas.drawText(mDataList[i].apsQ.toString(), x, gridHeight + dpToPx(40f), textPaint)
-//            }
+            if (showVerticalLine) {
+                canvas.drawLine(x, if (showTopValue) topOffset else 0f, x, gridHeight + topOffset, gridPaint)
+            }
         }
 
         // 2. 绘制水平线及左侧文字
@@ -236,8 +273,9 @@ class InteractiveWaveView @JvmOverloads constructor(
         for (i in 0..rows) {
             val y = i * rowHeight
             // 画线
-            canvas.drawLine(0f, y, gridWidth, y, gridPaint)
-
+            if (showHorizontalLine) {
+                canvas.drawLine(0f, y, gridWidth, y, gridPaint)
+            }
             // 在格子外面绘制 Y 轴文字
 //            if (i < yAxisValues.size) {
 //                // 0 - 偏移量，使文字出现在线条左侧
@@ -248,20 +286,20 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     private fun buildWavePath(w: Float, h: Float, segmentWidth: Float) {
         wavePath.reset()
-        wavePath.moveTo(0f, h)
-        val startY = h - dpToPx(slopeHeightsDp[0])
+        wavePath.moveTo(0f, h + topOffset)
+        val startY = h - dpToPx(slopeHeightsDp[0]) + topOffset
         wavePath.lineTo(0f, startY)
 
         for (i in 0 until slopeHeightsDp.size - 1) {
             val x1 = i * segmentWidth
-            val y1 = h - dpToPx(slopeHeightsDp[i])
+            val y1 = h - dpToPx(slopeHeightsDp[i]) + topOffset
             val x2 = (i + 1) * segmentWidth
-            val y2 = h - dpToPx(slopeHeightsDp[i + 1])
+            val y2 = h - dpToPx(slopeHeightsDp[i + 1]) + topOffset
 
             // 三次贝塞尔保持平滑
             wavePath.cubicTo(x1 + segmentWidth / 2f, y1, x2 - segmentWidth / 2f, y2, x2, y2)
         }
-        wavePath.lineTo(w, h)
+        wavePath.lineTo(w, h + topOffset)
         wavePath.close()
     }
 
@@ -289,14 +327,24 @@ class InteractiveWaveView @JvmOverloads constructor(
     }
 
     fun updateList(list: List<Int>) {
+        if (mDataList.isEmpty() && topOffset > 0) {
+            maxHeightPx -= topOffset
+        }
         mDataList.clear()
         mDataList.addAll(list)
-//        COLUMN_WIDTH_DP = (context.resources.displayMetrics.widthPixels/list.size).toFloat()
+        COLUMN_WIDTH_DP = (width/list.size).toFloat()
         if (measuredWidth > 0){
             drawView()
         } else {
             // 还没测量，设置一个标记位
             mPendingUpdate = true
+        }
+    }
+
+    fun updateFreq(dataArray: IntArray) {
+        if (freqArray == null) {
+            freqArray = dataArray
+            invalidate()
         }
     }
 
@@ -317,12 +365,12 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     private fun drawTopOutline(canvas: Canvas, h: Float, segmentWidth: Float) {
         val topPath = Path()
-        topPath.moveTo(0f, h - dpToPx(slopeHeightsDp[0]))
+        topPath.moveTo(0f, h - dpToPx(slopeHeightsDp[0]) + topOffset)
         for (i in 0 until slopeHeightsDp.size - 1) {
             val x1 = i * segmentWidth
-            val y1 = h - dpToPx(slopeHeightsDp[i])
+            val y1 = h - dpToPx(slopeHeightsDp[i]) + topOffset
             val x2 = (i + 1) * segmentWidth
-            val y2 = h - dpToPx(slopeHeightsDp[i + 1])
+            val y2 = h - dpToPx(slopeHeightsDp[i + 1]) + topOffset
             topPath.cubicTo(x1 + segmentWidth / 2f, y1, x2 - segmentWidth / 2f, y2, x2, y2)
         }
         canvas.drawPath(topPath, borderPaint)

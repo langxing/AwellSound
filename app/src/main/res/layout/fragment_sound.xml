@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/dsp_seek_bg"
-            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -32,9 +31,8 @@
             android:layout_marginStart="25dp"
             android:gravity="end"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/VerticalSeekBarWrapper1">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,33 +128,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
-            android:id="@+id/VerticalSeekBarWrapper1"
-            style="@style/dsp_seekBar_parent_view_style2"
-            android:layout_centerHorizontal="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                android:id="@+id/seekbar_high"
-                style="@style/dsp_seekBar_style"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/VerticalSeekBarWrapper1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/high_notes"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/VerticalSeekBarWrapper1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,7 +145,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/dsp_seek_bg"
-            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -184,9 +154,8 @@
             android:layout_marginStart="25dp"
             android:gravity="end"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/VerticalSeekBarWrapper2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/VerticalSeekBarWrapper2">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -283,34 +252,6 @@
 
         </LinearLayout>
 
-        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
-            android:id="@+id/VerticalSeekBarWrapper2"
-            style="@style/dsp_seekBar_parent_view_style2"
-            android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-                android:id="@+id/seekbar_low"
-                style="@style/dsp_seekBar_style"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/VerticalSeekBarWrapper2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/bass"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/VerticalSeekBarWrapper2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -343,19 +284,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
+            <FrameLayout
                 android:id="@+id/aps_sound_range"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/aps_car_ball"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     android:background="@drawable/dsp_sound_ball_new" />
-            </RelativeLayout>
+            </FrameLayout>
 
         </RelativeLayout>
 
