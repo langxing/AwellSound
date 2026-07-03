@@ -136,7 +136,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val gridW = width.toFloat()
-        // gridH 代表网格的实际物理高度
+        // 网格的实际物理高度
         val gridH = height.toFloat() - paddingBottom - topOffset
 
         canvas.save()
@@ -146,30 +146,18 @@ class InteractiveWaveView @JvmOverloads constructor(
         val gridWidth = if (showVerticalLine) gridW - (paddingLeftRight * 2) else gridW
         drawGrid(canvas, gridWidth, gridH, 2, mDataList.size - 1)
 
-        // ================== [ 2. 精准裁剪并绘制波纹 ] ==================
-        // 计算波浪点间距
-        val startX = paddingLeftRight
-        val endX = gridW
-        val segmentWidth = (endX - startX) / (mDataList.size - 1)
-
-        // 🌟【核心改变】：只针对波纹的填充和边框进行局部裁剪上锁
+        // 绘制波纹
         canvas.save()
         // 限制绘制区间：从 TOP_OFFSET 到 View 底部，物理上绝对禁止波纹冲到 TOP_OFFSET 上方
         canvas.clipRect(0f, topOffset, width.toFloat(), height.toFloat() - paddingBottom)
 
         // 绘制填充面
-        buildWavePath(gridW, gridH, segmentWidth)
+        buildWavePath(gridW, gridH)
         canvas.drawPath(wavePath, fillPaint)
-
         // 绘制顶部边框线
-        drawTopOutline(canvas, gridH, segmentWidth)
-
+        drawTopOutline(canvas, gridH)
         // 释放波纹的裁剪锁
         canvas.restore()
-
-        // =========================================================
-        canvas.restore()
-
         // 3. 绘制粒子
         drawParticles(canvas)
     }
@@ -284,7 +272,7 @@ class InteractiveWaveView @JvmOverloads constructor(
         }
     }
 
-    private fun buildWavePath(w: Float, h: Float, segmentWidth: Float) {
+    private fun buildWavePath(w: Float, h: Float) {
         wavePath.reset()
 
         // 确定网格真正的左右物理边界
@@ -374,7 +362,7 @@ class InteractiveWaveView @JvmOverloads constructor(
         }
     }
 
-    private fun drawTopOutline(canvas: Canvas, h: Float, segmentWidth: Float) {
+    private fun drawTopOutline(canvas: Canvas, h: Float) {
         val topPath = Path()
         val startX = paddingLeftRight
         val endX = canvas.width.toFloat() - paddingLeftRight
