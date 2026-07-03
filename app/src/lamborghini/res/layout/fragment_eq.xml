@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="18sp"
         tools:text="15"
         app:layout_constraintTop_toTopOf="@+id/waveview"
         app:layout_constraintStart_toStartOf="@+id/layout_loudness_switch"/>
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:text="0"
         app:layout_constraintStart_toStartOf="@+id/layout_loudness_switch"
         app:layout_constraintTop_toTopOf="@+id/waveview"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="18sp"
         tools:text="15"
         app:layout_constraintBottom_toBottomOf="@+id/waveview"
         app:layout_constraintStart_toStartOf="@+id/layout_loudness_switch"/>

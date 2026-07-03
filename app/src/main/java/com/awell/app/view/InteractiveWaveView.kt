@@ -39,7 +39,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     // 在 InteractiveWaveView 类定义处添加
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = "#AAAAAA".toColorInt() // 文字颜色
-        textSize = dpToPx(18f)              // 文字大小
+        textSize = dpToPx(20f)              // 文字大小
         textAlign = Paint.Align.RIGHT       // 左侧文字右对齐，方便贴合线条
     }
     private var COLUMN_WIDTH_DP = 0f // 每一格的固定宽度
@@ -254,7 +254,7 @@ class InteractiveWaveView @JvmOverloads constructor(
                     val value = if (mDataList[i] > maxGain/2) {
                         "+${mDataList[i] - (maxGain/2)}"
                     } else if (mDataList[i] < maxGain/2) {
-                        "-${mDataList[i] - (maxGain/2)}"
+                        "${mDataList[i] - (maxGain/2)}"
                     } else {
                         "0"
                     }
@@ -286,20 +286,32 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     private fun buildWavePath(w: Float, h: Float, segmentWidth: Float) {
         wavePath.reset()
-        wavePath.moveTo(0f, h + topOffset)
-        val startY = h - dpToPx(slopeHeightsDp[0]) + topOffset
-        wavePath.lineTo(0f, startY)
 
+        // 确定网格真正的左右物理边界
+        val startX = paddingLeftRight
+        val endX = w - paddingLeftRight
+        // 重新计算精确的格子宽度
+        val validSegmentWidth = (endX - startX) / (slopeHeightsDp.size - 1)
+        val bottomY = h + topOffset
+
+        // 起点：在第一条垂直线（7.5k左边的起点）的底部扎底
+        wavePath.moveTo(startX, bottomY)
+
+        val startY = h - dpToPx(slopeHeightsDp[0]) + topOffset
+        wavePath.lineTo(startX, startY)
+
+        // 通过贝塞尔曲线绘制到最后一个数据点
         for (i in 0 until slopeHeightsDp.size - 1) {
-            val x1 = i * segmentWidth
+            val x1 = startX + i * validSegmentWidth
             val y1 = h - dpToPx(slopeHeightsDp[i]) + topOffset
-            val x2 = (i + 1) * segmentWidth
+            val x2 = startX + (i + 1) * validSegmentWidth
             val y2 = h - dpToPx(slopeHeightsDp[i + 1]) + topOffset
 
             // 三次贝塞尔保持平滑
-            wavePath.cubicTo(x1 + segmentWidth / 2f, y1, x2 - segmentWidth / 2f, y2, x2, y2)
+            wavePath.cubicTo(x1 + validSegmentWidth / 2f, y1, x2 - validSegmentWidth / 2f, y2, x2, y2)
         }
-        wavePath.lineTo(w, h + topOffset)
+
+        wavePath.lineTo(endX, bottomY)
         wavePath.close()
     }
 
@@ -310,7 +322,6 @@ class InteractiveWaveView @JvmOverloads constructor(
             val offsetX = (random.nextGaussian() * dpToPx(12f)).toFloat() // X轴 扩散略大
             val offsetY = (random.nextGaussian() * dpToPx(25f)).toFloat() // Y轴 扩散略小，形成长条
 
-            // 速度给得很小，让它们只是微颤
             val vx = (Math.random().toFloat() - 0.5f) * 2f
             val vy = (Math.random().toFloat() - 0.5f) * 2f
 
@@ -365,13 +376,19 @@ class InteractiveWaveView @JvmOverloads constructor(
 
     private fun drawTopOutline(canvas: Canvas, h: Float, segmentWidth: Float) {
         val topPath = Path()
-        topPath.moveTo(0f, h - dpToPx(slopeHeightsDp[0]) + topOffset)
+        val startX = paddingLeftRight
+        val endX = canvas.width.toFloat() - paddingLeftRight
+        val validSegmentWidth = (endX - startX) / (slopeHeightsDp.size - 1)
+
+        val startY = h - dpToPx(slopeHeightsDp[0]) + topOffset
+        topPath.moveTo(startX, startY)
+
         for (i in 0 until slopeHeightsDp.size - 1) {
-            val x1 = i * segmentWidth
+            val x1 = startX + i * validSegmentWidth
             val y1 = h - dpToPx(slopeHeightsDp[i]) + topOffset
-            val x2 = (i + 1) * segmentWidth
+            val x2 = startX + (i + 1) * validSegmentWidth
             val y2 = h - dpToPx(slopeHeightsDp[i + 1]) + topOffset
-            topPath.cubicTo(x1 + segmentWidth / 2f, y1, x2 - segmentWidth / 2f, y2, x2, y2)
+            topPath.cubicTo(x1 + validSegmentWidth / 2f, y1, x2 - validSegmentWidth / 2f, y2, x2, y2)
         }
         canvas.drawPath(topPath, borderPaint)
     }
