@@ -101,7 +101,7 @@
         android:enabled="false"
         android:textColor="@color/white"
         android:text="FL 100%"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:background="@drawable/selector_btn_ball"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -114,7 +114,7 @@
         android:enabled="false"
         android:textColor="@color/white"
         android:text="FR 100%"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:background="@drawable/selector_btn_ball"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -199,7 +199,7 @@
         android:enabled="false"
         android:textColor="@color/white"
         android:text="RL 100%"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:background="@drawable/selector_btn_ball"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -213,7 +213,7 @@
         android:enabled="false"
         android:textColor="@color/white"
         android:text="RR 100%"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:background="@drawable/selector_btn_ball"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -229,7 +229,7 @@
         android:background="@drawable/selector_btn_reset"
         android:text="@string/reset_default"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

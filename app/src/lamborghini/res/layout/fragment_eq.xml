@@ -23,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="#66ffffff"
+        android:textSize="20sp"
         tools:text="15"
         app:layout_constraintTop_toTopOf="@+id/waveview"
         app:layout_constraintStart_toStartOf="@+id/layout_loudness_switch"/>
@@ -32,8 +32,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="#66ffffff"
+        android:textSize="20sp"
         android:text="0"
         app:layout_constraintStart_toStartOf="@+id/layout_loudness_switch"
         app:layout_constraintTop_toTopOf="@+id/waveview"
@@ -44,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="#66ffffff"
+        android:textSize="20sp"
         tools:text="15"
         app:layout_constraintBottom_toBottomOf="@+id/waveview"
         app:layout_constraintStart_toStartOf="@+id/layout_loudness_switch"/>
@@ -75,13 +75,17 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_loudness"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="marquee"
             android:gravity="center"
             android:text="@string/loudness_switch"
             android:textColor="#ffffffff"
-            android:textSize="16sp" />
+            android:textSize="32sp" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/sb_loudness"
@@ -99,7 +103,7 @@
         android:gravity="center"
         android:background="@drawable/ic_eq_title_bg"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="32sp"
         tools:text="Pop"
         app:layout_constraintStart_toStartOf="@+id/iv_logo"
         app:layout_constraintEnd_toEndOf="@+id/iv_logo"
@@ -128,7 +132,7 @@
     <TextView
         android:id="@+id/tv_reset"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="25dp"
         android:paddingHorizontal="12dp"
         android:gravity="center"
@@ -136,7 +140,7 @@
         android:background="@drawable/selector_btn_reset"
         android:text="@string/reset_default"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@+id/layout_loudness_switch"
         app:layout_constraintEnd_toEndOf="parent"/>
 

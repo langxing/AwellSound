@@ -82,4 +82,20 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="Animation.NoAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+    </style>
+
+    <style name="NoAnimActivity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/Animation.NoAnimation</item>
+        <item name="android:windowBackground">@drawable/dsp_bg</item>
+    </style>
+
 </resources>

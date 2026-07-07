@@ -26,6 +26,7 @@ import java.util.Arrays;
 
 public class EqFragment extends SoundEqualFragment implements View.OnClickListener {
     private SwitchCompat mIvLoudness;
+    private TextView tvLoudness;
     private ImageView ivPrev;
     private ImageView ivNext;
     private TextView tvType;
@@ -51,12 +52,14 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mIvLoudness = mContentView.findViewById(R.id.sb_loudness);
+        tvLoudness = mContentView.findViewById(R.id.tv_loudness);
         ivPrev = mContentView.findViewById(R.id.iv_prev);
         ivNext = mContentView.findViewById(R.id.iv_next);
         tvType = mContentView.findViewById(R.id.tv_type);
         tvReset = mContentView.findViewById(R.id.tv_reset);
         tvMax = mContentView.findViewById(R.id.tv_max);
         tvMin = mContentView.findViewById(R.id.tv_min);
+        tvLoudness.setSelected(true);
         waveview.setShowVerticalLine(true);
         waveview.setShowTopValue(true);
         waveview.setTopOffset(ToolClass.dp2px(requireContext(), 30f));

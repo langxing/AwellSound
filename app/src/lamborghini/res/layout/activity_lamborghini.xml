@@ -16,7 +16,7 @@
         android:drawablePadding="5dp"
         android:drawableStart="@drawable/ic_media_music_icon"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="Music"
         app:layout_constraintStart_toStartOf="@+id/iv_bg"
         app:layout_constraintBottom_toTopOf="@+id/iv_bg"/>
@@ -40,33 +40,33 @@
 
     <TextView
         android:id="@+id/tv_bal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
+        android:layout_width="360dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="120dp"
         android:gravity="center"
+        android:background="@drawable/selector_bal_start"
         android:drawableStart="@drawable/ic_sound_field"
-        android:drawablePadding="5dp"
         android:text="BAL"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@+id/iv_bg"
         app:layout_constraintBottom_toBottomOf="@+id/iv_bg"
-        app:layout_constraintEnd_toStartOf="@+id/iv_logo"/>
+        app:layout_constraintStart_toStartOf="@+id/iv_bg"/>
 
     <TextView
         android:id="@+id/tv_eq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
+        android:layout_width="360dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="120dp"
         android:gravity="center"
         android:drawableStart="@drawable/ic_sound_effect"
-        android:drawablePadding="5dp"
-        android:text="EQ"
-        android:textSize="20sp"
+        android:background="@drawable/selector_eq_end"
+        android:text="EQ  "
+        android:textSize="30sp"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@+id/iv_bg"
         app:layout_constraintBottom_toBottomOf="@+id/iv_bg"
-        app:layout_constraintStart_toEndOf="@+id/iv_logo"/>
+        app:layout_constraintEnd_toEndOf="@+id/iv_bg"/>
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -88,7 +88,7 @@
         android:gravity="center"
         android:background="@drawable/ic_eq_title_bg"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         tools:text="Pop"
         app:layout_constraintStart_toStartOf="@+id/iv_logo"
         app:layout_constraintEnd_toEndOf="@+id/iv_logo"

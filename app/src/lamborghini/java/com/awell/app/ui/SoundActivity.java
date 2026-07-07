@@ -1,6 +1,8 @@
 package com.awell.app.ui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,7 +13,7 @@ import com.awell.app.R;
 import com.awell.app.databinding.ActivityLamborghiniBinding;
 import com.awell.app.utils.ToolClass;
 
-public class LamborghiniActivity extends AppCompatActivity implements View.OnClickListener {
+public class SoundActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityLamborghiniBinding mBinding;
     private int mCurrentTypePosition = 0;
     private String[] mApsType;
@@ -58,12 +60,10 @@ public class LamborghiniActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 break;
             case R.id.tv_bal:
-                intent = new Intent(this, BallActivity.class);
-                startActivity(intent);
+                startActivity(BallActivity.class);
                 break;
             case R.id.tv_eq:
-                intent = new Intent(this, EqActivity.class);
-                startActivity(intent);
+                startActivity(EqActivity.class);
                 break;
             case R.id.iv_rest:
                 mCurrentTypePosition = 0;
@@ -75,6 +75,17 @@ public class LamborghiniActivity extends AppCompatActivity implements View.OnCli
             case R.id.iv_next:
                 updateType(true);
                 break;
+        }
+    }
+
+    private void startActivity(Class<? extends Activity> clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+        // 传入 0 代表没有任何动画
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0);
+        } else {
+            overridePendingTransition(0, 0);
         }
     }
 
