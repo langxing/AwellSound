@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dsp_aps_type">
+        <item>User</item>
+        <item>Effects Off</item>
+        <item>Classical</item>
+        <item>Pop</item>
+        <item>Club</item>
+        <item>Live</item>
+        <item>Jazz</item>
+        <item>Soft</item>
+        <item>Rock</item>
+        <item>Disco</item>
+    </string-array>
+</resources>

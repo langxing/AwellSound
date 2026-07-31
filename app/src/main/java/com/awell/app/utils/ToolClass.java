@@ -2,6 +2,7 @@ package com.awell.app.utils;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.RemoteException;
 import android.view.Gravity;
 import android.widget.Toast;
 

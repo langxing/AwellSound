@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AwellAutoEq2313</string>
+
+    <string-array name="dsp_aps_type">
+        <item>用户</item>
+        <item>特效关</item>
+        <item>古典</item>
+        <item>流行</item>
+        <item>俱乐部</item>
+        <item>现场</item>
+        <item>爵士</item>
+        <item>轻柔</item>
+        <item>摇滚</item>
+        <item>迪斯科</item>
+    </string-array>
+
+</resources>

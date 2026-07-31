@@ -78,14 +78,19 @@ android {
             dimension "brand"
             buildConfigField "Boolean", "showLogo", "false"
         }
+        yikasi {
+            dimension "brand"
+            buildConfigField "Boolean", "showLogo", "false"
+        }
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.aar', '*.jar'], exclude: [], dir: 'libs')
     implementation libs.appcompat
     implementation libs.material
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
+    compileOnly files('libs/framework.jar')
+    implementation fileTree(include: ['*.aar'], exclude: [], dir: 'libs')
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

@@ -48,7 +48,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     protected int gainMax = 0;
     private int[] mUserGain;
     private int[][] mDataArray;
-    private boolean isInit = false;
+    protected boolean isInit = false;
     private Contract.EqualPresenter mPresenter;
     private SharedPreferences sp;
 
@@ -290,12 +290,13 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
                 }
                 break;
         }
+        setModel(mCurrentType);
         LogUtil.i("curType = " + mCurrentType + " low = " + lowGain + " high = " + highGain);
         updateSeekBar(data, mCurrentType == 0);
         waveview.updateList(list);
     }
 
-    private void sendGain(int lowValue, int highValue) {
+    protected void sendGain(int lowValue, int highValue) {
         if (!isInit) {
             isInit = true;
             return;
@@ -314,12 +315,16 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETBANDLEVEL.code, highGains, 2);
     }
 
+    protected void setModel(int type) {
+
+    }
+
     /**
      * 发送增益更新数据库值
      *
      * @param index
      */
-    private void saveGain(int index, int progress) {
+    protected void saveGain(int index, int progress) {
         ApsStation.updateApsInDb(requireContext(), index, progress, ApsStation.NAME_GAIN);
         int[] gains = new int[2];
         int gainIndex = 1;

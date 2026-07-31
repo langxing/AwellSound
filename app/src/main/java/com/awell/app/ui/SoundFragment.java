@@ -41,20 +41,20 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             R.id.btn_drive_rear,
             R.id.btn_drive_user1,
             R.id.btn_drive_user2};
-    private TextView[] buttons;
+    protected TextView[] buttons;
     protected FrameLayout aps_sound_range;
     protected ImageView aps_car_ball;
     private SwitchCompat mIvLoudness;
     private TextView mTvDefault;
     protected View mContentView;
-    private int ball_w, ball_h, range_w, range_h;
+    protected int ball_w, ball_h, range_w, range_h;
     /**
      * ball 小球的边框: 左、上、右、下
      */
-    private int[] soundRange, ball;
+    protected int[] soundRange, ball;
     private int[][] apsSound;
-    private float center_w, center_h, dataScale_w = 0f, dataScale_h = 0f;
-    private boolean mLoudnessOpen = false;
+    protected float center_w, center_h, dataScale_w = 0f, dataScale_h = 0f;
+    protected boolean mLoudnessOpen = false;
     private int gainMax = 0;
     private boolean isFirst = false;
     private SoundHandler soundHandler;
@@ -64,8 +64,8 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
     private final int[] btnKey = {R.id.dsp_sound_up, R.id.dsp_sound_down, R.id.dsp_sound_left, R.id.dsp_sound_right};
     private final int size = btnKey.length;
 
-    private int location;
-    private int[] sounds = new int[4];
+    protected int location;
+    protected int[] sounds = new int[4];
 
     @Nullable
     @Override
@@ -136,13 +136,18 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         apsSound = new int[4][4];
         mLoudnessOpen = ToolClass.getLoudnessGain(requireContext()) == 1;
         mIvLoudness.setChecked(mLoudnessOpen);
+        initSoundRange();
+        init();
+    }
+
+    protected void initSoundRange() {
         soundRange = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETSOUNDFIELDRANGE.code, null);
         if (soundRange == null) {
             soundRange = ApsData.DefaultData.soundRange.clone();
         }
         LogUtil.d("soundRange[0] = " + soundRange[0] + " soundRange[1] = " + soundRange[1]);
-        init();
     }
+
 
     @Override
     public void onResume() {
@@ -299,7 +304,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
      *
      * @param send
      */
-    private void setLayout(boolean send, boolean sound) {
+    protected void setLayout(boolean send, boolean sound) {
         LogUtil.i("l = " + ball[0] + " t = " + ball[1] + " r = " + ball[2] + " b = " + ball[3]);
         aps_car_ball.layout(ball[0], ball[1], ball[2], ball[3]);
 
@@ -374,7 +379,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         }
     }
 
-    private void saveSQL(int layout, int send) {
+    protected void saveSQL(int layout, int send) {
         ApsStation.deleteSoundInDb(requireContext(), layout);
         ApsStation.deleteSoundInDb(requireContext(), send);
         ApsStation.insertSoundToDb(requireContext(), ball, layout);
@@ -386,7 +391,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
      *
      * @return
      */
-    private int isExist() {
+    protected int isExist() {
         int i, j;
         boolean exist;
         for (i = 0; i < apsSound.length; i++) {
@@ -470,7 +475,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         }
     }
 
-    private void loudnessSwitch() {
+    protected void loudnessSwitch() {
         LogUtil.d("Loudness =" + mLoudnessOpen);
         if (mLoudnessOpen){
             AwellAudio.setIntParameter(Constant.IAUDIOCONTROL.CMD.SETLOUDNESSGAIN.code, new int[]{1}, 1);
