@@ -358,7 +358,7 @@
             android:layout_height="wrap_content"
             android:thumb="@drawable/ic_switch_button"
             app:track="@drawable/selector_loudness_switch"
-            tools:checked="false" />
+            tools:checked="true" />
     </LinearLayout>
 
     <TextView
