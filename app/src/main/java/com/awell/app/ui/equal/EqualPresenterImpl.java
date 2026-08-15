@@ -14,7 +14,9 @@ public class EqualPresenterImpl extends Contract.EqualPresenter {
                 mContext.getResources().getIntArray(R.array.aps_rock),
                 mContext.getResources().getIntArray(R.array.aps_classical),
                 mContext.getResources().getIntArray(R.array.aps_bass),
-                mContext.getResources().getIntArray(R.array.aps_treble)
+                mContext.getResources().getIntArray(R.array.aps_treble),
+                mContext.getResources().getIntArray(R.array.aps_soft),
+                mContext.getResources().getIntArray(R.array.aps_disco)
         };
         mView.setData(dataArray);
     }

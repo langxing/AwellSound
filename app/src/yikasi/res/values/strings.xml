@@ -3,13 +3,13 @@
     <string-array name="dsp_aps_type">
         <item>User</item>
         <item>Effects Off</item>
-        <item>Classical</item>
-        <item>Pop</item>
-        <item>Club</item>
-        <item>Live</item>
         <item>Jazz</item>
-        <item>Soft</item>
+        <item>Pop</item>
         <item>Rock</item>
+        <item>Classical</item>
+        <item>Bass</item>
+        <item>Treble</item>
+        <item>Gentle</item>
         <item>Disco</item>
     </string-array>
 </resources>

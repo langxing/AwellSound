@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.awell.app.R;
 import com.awell.app.databinding.LayoutEqualizerWindowBinding;
+import com.awell.app.utils.ToolClass;
 
 public class EqualizerTypeWindow extends PopupWindow implements View.OnClickListener {
     private LayoutEqualizerWindowBinding mBinding;
@@ -18,9 +19,13 @@ public class EqualizerTypeWindow extends PopupWindow implements View.OnClickList
     private String[] mApsType;
 
     public void setSelectedPosition(int mSelectedPosition) {
+        if (mBinding == null) return;
         for (int i = 0; i < mApsType.length; i++) {
             View itemView = mBinding.layoutType.getChildAt(i);
             itemView.setSelected(i == mSelectedPosition);
+        }
+        if (mSelectedPosition > 5) {
+            mBinding.getRoot().post(() -> mBinding.scrollView.fullScroll(View.FOCUS_DOWN));
         }
     }
 
@@ -59,6 +64,11 @@ public class EqualizerTypeWindow extends PopupWindow implements View.OnClickList
                 itemView.getChildAt(1).setVisibility(View.GONE);
             }
         }
+        int maxHeightPx = (int) ToolClass.dp2px(mContext, 380);
+        int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int heightSpec = View.MeasureSpec.makeMeasureSpec(maxHeightPx, View.MeasureSpec.AT_MOST);
+        contentView.measure(widthSpec, heightSpec);
+        setHeight(Math.min(contentView.getMeasuredHeight(), maxHeightPx));
     }
 
     @Override

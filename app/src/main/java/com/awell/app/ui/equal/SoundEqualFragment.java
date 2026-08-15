@@ -278,6 +278,17 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
                 highGain = 14;
                 sendGain(lowGain, highGain);
                 break;
+            case 8: // 轻柔
+                lowGain = 10;
+                highGain = 8;
+                sendGain(lowGain, highGain);
+                break;
+
+            case 9: // 迪斯科
+                lowGain = 28;
+                highGain = 25;
+                sendGain(lowGain, highGain);
+                break;
             default:
                 if (size < 2) return;
                 if (mCurrentType == 0) {
