@@ -1,15 +1,17 @@
 package com.awell.app.ui;
 
+import android.annotation.SuppressLint;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.awell.aidl.awellface.IAwellApi;
+import com.awell.app.R;
 import com.awell.app.utils.ApsStation;
 import com.awell.app.utils.LogUtil;
 import com.awell.app.utils.ToolClass;
-import com.awell.kpslibrary.Constant;
-import com.awell.kpslibrary.module.AwellAudio;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,7 +26,19 @@ public class YKSSoundFragment extends SoundFragment {
     }
 
     @Override
+    protected void initView() {
+        super.initView();
+        buttons[3].setVisibility(View.GONE);
+    }
+
+    @Override
     protected void setLayout(boolean send, boolean sound) {
+        if (ball[1] > center_h - ball_h / 2) {
+            LogUtil.i("YKSSound clamp: before t = " + ball[1] + " center_h = " + center_h + " ball_h = " + ball_h);
+            ball[1] = (int) (center_h - ball_h / 2);
+            ball[3] = ball[1] + ball_h;
+            LogUtil.i("YKSSound clamp: after t = " + ball[1] + " b = " + ball[3]);
+        }
         LogUtil.i("l = " + ball[0] + " t = " + ball[1] + " r = " + ball[2] + " b = " + ball[3]);
         aps_car_ball.layout(ball[0], ball[1], ball[2], ball[3]);
 
@@ -96,15 +110,49 @@ public class YKSSoundFragment extends SoundFragment {
         }
     }
 
+    public void setLoudness(int open) {
+        mLoudnessOpen = open == 1;
+        // 这里只获取状态，UI更新还是用的本地缓存
+        setLoudnessOpen(mLoudnessOpen, false);
+    }
+
+    @SuppressLint({"NonConstantResourceId", "ClickableViewAccessibility"})
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (v.getId() == R.id.aps_sound_range) {
+            int touch_x = (int) event.getX();
+            int touch_y = (int) event.getY();
+            LogUtil.i("touch_x = " + touch_x + " touch_y = " + touch_y);
+            if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                if (touch_x < ball_w / 2) {
+                    touch_x = ball_w / 2;
+                }
+                if (touch_x > range_w - ball_w / 2) {
+                    touch_x = range_w - ball_w / 2;
+                }
+                if (touch_y < ball_h / 2) {
+                    touch_y = ball_h / 2;
+                }
+                if (touch_y > center_h) {
+                    touch_y = (int) center_h;
+                }
+                ball = new int[]{touch_x - ball_w / 2, touch_y - ball_h / 2, touch_x + ball_w / 2, touch_y + ball_h / 2};
+                setLayout(true, true);
+            }
+            return true;
+        }
+        return super.onTouch(v, event);
+    }
+
     @Override
     protected void loudnessSwitch() {
         LogUtil.d("Loudness =" + mLoudnessOpen);
         if (mLoudnessOpen){
             ToolClass.setLoudnessGain(requireContext(), 1);
-            setEqSetting(5, 1);
+            ((SoundActivity)requireActivity()).setEqSetting(5, 1);
         } else {
             ToolClass.setLoudnessGain(requireContext(), 0);
-            setEqSetting(5, 0);
+            ((SoundActivity)requireActivity()).setEqSetting(5, 0);
         }
     }
 
@@ -123,40 +171,6 @@ public class YKSSoundFragment extends SoundFragment {
                 mawellapi = IAwellApi.Stub.asInterface(ServiceManager.getService("AwellAutoApi"));
             }
             mawellapi.sendDataToUart(data, 6);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 0:低音
-     * 1:请求
-     * 1:中音
-     * 2:高音
-     * 3:重低音
-     * 4:中心频点
-     * 5:等响度
-     * 6:模式
-     * 7:ALL
-     *
-     * @param type
-     * @param gain
-     */
-    private void setEqSetting(int type, int gain) {
-        try {
-            byte[] data = new byte[7];
-            data[0] = (byte) 0x0b;
-            data[1] = 0;
-            data[2] = (byte) type;
-            data[3] = (byte) gain;
-            data[4] = 0;
-            data[5] = 0;
-            data[6] = 0;
-            if (mawellapi == null){
-                mawellapi = IAwellApi.Stub.asInterface(ServiceManager.getService("AwellAutoApi"));
-            }
-            LogUtil.i("eq data = " + Arrays.toString(data));
-            mawellapi.sendDataToUart(data, 7);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

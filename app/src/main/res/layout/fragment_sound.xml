@@ -339,6 +339,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="@+id/layout_tab"
         app:layout_constraintTop_toBottomOf="@+id/layout_tab">
@@ -346,7 +349,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:gravity="center"
             android:text="@string/loudness_switch"
             android:textColor="#ffffffff"
@@ -356,6 +358,8 @@
             android:id="@+id/sb_loudness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
             android:thumb="@drawable/ic_switch_button"
             app:track="@drawable/selector_loudness_switch"
             tools:checked="true" />

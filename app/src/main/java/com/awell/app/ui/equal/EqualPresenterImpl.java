@@ -1,6 +1,9 @@
 package com.awell.app.ui.equal;
 
 import com.awell.app.R;
+import com.awell.app.utils.LogUtil;
+
+import java.util.Arrays;
 
 public class EqualPresenterImpl extends Contract.EqualPresenter {
 
@@ -18,6 +21,10 @@ public class EqualPresenterImpl extends Contract.EqualPresenter {
                 mContext.getResources().getIntArray(R.array.aps_soft),
                 mContext.getResources().getIntArray(R.array.aps_disco)
         };
+        for (int i = 0; i < dataArray.length; i++) {
+            int[] a = dataArray[i];
+            LogUtil.i("equal initData[" + i + "] = " + (a == null ? "null" : "len=" + a.length + " " + Arrays.toString(a)));
+        }
         mView.setData(dataArray);
     }
 

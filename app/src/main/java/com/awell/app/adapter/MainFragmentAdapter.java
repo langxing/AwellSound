@@ -15,6 +15,10 @@ public class MainFragmentAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragments = new ArrayList<>();
 
+    public List<Fragment> getFragments() {
+        return mFragments;
+    }
+
     public MainFragmentAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }

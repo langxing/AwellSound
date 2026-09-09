@@ -33,3 +33,6 @@
 
 -dontwarn android.os.ServiceManager
 -dontwarn android.os.SystemProperties
+# bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

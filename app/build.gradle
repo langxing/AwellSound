@@ -11,9 +11,12 @@ android {
         applicationId "com.awell.app"
         minSdk 24
         targetSdk 34
-        versionCode 7
-        versionName "1.7"
+        versionCode 8
+        versionName "1.8"
 
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -88,6 +91,7 @@ android {
 dependencies {
     implementation libs.appcompat
     implementation libs.material
+    implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
     compileOnly files('libs/framework.jar')
     implementation fileTree(include: ['*.aar'], exclude: [], dir: 'libs')

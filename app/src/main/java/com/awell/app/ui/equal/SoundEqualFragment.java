@@ -47,7 +47,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     private int mCurrentType = 0;
     protected int gainMax = 0;
     private int[] mUserGain;
-    private int[][] mDataArray;
+    protected int[][] mDataArray;
     protected boolean isInit = false;
     private Contract.EqualPresenter mPresenter;
     private SharedPreferences sp;
@@ -148,6 +148,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             }
             seekBar.setEnabled(changeSeekbar);
             waveview.setNeedIntercept(changeSeekbar);
+            waveview.setEnabled(changeSeekbar);
             if (changeSeekbar) {
                 setSeekbarListener(seekBar, i);
             }
@@ -212,10 +213,14 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         ApsStation.updateApsInDb(requireContext(), index, progress, ApsStation.NAME_GAIN_CUSTOM);
     }
 
+    public void setType(int position) {
+        setType(position, true);
+    }
+
     /**
      * 设置当前模式
      */
-    public void setType(int position) {
+    public void setType(int position, boolean send) {
         LogUtil.i("position = " + position);
         mCurrentType = position;
         if (position == 0) {
@@ -223,9 +228,11 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             if (apsGainCustom == null) {
                 apsGainCustom = mDataArray[position];
             }
-            setData(apsGainCustom, false);
+            setData(apsGainCustom, false, send);
         } else {
-            setData(mDataArray[position], false);
+            int[] apsType = mDataArray == null ? null : mDataArray[position];
+            LogUtil.i("setType position = " + position + " data = " + (apsType == null ? "null" : "len=" + apsType.length));
+            setData(mDataArray[position], false, send);
         }
         ToolClass.setTypeFlag(requireContext(), position);
     }
@@ -235,7 +242,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      *
      * @param save
      */
-    public void setData(int[] data, boolean save) {
+    public void setData(int[] data, boolean save, boolean sendData) {
         Context context = requireContext();
         if (save) {
             ApsStation.deleteApsInDb(context, ApsStation.NAME_GAIN_REAR);
@@ -256,52 +263,69 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             case 1: // 标准
                 lowGain = 14;
                 highGain = 14;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
             case 2: // 爵士
                 lowGain = 4;
                 highGain = 28;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
             case 3: // 流行
                 lowGain = 20;
                 highGain = 19;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
             case 4: // 摇滚
                 lowGain = 28;
                 highGain = 24;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
             case 5: // 古典
                 lowGain = 26;
                 highGain = 14;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
             case 8: // 轻柔
                 lowGain = 10;
                 highGain = 8;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
-
             case 9: // 迪斯科
                 lowGain = 28;
                 highGain = 25;
-                sendGain(lowGain, highGain);
+                if (sendData) {
+                    sendGain(lowGain, highGain);
+                }
                 break;
             default:
                 if (size < 2) return;
-                if (mCurrentType == 0) {
-                    sendGain(mUserGain[0], mUserGain[1]);
-                    break;
-                } else if (mCurrentType == 6 || mCurrentType == 7) {
-                    // 只有2位数字是真正有效的，所以取第一段、第二段结尾数字
-                    sendGain(data[(size/2) - 1], data[size - 1]);
-                    break;
+                if (sendData) {
+                    if (mCurrentType == 0) {
+                        sendGain(mUserGain[0], mUserGain[1]);
+                        break;
+                    } else if (mCurrentType == 6 || mCurrentType == 7) {
+                        // 只有2位数字是真正有效的，所以取第一段、第二段结尾数字
+                        sendGain(data[(size/2) - 1], data[size - 1]);
+                        break;
+                    }
                 }
                 break;
         }
-        setModel(mCurrentType);
+        if (sendData) {
+            setModel(mCurrentType);
+        }
         LogUtil.i("curType = " + mCurrentType + " low = " + lowGain + " high = " + highGain);
         updateSeekBar(data, mCurrentType == 0);
         waveview.updateList(list);
@@ -357,7 +381,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
             LogUtil.e("apsFreq is null ");
             apsFreq = ApsData.getInstance().apsFreq.clone();
         }
-        final int position = ToolClass.getTypeFlag(requireContext());
+        final int position = ToolClass.getTypeFlag(requireContext()) == -1 ? 0 : ToolClass.getTypeFlag(requireContext());
         apsGain = ApsStation.getApsGain(getContext(), ApsStation.NAME_GAIN);
         LogUtil.i("apsGain = " + Arrays.toString(apsGain));
         if (apsGain == null) {

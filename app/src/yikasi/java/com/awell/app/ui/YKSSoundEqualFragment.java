@@ -1,18 +1,64 @@
 package com.awell.app.ui;
 
-import android.os.RemoteException;
-import com.awell.aidl.awellface.IAwellApi;
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.awell.app.model.ApsData;
 import com.awell.app.ui.equal.SoundEqualFragment;
 import com.awell.app.utils.ApsStation;
 import com.awell.app.utils.LogUtil;
-
-import android.os.ServiceManager;
+import com.awell.app.utils.ToolClass;
+import com.awell.kpslibrary.Constant;
+import com.awell.kpslibrary.module.AwellAudio;
 
 import java.util.Arrays;
 
 public class YKSSoundEqualFragment extends SoundEqualFragment {
-    private IAwellApi mawellapi;
+
+    private int mPendingPosition = -1;
+
+    public void onTypeUpdated(int position) {
+        if (isAdded() && mDataArray != null) {
+            setType(position, false);
+        } else {
+            LogUtil.i("onTypeUpdated fragment not ready, save position=" + position);
+            mPendingPosition = position;
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mPendingPosition >= 0 && mDataArray != null) {
+            LogUtil.i("onViewCreated apply pending position=" + mPendingPosition);
+            setType(mPendingPosition, false);
+            mPendingPosition = -1;
+        }
+    }
+
+    @Override
+    public void setData(int[][] data) {
+        mDataArray = data;
+        apsFreq = AwellAudio.getIntParameter(Constant.IAUDIOCONTROL.CMD.GETBANDS.code, null);
+        if (apsFreq == null || apsFreq.length != ApsData.getInstance().apsFreq.length){
+            LogUtil.e("apsFreq is null ");
+            apsFreq = ApsData.getInstance().apsFreq.clone();
+        }
+        final int typeFlag = ToolClass.getTypeFlag(requireContext());
+        final int position = typeFlag == -1 ? 0 : typeFlag;
+        LogUtil.i("setData typeFlag=" + typeFlag + " position=" + position + " dataArray length=" + (data != null ? data.length : "null"));
+        apsGain = ApsStation.getApsGain(getContext(), ApsStation.NAME_GAIN);
+        LogUtil.i("apsGain = " + Arrays.toString(apsGain));
+        if (apsGain == null) {
+            apsGain = mDataArray[0];
+            ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN);
+            ApsStation.insertApsToDb(requireContext(), apsGain, ApsStation.NAME_GAIN_CUSTOM);
+        }
+        setType(position, false);
+    }
 
     @Override
     protected void setModel(int type) {
@@ -22,7 +68,31 @@ public class YKSSoundEqualFragment extends SoundEqualFragment {
             // Type=6:模式(0:特效关1:古典2:流行
             //3:俱乐部4:现场 5:爵士
             //6:轻柔7:摇滚8:迪斯科)
-            setEqSetting(6, type - 1);
+            int temp;
+            switch (type) {
+                case 2:
+                    temp = 5;
+                    break;
+                case 4:
+                    temp = 7;
+                    break;
+                case 5:
+                    temp = 1;
+                    break;
+                case 6:
+                    temp = 3;
+                    break;
+                case 7:
+                    temp = 4;
+                    break;
+                case 8:
+                    temp = 6;
+                    break;
+                default:
+                    temp = type - 1;
+                    break;
+            }
+            ((SoundActivity)requireActivity()).setEqSetting(6, temp);
         }
     }
 
@@ -43,27 +113,7 @@ public class YKSSoundEqualFragment extends SoundEqualFragment {
         gains[0] = gainIndex;
         gains[1] = progress - gainMax / 2;
         LogUtil.i("gains = " + Arrays.toString(gains));
-        setEqSetting(gains[0], gains[1]);
-    }
-
-    private void setEqSetting(int type, int gain) {
-        try {
-            byte[] data = new byte[7];
-            data[0] = (byte) 0x0b;
-            data[1] = 0;
-            data[2] = (byte) type;
-            data[3] = (byte) gain;
-            data[4] = 0;
-            data[5] = 0;
-            data[6] = 0;
-            if (mawellapi == null){
-                mawellapi = IAwellApi.Stub.asInterface(ServiceManager.getService("AwellAutoApi"));
-            }
-            LogUtil.i("eq data = " + Arrays.toString(data));
-            mawellapi.sendDataToUart(data, 7);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        ((SoundActivity)requireActivity()).setEqSetting(gains[0], gains[1]);
     }
 
 }

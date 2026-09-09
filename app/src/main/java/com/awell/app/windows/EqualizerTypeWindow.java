@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.awell.app.R;
 import com.awell.app.databinding.LayoutEqualizerWindowBinding;
+import com.awell.app.utils.LogUtil;
 import com.awell.app.utils.ToolClass;
 
 public class EqualizerTypeWindow extends PopupWindow implements View.OnClickListener {
@@ -77,6 +78,7 @@ public class EqualizerTypeWindow extends PopupWindow implements View.OnClickList
         for (int i = 0; i < mBinding.layoutType.getChildCount(); i++) {
             mBinding.layoutType.getChildAt(i).setSelected(i == position);
         }
+        LogUtil.i("onClick position: " + position);
         if (mListener != null) {
             mListener.onEqualizerTypeClick(position, mApsType[position]);
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="dsp_aps_type">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="dsp_aps_type" tools:ignore="InconsistentArrays">
         <item>User</item>
         <item>Effects Off</item>
         <item>Jazz</item>

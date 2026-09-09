@@ -52,7 +52,7 @@ public class ToolClass {
     }
 
     public static int getTypeFlag(Context context) {
-        return android.provider.Settings.System.getInt(context.getContentResolver(), "SoundApsTypeFlag", 0);//模式 爵士 流行 等
+        return android.provider.Settings.System.getInt(context.getContentResolver(), "SoundApsTypeFlag", -1);//模式 爵士 流行 等
     }
 
     public static void setTypeFlag(Context context, int value) {

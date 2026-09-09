@@ -1,7 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AwellAutoEq2313</string>
 
-    <string-array name="dsp_aps_type">
+    <string-array name="dsp_aps_type" tools:ignore="InconsistentArrays">
         <item>用户</item>
         <item>特效关</item>
         <item>爵士</item>
