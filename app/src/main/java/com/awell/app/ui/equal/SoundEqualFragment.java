@@ -222,6 +222,12 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      */
     public void setType(int position, boolean send) {
         LogUtil.i("position = " + position);
+        // 数据还没从 presenter 回调回来时（例如子类在 initData 里提前调用），直接忽略，
+        // 等 setData(int[][]) 里再按保存的模式初始化，避免 mDataArray 为 null 崩溃
+        if (mDataArray == null || position < 0 || position >= mDataArray.length) {
+            LogUtil.e("setType skipped: mDataArray is not ready, position = " + position);
+            return;
+        }
         mCurrentType = position;
         if (position == 0) {
             int[] apsGainCustom = ApsStation.getApsGain(requireContext(), ApsStation.NAME_GAIN_CUSTOM);

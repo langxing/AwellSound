@@ -48,7 +48,7 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         waveview.setShowHorizontalLine(true);
         waveview.setShowTopValue(false);
         waveview.setTopOffset(ToolClass.dp2px(requireContext(), 30f));
-        waveview.setPaddingBottom(ToolClass.dp2px(requireContext(), 30f));
+        waveview.setPaddingBottom(ToolClass.dp2px(requireContext(), 36f));
         // 渐变、边框、网格线用 car_50 的配色覆盖父类默认样式
         waveview.setWaveFillGradient(new int[]{Color.parseColor("#C3E5FE"),
                 Color.TRANSPARENT}, high, 0);
@@ -58,6 +58,8 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         // 0.5dp 在 mdpi 上只有半个像素，加上白色在浅色背景上几乎不可见
         gridPaint.setStrokeWidth(ToolClass.dp2px(requireContext(), 1f));
         gridPaint.setColor(Color.parseColor("#9FB0C4"));
+        // 上面这些是绘制参数，设置完主动重绘一次，避免首帧还是父类默认样式
+        waveview.invalidate();
 
         layoutCustom = view.findViewById(R.id.layout_custom);
         tvCustom = view.findViewById(R.id.tv_custom);

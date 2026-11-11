@@ -210,9 +210,11 @@
             android:id="@+id/sb_loudness"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="35dp"
             android:thumb="@drawable/ic_switch_button"
             app:track="@drawable/selector_loudness_switch"
-            tools:checked="false" />
+            tools:checked="false"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
     <ImageView

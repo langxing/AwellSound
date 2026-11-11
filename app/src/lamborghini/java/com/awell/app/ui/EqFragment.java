@@ -97,13 +97,11 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         mIvLoudness.setChecked(mLoudnessOpen);
         tvMax.setText("+" + gainMax/2);
         tvMin.setText("-" + gainMax/2);
-        initData();
-    }
-
-    protected void initData() {
+        // 这里视图都已经绑定，再按保存的模式刷新文字/交互；
         mApsType = getResources().getStringArray(R.array.dsp_aps_type);
         mCurrentTypePosition = ToolClass.getTypeFlag(requireContext()) == -1 ? 0 : ToolClass.getTypeFlag(requireContext());
-        updateWave(mCurrentTypePosition);
+        tvType.setText(mApsType[mCurrentTypePosition]);
+        waveview.setNeedIntercept(mCurrentTypePosition == 0);
     }
 
     private void updateWave(int position) {

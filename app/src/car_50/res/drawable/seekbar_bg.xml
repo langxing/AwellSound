@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    car_50：轨道改用 shape 画，避免位图在竖直 SeekBar 里被裁剪后圆角两端变平。
+    厚度 12dp，圆角取一半 6dp。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#D8E5F1" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle">
+                <solid android:color="#4D93F7" />
+                <corners android:radius="6dp" />
+            </shape>
+        </scale>
+    </item>
+
+</layer-list>
