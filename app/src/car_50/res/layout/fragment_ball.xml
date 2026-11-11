@@ -50,7 +50,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_right"
-            app:drawableStartCompat="@drawable/ic_driver" />
+            app:drawableStartCompat="@drawable/ic_drive_right" />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_center"
-            app:drawableStartCompat="@drawable/ic_driver" />
+            app:drawableStartCompat="@drawable/ic_drive_center" />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_rear"
-            app:drawableStartCompat="@drawable/ic_driver" />
+            app:drawableStartCompat="@drawable/ic_drive_rear" />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_user1"
-            app:drawableStartCompat="@drawable/ic_driver" />
+            app:drawableStartCompat="@drawable/ic_drive_user1" />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_user2"
-            app:drawableStartCompat="@drawable/ic_driver"/>
+            app:drawableStartCompat="@drawable/ic_drive_user2"/>
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/focus_bg"
         android:gravity="center"
-        android:text="焦点"
+        android:text="@string/focus"
         android:textColor="#5E718D"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_position"

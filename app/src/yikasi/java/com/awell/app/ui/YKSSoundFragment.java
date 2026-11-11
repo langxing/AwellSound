@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.awell.aidl.awellface.IAwellApi;
 import com.awell.app.R;
@@ -46,8 +45,8 @@ public class YKSSoundFragment extends SoundFragment {
 
         if (location < 4 && isExist() < 0) {
             location = 4;
-            for (TextView textView : buttons) {
-                textView.setSelected(false);
+            for (View view : buttons) {
+                view.setSelected(false);
             }
             buttons[location].setSelected(true);
         }

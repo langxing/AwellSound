@@ -144,9 +144,6 @@ class InteractiveWaveView @JvmOverloads constructor(
         // X 轴平移留白，Y 轴在绘制内部通过 topOffset 统一处理，不再全局平移 Y
         canvas.translate(paddingLeft, 0f)
 
-        val gridWidth = if (showVerticalLine) gridW - (paddingLeftRight * 2) else gridW
-        drawGrid(canvas, gridWidth, gridH, 2, mDataList.size - 1)
-
         // 绘制波纹
         canvas.save()
         // 限制绘制区间：从 TOP_OFFSET 到 View 底部，物理上绝对禁止波纹冲到 TOP_OFFSET 上方
@@ -155,6 +152,10 @@ class InteractiveWaveView @JvmOverloads constructor(
         // 绘制填充面
         buildWavePath(gridW, gridH)
         canvas.drawPath(wavePath, fillPaint)
+
+        val gridWidth = if (showVerticalLine) gridW - (paddingLeftRight * 2) else gridW
+        drawGrid(canvas, gridWidth, gridH, 2, mDataList.size - 1)
+
         // 绘制顶部边框线
         if (showTopOutline) {
             drawTopOutline(canvas, gridH)

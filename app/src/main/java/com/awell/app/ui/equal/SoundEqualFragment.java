@@ -402,12 +402,4 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         sp.edit().putInt(type + "_" + high, gain).apply();
     }
 
-    private int getLow(int def) {
-        return sp.getInt(mCurrentType + "_" + 0, def);
-    }
-
-    private int getHigh(int def) {
-        return sp.getInt(mCurrentType + "_" + 1, def);
-    }
-
 }

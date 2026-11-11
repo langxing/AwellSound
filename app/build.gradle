@@ -37,6 +37,8 @@ android {
 
     buildFeatures {
         viewBinding true
+        // flavors reference BuildConfig.showLogo / BuildConfig.FLAVOR
+        buildConfig true
     }
 
     buildTypes {
@@ -44,7 +46,6 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            proguardFiles file('proguard-rules.pro')
         }
         debug {
             minifyEnabled false

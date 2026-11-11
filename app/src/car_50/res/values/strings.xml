@@ -1,3 +1,5 @@
 <resources>
-    <string name="reset_default">Reset</string>
+    <string name="reset_default">Restore defaults</string>
+    <string name="sound_field_location">Sound Positioning</string>
+    <string name="focus">Focus</string>
 </resources>

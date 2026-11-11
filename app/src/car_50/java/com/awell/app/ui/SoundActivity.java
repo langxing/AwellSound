@@ -2,7 +2,6 @@ package com.awell.app.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,16 +10,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.awell.app.R;
-import com.awell.app.adapter.MainFragmentAdapter;
 import com.awell.app.databinding.ActivityMain50Binding;
-import com.awell.app.databinding.ActivityMainBinding;
-import com.awell.app.utils.ToolClass;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SoundActivity extends AppCompatActivity {
-    private String[] mApsType;
     private int mCurrentTypePosition = -1;
     private ActivityMain50Binding mBinding;
     private List<Fragment> mFragmentList = new ArrayList<>();

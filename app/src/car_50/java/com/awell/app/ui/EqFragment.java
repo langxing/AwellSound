@@ -2,7 +2,6 @@ package com.awell.app.ui;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -43,22 +42,23 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        float high = ToolClass.dp2px(requireContext(), 300f);
+        int gridW = requireContext().getResources().getDisplayMetrics().widthPixels;
         waveview.setShowVerticalLine(true);
         waveview.setShowHorizontalLine(true);
         waveview.setShowTopValue(false);
         waveview.setTopOffset(ToolClass.dp2px(requireContext(), 30f));
-        waveview.setPaddingBottom(ToolClass.dp2px(requireContext(), 36f));
+        waveview.setPaddingBottom(ToolClass.dp2px(requireContext(), 30f));
         // 渐变、边框、网格线用 car_50 的配色覆盖父类默认样式
+        // setWaveFillGradient(colors, heightPx, widthPx)：heightPx=0、widthPx=网格宽 → 左到右渐变
         waveview.setWaveFillGradient(new int[]{Color.parseColor("#C3E5FE"),
-                Color.TRANSPARENT}, high, 0);
+                Color.parseColor("#C0E9FF"), Color.parseColor("#D2D3FF")}, 0, gridW);
         Paint borderPaint = waveview.getBorderPaint();
         borderPaint.setColor(Color.parseColor("#ffe866"));
         Paint gridPaint = waveview.getGridPaint();
         // 0.5dp 在 mdpi 上只有半个像素，加上白色在浅色背景上几乎不可见
-        gridPaint.setStrokeWidth(ToolClass.dp2px(requireContext(), 1f));
-        gridPaint.setColor(Color.parseColor("#9FB0C4"));
-        // 上面这些是绘制参数，设置完主动重绘一次，避免首帧还是父类默认样式
+        gridPaint.setStrokeWidth(ToolClass.dp2px(requireContext(), 0.5f));
+        gridPaint.setColor(Color.parseColor("#8AA2BE"));
+        // 设置完主动重绘一次，避免首帧还是父类默认样式
         waveview.invalidate();
 
         layoutCustom = view.findViewById(R.id.layout_custom);
