@@ -44,7 +44,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         mBinding.btnEqualizer.setSelected(true);
         mBinding.layoutCustom.setOnClickListener(this);
         mApsType = getResources().getStringArray(R.array.dsp_aps_type);
-        mCurrentTypePosition = ToolClass.getTypeFlag(this);
+        mCurrentTypePosition = ToolClass.getTypeFlag(this) == -1 ? 0 : ToolClass.getTypeFlag(this);
         mBinding.tvCustom.setText(mApsType[mCurrentTypePosition]);
     }
 

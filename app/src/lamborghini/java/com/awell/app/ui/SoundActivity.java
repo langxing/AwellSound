@@ -30,7 +30,7 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
 
     private void initData() {
         mApsType = getResources().getStringArray(R.array.dsp_aps_type);
-        mCurrentTypePosition = ToolClass.getTypeFlag(this);
+        mCurrentTypePosition = ToolClass.getTypeFlag(this) == -1 ? 0 : ToolClass.getTypeFlag(this);
         mBinding.tvType.setText(mApsType[mCurrentTypePosition]);
     }
 

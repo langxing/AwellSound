@@ -11,8 +11,8 @@ android {
         applicationId "com.awell.app"
         minSdk 24
         targetSdk 34
-        versionCode 8
-        versionName "1.8"
+        versionCode 7
+        versionName "1.7"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
@@ -67,6 +67,7 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+
     flavorDimensions "brand"
     productFlavors {
         gongban {
@@ -82,6 +83,10 @@ android {
             buildConfigField "Boolean", "showLogo", "false"
         }
         yikasi {
+            dimension "brand"
+            buildConfigField "Boolean", "showLogo", "false"
+        }
+        car_50 {
             dimension "brand"
             buildConfigField "Boolean", "showLogo", "false"
         }

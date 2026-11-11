@@ -62,6 +62,7 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         tvLoudness.setSelected(true);
         waveview.setShowVerticalLine(true);
         waveview.setShowTopValue(true);
+        waveview.setShowTopOutline(true);
         waveview.setTopOffset(ToolClass.dp2px(requireContext(), 30f));
         waveview.setPaddingBottom(ToolClass.dp2px(requireContext(), 30f));
         float high = ToolClass.dp2px(requireContext(), 300f);
@@ -99,9 +100,9 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         initData();
     }
 
-    private void initData() {
+    protected void initData() {
         mApsType = getResources().getStringArray(R.array.dsp_aps_type);
-        mCurrentTypePosition = ToolClass.getTypeFlag(requireContext());
+        mCurrentTypePosition = ToolClass.getTypeFlag(requireContext()) == -1 ? 0 : ToolClass.getTypeFlag(requireContext());
         updateWave(mCurrentTypePosition);
     }
 

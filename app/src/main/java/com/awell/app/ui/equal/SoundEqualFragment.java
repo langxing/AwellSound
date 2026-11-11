@@ -44,7 +44,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
      * apsFreq:底部HZ显示值
      */
     protected int[] apsGain, apsFreq;
-    private int mCurrentType = 0;
+    protected int mCurrentType = 0;
     protected int gainMax = 0;
     private int[] mUserGain;
     protected int[][] mDataArray;
@@ -96,7 +96,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
     }
 
     @SuppressLint("SetTextI18n")
-    private void initData() {
+    protected void initData() {
         sp = requireContext().getSharedPreferences("eq_gain", Context.MODE_PRIVATE);
         int[] apsGainRange = null;
         try {

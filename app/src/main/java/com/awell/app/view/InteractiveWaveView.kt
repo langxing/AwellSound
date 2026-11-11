@@ -54,6 +54,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     var showHorizontalLine = false
     // 是否绘制竖线
     var showVerticalLine = false
+    var showTopOutline = false
     // 是否显示顶部的值
     var showTopValue = false
     var maxGain = 0
@@ -155,7 +156,9 @@ class InteractiveWaveView @JvmOverloads constructor(
         buildWavePath(gridW, gridH)
         canvas.drawPath(wavePath, fillPaint)
         // 绘制顶部边框线
-        drawTopOutline(canvas, gridH)
+        if (showTopOutline) {
+            drawTopOutline(canvas, gridH)
+        }
         // 释放波纹的裁剪锁
         canvas.restore()
         // 3. 绘制粒子
@@ -237,8 +240,9 @@ class InteractiveWaveView @JvmOverloads constructor(
                 } else {
                     (hz / 1000f).toString() + "k"
                 }
-                val textY = dpToPx(20f)
+                var textY = 0f
                 if (showTopValue) {
+                    textY = dpToPx(20f)
                     val value = if (mDataList[i] > maxGain/2) {
                         "+${mDataList[i] - (maxGain/2)}"
                     } else if (mDataList[i] < maxGain/2) {
@@ -258,11 +262,14 @@ class InteractiveWaveView @JvmOverloads constructor(
 
         // 2. 绘制水平线及左侧文字
 //        textPaint.textAlign = Paint.Align.RIGHT
+        val lineLeft = if (showVerticalLine) paddingLeftRight else 0f
+        val lineRight = lineLeft + gridWidth
         for (i in 0..rows) {
-            val y = i * rowHeight
+            // 水平线要和竖线一样从 topOffset 开始，否则会画到图表区域外面
+            val y = i * rowHeight + topOffset
             // 画线
             if (showHorizontalLine) {
-                canvas.drawLine(0f, y, gridWidth, y, gridPaint)
+                canvas.drawLine(lineLeft, y, lineRight, y, gridPaint)
             }
             // 在格子外面绘制 Y 轴文字
 //            if (i < yAxisValues.size) {

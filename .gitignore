@@ -9,5 +9,6 @@
 .cxx
 local.properties
 gradle-wrapper.properties
+gradle-wrapper.jar
 gradlew
 gradlew.bat

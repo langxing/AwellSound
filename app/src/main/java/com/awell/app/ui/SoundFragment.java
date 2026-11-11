@@ -40,7 +40,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             R.id.btn_drive_rear,
             R.id.btn_drive_user1,
             R.id.btn_drive_user2};
-    protected TextView[] buttons;
+    protected View[] buttons;
     protected FrameLayout aps_sound_range;
     protected ImageView aps_car_ball;
     private SwitchCompat mIvLoudness;
@@ -94,7 +94,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             mContentView.findViewById(btnKey[i]).setOnTouchListener(this);
         }
 
-        buttons = new TextView[btnId.length];
+        buttons = new View[btnId.length];
         for (int i = 0; i < btnId.length; i++) {
             buttons[i] = mContentView.findViewById(btnId[i]);
             buttons[i].setOnClickListener(this);
@@ -317,8 +317,8 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
 
         if (location < 4 && isExist() < 0) {
             location = 4;
-            for (TextView textView : buttons) {
-                textView.setSelected(false);
+            for (View view : buttons) {
+                view.setSelected(false);
             }
             buttons[location].setSelected(true);
         }
@@ -418,7 +418,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
      * @param view
      * @param flag
      */
-    private void setBallBg(ImageView view, boolean flag) {
+    protected void setBallBg(ImageView view, boolean flag) {
         int id = view.getId();
         if (id == R.id.dsp_sound_up) {
             view.setImageResource(flag ? R.drawable.dsp_sound_up_d_new : R.drawable.dsp_sound_up_new);
