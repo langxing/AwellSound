@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      1280x720 / mdpi（可用高度 672dp）。
+      卡片比 800 矮 68dp，模式按钮列表若沿用 800 的高度会正好顶到卡片底边，
+      所以这里把按钮压到 74dp、间隔 8dp，列表下方留出约 28dp 余量。
+    -->
+
+    <!-- 卡片外边距 -->
+    <dimen name="c50_card_margin_horizontal">40dp</dimen>
+    <dimen name="c50_card_margin_vertical">60dp</dimen>
+
+    <!-- 顶部页签 -->
+    <dimen name="c50_tab_width">120dp</dimen>
+    <dimen name="c50_tab_height">55dp</dimen>
+    <dimen name="c50_tab_text_size">20sp</dimen>
+
+    <!-- 右上角模式下拉框 -->
+    <dimen name="c50_custom_width">150dp</dimen>
+    <dimen name="c50_custom_height">60dp</dimen>
+
+    <!-- 声场页模式按钮：高度 74 = 50dp 图标 + 上下各 12dp -->
+    <dimen name="c50_mode_item_height">74dp</dimen>
+    <dimen name="c50_mode_item_margin_top">8dp</dimen>
+    <dimen name="c50_mode_item_padding">12dp</dimen>
+    <dimen name="c50_mode_item_padding_horizontal">20dp</dimen>
+    <dimen name="c50_mode_text_size">18sp</dimen>
+
+    <!-- 声场页右列：宽度由该值决定，高度按原图比例换算 -->
+    <dimen name="c50_panel_width">328dp</dimen>
+    <dimen name="c50_loudness_height">85dp</dimen>
+
+    <!-- 通用文字大小（响度/焦点/恢复默认） -->
+    <dimen name="c50_text_size">16sp</dimen>
+</resources>

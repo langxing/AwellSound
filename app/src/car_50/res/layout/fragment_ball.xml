@@ -9,7 +9,7 @@
         android:id="@+id/btn_drive_left"
         style="@style/style_mode_item"
         android:layout_marginStart="20dp"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/c50_mode_item_padding_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_drive_right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_chair"
@@ -41,7 +41,7 @@
     <LinearLayout
         android:id="@+id/btn_drive_right"
         style="@style/style_mode_item"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/c50_mode_item_padding_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_drive_center"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_drive_left">
@@ -72,7 +72,7 @@
     <LinearLayout
         android:id="@+id/btn_drive_center"
         style="@style/style_mode_item"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/c50_mode_item_padding_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_drive_rear"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_drive_right">
@@ -103,7 +103,7 @@
     <LinearLayout
         android:id="@+id/btn_drive_rear"
         style="@style/style_mode_item"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/c50_mode_item_padding_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_drive_user1"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_drive_center">
@@ -134,7 +134,7 @@
     <LinearLayout
         android:id="@+id/btn_drive_user1"
         style="@style/style_mode_item"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/c50_mode_item_padding_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_drive_user2"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_drive_rear">
@@ -165,7 +165,7 @@
     <LinearLayout
         android:id="@+id/btn_drive_user2"
         style="@style/style_mode_item"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/c50_mode_item_padding_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_drive_user1">
@@ -196,7 +196,7 @@
     <LinearLayout
         android:id="@+id/layout_loudness_switch"
         android:layout_width="0dp"
-        android:layout_height="85dp"
+        android:layout_height="@dimen/c50_loudness_height"
         android:layout_marginBottom="20dp"
         android:paddingHorizontal="25dp"
         android:background="@drawable/shape_switch_bg"
@@ -212,7 +212,7 @@
             android:gravity="center"
             android:text="@string/loudness_switch"
             android:textColor="#0D0D0D"
-            android:textSize="16sp"
+            android:textSize="@dimen/c50_text_size"
             android:textStyle="bold" />
 
         <Space
@@ -233,21 +233,24 @@
 
     <ImageView
         android:id="@+id/iv_position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="15dp"
         android:src="@drawable/position_bg"
         app:layout_constraintBottom_toTopOf="@+id/tv_default"
-        app:layout_constraintEnd_toEndOf="@+id/tv_default" />
+        app:layout_constraintDimensionRatio="H,328:285"
+        app:layout_constraintEnd_toEndOf="@+id/tv_default"
+        app:layout_constraintStart_toStartOf="@+id/tv_default" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/focus_bg"
+        android:padding="10dp"
         android:gravity="center"
         android:text="@string/focus"
         android:textColor="#5E718D"
-        android:textSize="20sp"
+        android:textSize="@dimen/c50_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/iv_position"
         app:layout_constraintEnd_toEndOf="@+id/iv_position"
         app:layout_constraintStart_toStartOf="@+id/iv_position"
@@ -264,10 +267,11 @@
 
     <ImageView
         android:id="@+id/iv_chair"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_sound_car"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="W,353:529"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
@@ -326,14 +330,15 @@
 
     <Button
         android:id="@+id/tv_default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/c50_panel_width"
+        android:layout_height="0dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/selector_reset_bg"
         android:gravity="center"
         android:text="@string/reset_default"
         android:textColor="#5E718D"
-        android:textSize="20sp"
+        android:textSize="@dimen/c50_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/iv_chair"
+        app:layout_constraintDimensionRatio="H,328:90"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

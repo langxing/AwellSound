@@ -30,6 +30,14 @@ public class SoundActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     private void initView() {
+        // Activity 重建（如切换分辨率）时，FragmentManager 会按 tag 恢复旧实例。
+        // 这里必须复用恢复出来的实例，否则 new 出来的新实例不在 FragmentManager 里，
+        // hide() 作用不到真正显示的旧页面，两个页面会重叠。
+        FragmentManager fm = getSupportFragmentManager();
+        mFragmentList.clear();
+        mFragmentList.add(obtainFragment(fm, EqFragment.class.getSimpleName(), new EqFragment()));
+        mFragmentList.add(obtainFragment(fm, BallFragment.class.getSimpleName(), new BallFragment()));
+
         mBinding.rgTab.setOnCheckedChangeListener((radioGroup, id) -> {
             switch (id) {
                 case R.id.tab_eq:
@@ -40,25 +48,27 @@ public class SoundActivity extends AppCompatActivity {
                     break;
             }
         });
-        mFragmentList.add(new EqFragment());
-        mFragmentList.add(new BallFragment());
         switchFragment(0);
     }
 
-    private void switchFragment(int position) {
-        FragmentManager fm = getSupportFragmentManager();
-        String targetTag = mFragmentList.get(position)
-                .getClass().getSimpleName();
-        Fragment targetFragment = fm.findFragmentByTag(targetTag);
-        if (targetFragment == null) {
-            targetFragment = mFragmentList.get(position);
-        }
+    private Fragment obtainFragment(FragmentManager fm, String tag, Fragment created) {
+        Fragment restored = fm.findFragmentByTag(tag);
+        return restored != null ? restored : created;
+    }
 
+    private void switchFragment(int position) {
+        if (position < 0 || position >= mFragmentList.size()) return;
         if (position == mCurrentTypePosition) return;
 
-        FragmentTransaction transaction = fm.beginTransaction();
-        if (mCurrentTypePosition != -1) {
-            transaction.hide(mFragmentList.get(mCurrentTypePosition));
+        Fragment targetFragment = mFragmentList.get(position);
+        String targetTag = targetFragment.getClass().getSimpleName();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // 隐藏其他所有已加入的页面，而不是只隐藏“上一个”，避免重建或异常时序下残留显示
+        for (Fragment fragment : mFragmentList) {
+            if (fragment != targetFragment && fragment.isAdded()) {
+                transaction.hide(fragment);
+            }
         }
 
         if (!targetFragment.isAdded()) {

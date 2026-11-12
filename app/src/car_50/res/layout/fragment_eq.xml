@@ -7,8 +7,8 @@
 
     <FrameLayout
         android:id="@+id/layout_custom"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/c50_custom_width"
+        android:layout_height="@dimen/c50_custom_height"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/shape_type_bg"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#748AA2"
-            android:textSize="16sp"
+            android:textSize="@dimen/c50_text_size"
             tools:text="自定义模式1" />
 
         <ImageView
@@ -39,10 +39,12 @@
     <com.awell.app.view.InteractiveWaveView
         android:id="@+id/waveview"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_seekbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_custom"/>
+        app:layout_constraintTop_toBottomOf="@+id/layout_custom"
+        app:layout_constraintVertical_weight="300" />
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -65,6 +67,7 @@
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/waveview"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintVertical_weight="275" />
 </androidx.constraintlayout.widget.ConstraintLayout>

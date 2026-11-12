@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      紧凑档：适用于 sw < 720dp 的设备（如 1080x600 / mdpi，可用高度 552dp）。
+      标准档（1280x720、1280x800）见 values-sw720dp/dimens.xml。
+      放在 values/ 作为默认值，保证任何分辨率都有可用尺寸。
+    -->
+
+    <!-- 卡片外边距 -->
+    <dimen name="c50_card_margin_horizontal">30dp</dimen>
+    <dimen name="c50_card_margin_vertical">24dp</dimen>
+
+    <!-- 顶部页签 -->
+    <dimen name="c50_tab_width">108dp</dimen>
+    <dimen name="c50_tab_height">48dp</dimen>
+    <dimen name="c50_tab_text_size">17sp</dimen>
+
+    <!-- 右上角模式下拉框 -->
+    <dimen name="c50_custom_width">130dp</dimen>
+    <dimen name="c50_custom_height">48dp</dimen>
+
+    <!-- 声场页模式按钮：高度 72 = 50dp 图标 + 上下各 10dp -->
+    <dimen name="c50_mode_item_height">70dp</dimen>
+    <dimen name="c50_mode_item_margin_top">8dp</dimen>
+    <dimen name="c50_mode_item_padding">10dp</dimen>
+    <dimen name="c50_mode_item_padding_horizontal">16dp</dimen>
+    <dimen name="c50_mode_text_size">16sp</dimen>
+
+    <!-- 声场页右列：宽度由该值决定，高度按原图比例换算 -->
+    <dimen name="c50_panel_width">280dp</dimen>
+    <dimen name="c50_loudness_height">58dp</dimen>
+
+    <!-- 通用文字大小（响度/焦点/恢复默认） -->
+    <dimen name="c50_text_size">13sp</dimen>
+</resources>

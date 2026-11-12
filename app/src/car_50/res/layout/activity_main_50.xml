@@ -9,8 +9,8 @@
         android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="60dp"
+        android:layout_marginHorizontal="@dimen/c50_card_margin_horizontal"
+        android:layout_marginVertical="@dimen/c50_card_margin_vertical"
         android:background="@drawable/main_bg" />
 
     <RadioGroup
@@ -29,27 +29,27 @@
 
         <RadioButton
             android:id="@+id/tab_eq"
-            android:layout_width="120dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/c50_tab_width"
+            android:layout_height="@dimen/c50_tab_height"
             android:background="@drawable/selector_tab_bg"
             android:button="@null"
             android:checked="true"
             android:gravity="center"
             android:text="@string/equalizer"
             android:textColor="@color/selector_tab_txt"
-            android:textSize="20sp" />
+            android:textSize="@dimen/c50_tab_text_size" />
 
         <RadioButton
             android:id="@+id/tab_ball"
-            android:layout_width="120dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/c50_tab_width"
+            android:layout_height="@dimen/c50_tab_height"
             android:layout_marginStart="20dp"
             android:background="@drawable/selector_tab_bg"
             android:button="@null"
             android:gravity="center"
             android:text="@string/sound_field_location"
             android:textColor="@color/selector_tab_txt"
-            android:textSize="20sp" />
+            android:textSize="@dimen/c50_tab_text_size" />
     </RadioGroup>
 
     <FrameLayout
