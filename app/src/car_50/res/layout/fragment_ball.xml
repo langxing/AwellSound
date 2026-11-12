@@ -288,10 +288,10 @@
 
         <ImageView
             android:id="@+id/aps_car_ball"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
             android:layout_gravity="center"
-            android:src="@drawable/fg_soundwave"
+            android:background="@drawable/fg_soundwave"
             app:layout_constraintBottom_toBottomOf="@+id/iv_chair"
             app:layout_constraintEnd_toEndOf="@+id/iv_chair"
             app:layout_constraintStart_toStartOf="@+id/iv_chair"
