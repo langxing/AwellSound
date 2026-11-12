@@ -46,14 +46,16 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
         waveview.setShowVerticalLine(true);
         waveview.setShowHorizontalLine(true);
         waveview.setShowTopValue(false);
+        // car_50 浅色背景，白粒子看不清，用强调蓝
+        waveview.setParticleColor(Color.parseColor("#1769FF"));
+        // car_50 不画波浪顶部描边，其他 flavor 保持默认的 true
+        waveview.setShowTopOutline(false);
         waveview.setTopOffset(ToolClass.dp2px(requireContext(), 30f));
         waveview.setPaddingBottom(ToolClass.dp2px(requireContext(), 30f));
-        // 渐变、边框、网格线用 car_50 的配色覆盖父类默认样式
+        // 渐变、网格线用 car_50 的配色覆盖父类默认样式
         // setWaveFillGradient(colors, heightPx, widthPx)：heightPx=0、widthPx=网格宽 → 左到右渐变
         waveview.setWaveFillGradient(new int[]{Color.parseColor("#C3E5FE"),
                 Color.parseColor("#C0E9FF"), Color.parseColor("#D2D3FF")}, 0, gridW);
-        Paint borderPaint = waveview.getBorderPaint();
-        borderPaint.setColor(Color.parseColor("#ffe866"));
         Paint gridPaint = waveview.getGridPaint();
         // 0.5dp 在 mdpi 上只有半个像素，加上白色在浅色背景上几乎不可见
         gridPaint.setStrokeWidth(ToolClass.dp2px(requireContext(), 0.5f));

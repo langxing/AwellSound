@@ -10,9 +10,9 @@
         style="@style/style_mode_item"
         android:layout_marginStart="20dp"
         android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_drive_right"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_chair"
-        app:layout_constraintBottom_toTopOf="@+id/btn_drive_right"
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
@@ -22,10 +22,12 @@
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_left"
             app:drawableStartCompat="@drawable/ic_driver" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,9 +42,9 @@
         android:id="@+id/btn_drive_right"
         style="@style/style_mode_item"
         android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_drive_center"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
-        app:layout_constraintTop_toBottomOf="@+id/btn_drive_left"
-        app:layout_constraintBottom_toTopOf="@+id/btn_drive_center">
+        app:layout_constraintTop_toBottomOf="@+id/btn_drive_left">
 
         <TextView
             style="@style/rbtn_mode_type"
@@ -51,10 +53,11 @@
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_right"
             app:drawableStartCompat="@drawable/ic_drive_right" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -70,9 +73,9 @@
         android:id="@+id/btn_drive_center"
         style="@style/style_mode_item"
         android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_drive_rear"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
-        app:layout_constraintTop_toBottomOf="@+id/btn_drive_right"
-        app:layout_constraintBottom_toTopOf="@+id/btn_drive_rear">
+        app:layout_constraintTop_toBottomOf="@+id/btn_drive_right">
 
         <TextView
             style="@style/rbtn_mode_type"
@@ -81,10 +84,11 @@
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_center"
             app:drawableStartCompat="@drawable/ic_drive_center" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -100,9 +104,9 @@
         android:id="@+id/btn_drive_rear"
         style="@style/style_mode_item"
         android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_drive_user1"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
-        app:layout_constraintTop_toBottomOf="@+id/btn_drive_center"
-        app:layout_constraintBottom_toTopOf="@+id/btn_drive_user1">
+        app:layout_constraintTop_toBottomOf="@+id/btn_drive_center">
 
         <TextView
             style="@style/rbtn_mode_type"
@@ -111,10 +115,11 @@
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_rear"
             app:drawableStartCompat="@drawable/ic_drive_rear" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -130,9 +135,9 @@
         android:id="@+id/btn_drive_user1"
         style="@style/style_mode_item"
         android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_drive_user2"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
-        app:layout_constraintTop_toBottomOf="@+id/btn_drive_rear"
-        app:layout_constraintBottom_toTopOf="@+id/btn_drive_user2">
+        app:layout_constraintTop_toBottomOf="@+id/btn_drive_rear">
 
         <TextView
             style="@style/rbtn_mode_type"
@@ -141,10 +146,12 @@
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_user1"
             app:drawableStartCompat="@drawable/ic_drive_user1" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,9 +166,9 @@
         android:id="@+id/btn_drive_user2"
         style="@style/style_mode_item"
         android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btn_drive_left"
-        app:layout_constraintTop_toBottomOf="@+id/btn_drive_user1"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/btn_drive_user1">
 
         <TextView
             style="@style/rbtn_mode_type"
@@ -169,11 +176,12 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/btn_drive_user2"
-            app:drawableStartCompat="@drawable/ic_drive_user2"/>
+            app:drawableStartCompat="@drawable/ic_drive_user2" />
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -190,6 +198,7 @@
         android:layout_width="0dp"
         android:layout_height="85dp"
         android:layout_marginBottom="20dp"
+        android:paddingHorizontal="25dp"
         android:background="@drawable/shape_switch_bg"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/iv_position"
@@ -205,6 +214,11 @@
             android:textColor="#0D0D0D"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/sb_loudness"

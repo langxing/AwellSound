@@ -54,7 +54,9 @@ class InteractiveWaveView @JvmOverloads constructor(
     var showHorizontalLine = false
     // 是否绘制竖线
     var showVerticalLine = false
-    var showTopOutline = false
+    var showTopOutline = true
+    // 粒子颜色；波纹区域的背景色浅时改成深色，白色背景下白粒子看不见
+    var particleColor = Color.WHITE
     // 是否显示顶部的值
     var showTopValue = false
     var maxGain = 0
@@ -153,15 +155,15 @@ class InteractiveWaveView @JvmOverloads constructor(
         buildWavePath(gridW, gridH)
         canvas.drawPath(wavePath, fillPaint)
 
-        val gridWidth = if (showVerticalLine) gridW - (paddingLeftRight * 2) else gridW
-        drawGrid(canvas, gridWidth, gridH, 2, mDataList.size - 1)
-
         // 绘制顶部边框线
         if (showTopOutline) {
             drawTopOutline(canvas, gridH)
         }
         // 释放波纹的裁剪锁
         canvas.restore()
+        // 网格和文字画在波纹之上且不裁剪；X 轴文字在格子下方、超出 clipRect 底边会被裁掉
+        val gridWidth = if (showVerticalLine) gridW - (paddingLeftRight * 2) else gridW
+        drawGrid(canvas, gridWidth, gridH, 2, mDataList.size - 1)
         // 3. 绘制粒子
         drawParticles(canvas)
     }
@@ -328,7 +330,7 @@ class InteractiveWaveView @JvmOverloads constructor(
                 vx = vx,
                 vy = vy,
                 size = (Math.random() * 2f).toFloat(), // 大小不一
-                color = Color.WHITE
+                color = particleColor
             ))
         }
         invalidate()
