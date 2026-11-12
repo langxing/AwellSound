@@ -11,7 +11,7 @@
         android:id="@+id/tv_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#748AA2"
+        android:textColor="#1769FF"
         android:textSize="16sp"
         tools:text="15" />
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_centerHorizontal="true">
+        android:layout_marginTop="0dp">
 
         <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
             android:id="@+id/seekbar"
@@ -36,9 +36,9 @@
         android:id="@+id/tv_hz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#5E718D"
-        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#667991"
+        android:textSize="15sp"
         android:textStyle="bold"
-        android:visibility="gone"
         tools:text="20hz" />
 </LinearLayout>

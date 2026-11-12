@@ -41,11 +41,11 @@ public class EqFragment extends SoundEqualFragment implements View.OnClickListen
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         int gridW = requireContext().getResources().getDisplayMetrics().widthPixels;
         waveview.setShowVerticalLine(true);
         waveview.setShowHorizontalLine(true);
         waveview.setShowTopValue(false);
+        waveview.setShowBottomValue(false);
         // car_50 浅色背景，白粒子看不清，用强调蓝
         waveview.setParticleColor(Color.parseColor("#1769FF"));
         // car_50 不画波浪顶部描边，其他 flavor 保持默认的 true

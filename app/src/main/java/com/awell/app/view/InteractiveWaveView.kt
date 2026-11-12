@@ -59,6 +59,7 @@ class InteractiveWaveView @JvmOverloads constructor(
     var particleColor = Color.WHITE
     // 是否显示顶部的值
     var showTopValue = false
+    var showBottomValue = true
     var maxGain = 0
     //
     private val yAxisValues = arrayOf("+15", "+10", "+5", "0", "-5", "-10", "-15") // 对应 6 行
@@ -255,8 +256,10 @@ class InteractiveWaveView @JvmOverloads constructor(
                     }
                     canvas.drawText(value, x, textY, textPaint)
                 }
-                // X 轴频率文字固定在底部横线下方 6dp 起笔，不再依赖 showTopValue，避免压在线上
-                canvas.drawText(text, x, gridHeight + topOffset + dpToPx(28f), textPaint)
+                if (showBottomValue) {
+                    // X 轴频率文字固定在底部横线下方 6dp 起笔，不再依赖 showTopValue，避免压在线上
+                    canvas.drawText(text, x, gridHeight + topOffset + dpToPx(28f), textPaint)
+                }
             }
             // 画线：竖线始终从图表顶部画到底部，不受 showTopValue 影响，避免超出格子
             if (showVerticalLine) {
