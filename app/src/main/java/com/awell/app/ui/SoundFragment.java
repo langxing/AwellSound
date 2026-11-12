@@ -116,7 +116,6 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
 
         ball = ApsStation.getSoundData(requireContext(), ApsStation.NAME_LAYOUT);
         location = ToolClass.getLocationFlag(requireContext());
-        // 位置旗标可能被写成非法值，直接 buttons[location] 会越界崩溃
         if (location < 0 || location >= buttons.length) {
             LogUtil.e("location flag is invalid: " + location + ", fallback to 2");
             location = 2;
