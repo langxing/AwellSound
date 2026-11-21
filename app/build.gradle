@@ -11,8 +11,8 @@ android {
         applicationId "com.awell.app"
         minSdk 24
         targetSdk 34
-        versionCode 8
-        versionName "1.8"
+        versionCode 9
+        versionName "1.9"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
@@ -90,6 +90,12 @@ android {
         car_50 {
             dimension "brand"
             buildConfigField "Boolean", "showLogo", "false"
+        }
+        // 单包运行期换肤：persist.sys.current.lamborg.ui
+        // 1 = car_50, 2 = lamborghini, 其他 = gongban
+        multi {
+            dimension "brand"
+            buildConfigField "Boolean", "showLogo", "true"
         }
     }
 }

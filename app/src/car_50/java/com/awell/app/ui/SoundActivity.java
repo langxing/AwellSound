@@ -2,9 +2,12 @@ package com.awell.app.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,7 +28,20 @@ public class SoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityMain50Binding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
+        applyStatusBarPadding(mBinding.getRoot());
         initView();
+    }
+
+    /**
+     * car_50 卡片按状态栏高度下移，保证状态栏显示/隐藏时上下留白一致。
+     */
+    private void applyStatusBarPadding(View root) {
+        ViewCompat.setOnApplyWindowInsetsListener(root, (view, insets) -> {
+            int top = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+            view.setPadding(0, top, 0, 0);
+            return insets;
+        });
+        ViewCompat.requestApplyInsets(root);
     }
 
     @SuppressLint("NonConstantResourceId")

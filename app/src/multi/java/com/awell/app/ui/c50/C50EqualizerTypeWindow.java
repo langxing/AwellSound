@@ -1,0 +1,94 @@
+package com.awell.app.ui.c50;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import com.awell.app.R;
+import com.awell.app.databinding.C50LayoutEqualizerWindowBinding;
+import com.awell.app.utils.LogUtil;
+import com.awell.app.utils.ToolClass;
+
+public class C50EqualizerTypeWindow extends PopupWindow implements View.OnClickListener {
+    private C50LayoutEqualizerWindowBinding mBinding;
+    private Context mContext;
+    private String[] mApsType;
+
+    public void setSelectedPosition(int mSelectedPosition) {
+        if (mBinding == null) return;
+        for (int i = 0; i < mApsType.length; i++) {
+            View itemView = mBinding.layoutType.getChildAt(i);
+            itemView.setSelected(i == mSelectedPosition);
+        }
+        if (mSelectedPosition > 5) {
+            mBinding.getRoot().post(() -> mBinding.scrollView.fullScroll(View.FOCUS_DOWN));
+        }
+    }
+
+    public void setListener(OnEqualizerTypeClickListener mListener) {
+        this.mListener = mListener;
+    }
+
+    private OnEqualizerTypeClickListener mListener;
+
+    public C50EqualizerTypeWindow(Context context) {
+        super(context);
+        mContext = context;
+        View contentView = LayoutInflater.from(context).inflate(R.layout.c50_layout_equalizer_window, null);
+        setContentView(contentView);
+        initView(contentView);
+    }
+
+    private void initView(View contentView) {
+        // 1. 必须设置背景，哪怕是透明的（针对老版本系统）
+        setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 2. 设置点击外部消失
+        setOutsideTouchable(true);
+        // 3. 设置能够响应物理返回键
+        setFocusable(true);
+        mBinding = C50LayoutEqualizerWindowBinding.bind(contentView);
+        mApsType = mContext.getResources().getStringArray(R.array.dsp_aps_type);
+        mBinding.layoutType.removeAllViews();
+        for (int i = 0; i < mApsType.length; i++) {
+            ViewGroup itemView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.c50_layout_item_equalizer_type, null);
+            mBinding.layoutType.addView(itemView);
+            TextView textView = (TextView) itemView.getChildAt(0);
+            itemView.setTag(i);
+            textView.setText(mApsType[i]);
+            itemView.setOnClickListener(this);
+            if (i == mApsType.length - 1) {
+                itemView.getChildAt(1).setVisibility(View.GONE);
+            }
+        }
+        int maxHeightPx = (int) ToolClass.dp2px(mContext, 380);
+        int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int heightSpec = View.MeasureSpec.makeMeasureSpec(maxHeightPx, View.MeasureSpec.AT_MOST);
+        contentView.measure(widthSpec, heightSpec);
+        setHeight(Math.min(contentView.getMeasuredHeight(), maxHeightPx));
+    }
+
+    @Override
+    public void onClick(View view) {
+        int position = (int) view.getTag();
+        for (int i = 0; i < mBinding.layoutType.getChildCount(); i++) {
+            mBinding.layoutType.getChildAt(i).setSelected(i == position);
+        }
+        LogUtil.i("onClick position: " + position);
+        if (mListener != null) {
+            mListener.onEqualizerTypeClick(position, mApsType[position]);
+        }
+        dismiss();
+    }
+
+
+    public interface OnEqualizerTypeClickListener {
+        void onEqualizerTypeClick(int position, String type);
+    }
+
+}
+

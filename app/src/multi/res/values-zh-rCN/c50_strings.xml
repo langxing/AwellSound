@@ -1,0 +1,5 @@
+<resources>
+    <string name="c50_reset_default">恢复默认</string>
+    <string name="sound_field_location">声场定位</string>
+    <string name="focus">焦点</string>
+</resources>

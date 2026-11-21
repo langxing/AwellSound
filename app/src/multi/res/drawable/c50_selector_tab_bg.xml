@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <!--
+                底部投影：#1759FF 16%，向下约 10dp，用 5 层同心圆角矩形做渐隐
+                （shape 不支持模糊阴影，靠多层低透明度叠加近似）
+            -->
+            <item android:bottom="-10dp">
+                <shape>
+                    <solid android:color="#061759FF" />
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+            <item android:bottom="-8dp">
+                <shape>
+                    <solid android:color="#071759FF" />
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+            <item android:bottom="-6dp">
+                <shape>
+                    <solid android:color="#081759FF" />
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+            <item android:bottom="-4dp">
+                <shape>
+                    <solid android:color="#0B1759FF" />
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+            <item android:bottom="-2dp">
+                <shape>
+                    <solid android:color="#0C1759FF" />
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+            <!-- 主体 -->
+            <item>
+                <shape>
+                    <solid android:color="#1769FF" />
+                    <corners android:radius="10dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/white"/>
+            <corners android:radius="10dp"/>
+            <stroke android:color="#D7E0E9" android:width="0.5dp"/>
+        </shape>
+    </item>
+</selector>

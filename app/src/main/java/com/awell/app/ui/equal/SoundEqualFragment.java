@@ -69,7 +69,7 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         ivLogo = mContentView.findViewById(R.id.iv_logo);
         waveview = mContentView.findViewById(R.id.waveview);
         layoutSeekbar = mContentView.findViewById(R.id.layout_seekbar);
-        if (BuildConfig.showLogo) {
+        if (isShowLogo()) {
             ivLogo.setVisibility(View.VISIBLE);
         } else {
             ivLogo.setVisibility(View.GONE);
@@ -120,11 +120,27 @@ public class SoundEqualFragment extends Fragment implements Contract.EqualView {
         mPresenter.initData();
     }
 
+    /**
+     * 是否显示 logo。默认保持各 flavor 原来的 BuildConfig.showLogo 行为，
+     * multi 等运行期换肤的变体可以按皮肤覆盖。
+     */
+    protected boolean isShowLogo() {
+        return BuildConfig.showLogo;
+    }
+
+    /**
+     * EQ seekbar 子项的布局。默认使用公版布局，
+     * car_50 等皮肤可以覆盖成自己的布局。
+     */
+    protected int getSeekBarItemLayoutRes() {
+        return R.layout.layout_item_seekbar;
+    }
+
     @SuppressLint("SetTextI18n")
     protected void updateSeekBar(int[] apsGain, boolean changeSeekbar) {
         layoutSeekbar.removeAllViews();
         for (int i = 0; i < apsFreq.length; i++) {
-            View view = LayoutInflater.from(requireContext()).inflate(R.layout.layout_item_seekbar, null);
+            View view = LayoutInflater.from(requireContext()).inflate(getSeekBarItemLayoutRes(), null);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
             layoutParams.weight = 1;
