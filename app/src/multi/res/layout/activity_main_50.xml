@@ -9,8 +9,7 @@
         android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/c50_card_margin_horizontal"
-        android:layout_marginVertical="@dimen/c50_card_margin_vertical"
+        android:layout_margin="@dimen/c50_card_margin_horizontal"
         android:background="@drawable/main_bg" />
 
     <RadioGroup

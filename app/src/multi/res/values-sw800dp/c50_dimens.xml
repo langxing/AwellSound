@@ -19,7 +19,7 @@
     <dimen name="c50_custom_height">60dp</dimen>
 
     <!-- 声场页模式按钮：高度 80 = 50dp 图标 + 上下各 15dp -->
-    <dimen name="c50_mode_item_height">80dp</dimen>
+    <dimen name="c50_mode_item_height">78dp</dimen>
     <dimen name="c50_mode_item_margin_top">10dp</dimen>
     <dimen name="c50_mode_item_padding">15dp</dimen>
     <dimen name="c50_mode_item_padding_horizontal">20dp</dimen>

@@ -18,20 +18,21 @@ public final class SkinConfig {
     public static final int CAR_50 = 1;
     public static final int LAMBORGHINI = 2;
 
-    private static int sUiType = -1;
-
     private SkinConfig() {
     }
 
+    /**
+     * 每次读取最新值，不缓存，保证修改属性后无需重启进程即可生效。
+     */
     public static int uiType() {
-        if (sUiType < 0) {
-            sUiType = readUiType();
-        }
-        return sUiType;
+        return readUiType();
     }
 
+    /**
+     * 无缓存，保留方法兼容调用。
+     */
     public static void reload() {
-        sUiType = -1;
+        // no-op
     }
 
     public static boolean isGongban() {

@@ -1,6 +1,8 @@
 package com.awell.app.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -62,6 +64,15 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
 
     private final int[] btnKey = {R.id.dsp_sound_up, R.id.dsp_sound_down, R.id.dsp_sound_left, R.id.dsp_sound_right};
     private final int size = btnKey.length;
+
+    /**
+     * 数据库里存的是保存时那一套分辨率下的绝对像素坐标，而 aps_sound_range 的尺寸
+     * 会随分辨率变化。这里额外记录小球中心相对 aps_sound_range 的比例，
+     * 换分辨率后按比例还原，保证小球位置相对声场区域一致。
+     */
+    private static final String SP_BALL_SCALE = "aps_ball_scale";
+    private static final String KEY_CENTER_X = "_center_x";
+    private static final String KEY_CENTER_Y = "_center_y";
 
     protected int location;
     protected int[] sounds = new int[4];
@@ -193,12 +204,10 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
                     setSounds();
                     setLayout();
                 } else {
-                    if (ball == null) {
-                        ball = apsSound[2].clone();
-                        setLayout(false, true);
-                    } else {
-                        setLayout(false, true);
-                    }
+                    // location < 4 表示小球停在四个预设位置上，预设位置本身就是按当前
+                    // range 尺寸算出来的，直接重算，避免沿用旧分辨率的绝对像素。
+                    ball = apsSound[location].clone();
+                    setLayout(false, true);
                 }
             });
         }, 70);
@@ -218,8 +227,62 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
     }
 
     private void setUserBall() {
-        ball = ApsStation.getSoundData(requireContext(), location == 4 ? ApsStation.USER_MODE_LAYOUT_1 : ApsStation.USER_MODE_LAYOUT_2);
+        int name = location == 4 ? ApsStation.USER_MODE_LAYOUT_1 : ApsStation.USER_MODE_LAYOUT_2;
+        ball = normalizeBall(ApsStation.getSoundData(requireContext(), name), name);
         if (ball == null) ball = apsSound[2].clone();
+    }
+
+    /**
+     * 把数据库里存的绝对像素坐标换算成当前分辨率下的坐标。
+     * <p>
+     * 换分辨率后 aps_sound_range 和球本身的尺寸都会变，直接沿用旧像素会出现
+     * “位置偏了”或“球跑到可视区外看不见”。这里用保存时记录的小球中心比例还原，
+     * 并最终收敛到可视区内。
+     *
+     * @param data 数据库里存的 {l, t, r, b}
+     * @param name 数据对应的存储 name，用于区分不同模式各自的比例
+     */
+    private int[] normalizeBall(int[] data, int name) {
+        if (data == null || data.length < 4) return null;
+        if (range_w <= 0 || range_h <= 0 || ball_w <= 0 || ball_h <= 0) {
+            return data.clone();
+        }
+
+        int halfW = ball_w / 2;
+        int halfH = ball_h / 2;
+        int cx, cy;
+
+        SharedPreferences sp = requireContext().getSharedPreferences(SP_BALL_SCALE, Context.MODE_PRIVATE);
+        String keyX = name + KEY_CENTER_X;
+        String keyY = name + KEY_CENTER_Y;
+        if (sp.contains(keyX) && sp.contains(keyY)) {
+            // 按保存时记录的相对位置还原，换分辨率后相对声场区域的位置保持一致
+            cx = Math.round(sp.getFloat(keyX, 0.5f) * range_w);
+            cy = Math.round(sp.getFloat(keyY, 0.5f) * range_h);
+        } else {
+            // 没有比例记录：沿用已存的绝对像素，下面收敛到可视区内
+            cx = (data[0] + data[2]) / 2;
+            cy = (data[1] + data[3]) / 2;
+        }
+
+        cx = Math.max(halfW, Math.min(range_w - halfW, cx));
+        cy = Math.max(halfH, Math.min(range_h - halfH, cy));
+        return new int[]{cx - halfW, cy - halfH, cx + halfW, cy + halfH};
+    }
+
+    /**
+     * 记录小球中心相对 aps_sound_range 的比例，供换分辨率后还原。
+     */
+    private void saveBallScale(int[] data, int name) {
+        if (data == null || data.length < 4) return;
+        if (range_w <= 0 || range_h <= 0) return;
+        float ratioX = ((data[0] + data[2]) / 2f) / range_w;
+        float ratioY = ((data[1] + data[3]) / 2f) / range_h;
+        requireContext().getSharedPreferences(SP_BALL_SCALE, Context.MODE_PRIVATE)
+                .edit()
+                .putFloat(name + KEY_CENTER_X, ratioX)
+                .putFloat(name + KEY_CENTER_Y, ratioY)
+                .apply();
     }
 
     /**
@@ -366,7 +429,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
 
             LogUtil.i("x = " + x + " y = " + y + "  lf = " + lf + " rf = " + rf + " lr = " + lr + " rr = " + rr);
             sounds = new int[4];
-
+            if (dataScale_h == 0 || dataScale_w == 0) return;
             sounds[0] = new BigDecimal(lf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
             sounds[1] = new BigDecimal(rf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
             sounds[2] = new BigDecimal(lr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
@@ -393,6 +456,8 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         ApsStation.deleteSoundInDb(requireContext(), send);
         ApsStation.insertSoundToDb(requireContext(), ball, layout);
         ApsStation.insertSoundToDb(requireContext(), sounds, send);
+        // 同时记录小球中心比例，换分辨率后据此还原位置
+        saveBallScale(ball, layout);
     }
 
     /**

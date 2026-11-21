@@ -7,7 +7,7 @@
     -->
 
     <!-- 卡片外边距 -->
-    <dimen name="c50_card_margin_horizontal">30dp</dimen>
+    <dimen name="c50_card_margin_horizontal">25dp</dimen>
     <dimen name="c50_card_margin_vertical">24dp</dimen>
 
     <!-- 顶部页签 -->
@@ -20,10 +20,10 @@
     <dimen name="c50_custom_height">48dp</dimen>
 
     <!-- 声场页模式按钮：高度 72 = 50dp 图标 + 上下各 10dp -->
-    <dimen name="c50_mode_item_height">70dp</dimen>
+    <dimen name="c50_mode_item_height">55dp</dimen>
     <dimen name="c50_mode_item_margin_top">8dp</dimen>
     <dimen name="c50_mode_item_padding">10dp</dimen>
-    <dimen name="c50_mode_item_padding_horizontal">16dp</dimen>
+    <dimen name="c50_mode_item_padding_horizontal">10dp</dimen>
     <dimen name="c50_mode_text_size">16sp</dimen>
 
     <!-- 声场页右列：宽度由该值决定，高度按原图比例换算 -->
