@@ -12,8 +12,6 @@ import com.awell.app.utils.ApsStation;
 import com.awell.app.utils.LogUtil;
 import com.awell.app.utils.ToolClass;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class YKSSoundFragment extends SoundFragment {
@@ -52,50 +50,9 @@ public class YKSSoundFragment extends SoundFragment {
         }
 
         if (sound) {
-            float x = ball[0] - center_w + ball_w / 2f;
-            float y = ball[1] - center_h + ball_h / 2f;
-            LogUtil.i("x = " + x + " y = " + y + " dataScale_h = " + dataScale_h + " dataScale_w " + dataScale_w);
-            float lr, lf, rr, rf;
-            // dataScale_w 和 dataScale_h 是UI的坐标与要设置功能的比例值；
-            // 所以得出来的 lf,lr,rf,rr 都要x的除以dataScale_w，y的除以dataScale_h
-            if (x >= 0) {
-                if (y > 0) {
-                    lf = x > y ? center_w - x : center_h - y;
-                    lr = center_w - x;
-                    rf = center_h - y;
-                    rr = x > y ? center_w : center_h;
-                } else {
-                    lf = center_w - x;
-                    lr = x > -y ? center_w - x : center_h + y;
-                    rf = x > y ? center_w : center_h;
-                    rr = center_h + y;
-                }
-            } else {
-                if (y > 0) {
-                    lf = center_h - y;
-                    lr = x > y ? center_w : center_h;
-                    rf = -x > y ? center_w + x : center_h - y;
-                    rr = center_w + x;
-                } else {
-                    lf = x > y ? center_w : center_h;
-                    lr = center_h + y;
-                    rf = center_w + x;
-                    rr = -x > -y ? center_w + x : center_h + y;
-                }
-            }
-
-            lf -= ball_w / 2f;
-            lr -= ball_w / 2f;
-            rf -= ball_w / 2f;
-            rr -= ball_w / 2f;
-
-            LogUtil.i("x = " + x + " y = " + y + "  lf = " + lf + " rf = " + rf + " lr = " + lr + " rr = " + rr);
-            sounds = new int[4];
-
-            sounds[0] = new BigDecimal(lf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
-            sounds[1] = new BigDecimal(rf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
-            sounds[2] = new BigDecimal(lr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
-            sounds[3] = new BigDecimal(rr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
+            int[] computed = computeSounds();
+            if (computed == null) return;
+            sounds = computed;
         }
         if (!send) return;
         LogUtil.i("sound[0] = " + sounds[0] + " sound[1] = " + sounds[1] + " sound[2] = " + sounds[2] + " sound[3] = " + sounds[3]);

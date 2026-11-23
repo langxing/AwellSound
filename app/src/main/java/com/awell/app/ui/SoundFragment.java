@@ -54,7 +54,7 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
      */
     protected int[] soundRange, ball;
     private int[][] apsSound;
-    protected float center_w, center_h, dataScale_w = 0f, dataScale_h = 0f;
+    protected float center_w, center_h;
     protected boolean mLoudnessOpen = false;
     private int gainMax = 0;
     private boolean isFirst = false;
@@ -189,11 +189,8 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
             ball_h = aps_car_ball.getHeight();
             center_w = range_w / 2f;
             center_h = range_h / 2f;
-            dataScale_w = (center_w - ball_w / 2f) / (soundRange[1] - soundRange[0]);
-            dataScale_h = (center_h - ball_h / 2f) / (soundRange[1] - soundRange[0]);
             LogUtil.d("ball_w = " + ball_w + " ball_h = " + ball_h);
             LogUtil.d("range_w = " + range_w + " range_h = " + range_h);
-            LogUtil.d("dataScale_w = " + dataScale_w + " dataScale_h = " + dataScale_h);
 
             setFixedValue();
 
@@ -372,6 +369,77 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
     }
 
     /**
+     * 根据小球当前位置换算四个声道的值。
+     * <p>
+     * 旧逻辑直接用像素 x、y 互相比较（如 {@code x > y}）并在两个方向间取 min/max，
+     * 隐含了“声场区域是正方形且小球宽高相等”的前提。car_50 的 aps_sound_range
+     * 跟着 iv_chair 走，是矩形（实测 352x528），这个前提不成立，算出来的值就会和
+     * gongban 不一致。这里改成按各轴半径归一化后再比较，正方形场景下与旧逻辑完全一致。
+     *
+     * @return {lf, rf, lr, rr}，取值在 [0, soundRange[1] - soundRange[0]] 之间；
+     * 尺寸尚未就绪时返回 null
+     */
+    protected int[] computeSounds() {
+        // 半径：小球中心到各边的最大可移动距离
+        float radiusW = center_w - ball_w / 2f;
+        float radiusH = center_h - ball_h / 2f;
+        if (radiusW <= 0 || radiusH <= 0) return null;
+
+        // 小球中心相对声场中心的偏移，归一化到 [-1, 1]
+        float u = (ball[0] - center_w + ball_w / 2f) / radiusW;
+        float v = (ball[1] - center_h + ball_h / 2f) / radiusH;
+        u = Math.max(-1f, Math.min(1f, u));
+        v = Math.max(-1f, Math.min(1f, v));
+
+        // 各方向剩余距离，1 表示在中心（满值），0 表示已贴到该侧边缘
+        float right = 1f - u, left = 1f + u;
+        float bottom = 1f - v, top = 1f + v;
+
+        float lf, lr, rf, rr;
+        if (u >= 0) {
+            if (v > 0) {
+                // 右下：rr 满值，相邻两侧线性衰减，对角取两者中衰减更小的
+                lf = Math.min(right, bottom);
+                lr = right;
+                rf = bottom;
+                rr = 1f;
+            } else {
+                // 右上
+                lf = right;
+                lr = Math.min(right, top);
+                rf = 1f;
+                rr = top;
+            }
+        } else {
+            if (v > 0) {
+                // 左下
+                lf = bottom;
+                lr = 1f;
+                rf = Math.min(left, bottom);
+                rr = left;
+            } else {
+                // 左上
+                lf = 1f;
+                lr = top;
+                rf = left;
+                rr = Math.min(left, top);
+            }
+        }
+
+        int max = soundRange[1] - soundRange[0];
+        int[] result = new int[4];
+        result[0] = new BigDecimal(lf * max).setScale(0, RoundingMode.HALF_UP).intValue();
+        result[1] = new BigDecimal(rf * max).setScale(0, RoundingMode.HALF_UP).intValue();
+        result[2] = new BigDecimal(lr * max).setScale(0, RoundingMode.HALF_UP).intValue();
+        result[3] = new BigDecimal(rr * max).setScale(0, RoundingMode.HALF_UP).intValue();
+
+        LogUtil.i("u = " + u + " v = " + v
+                + "  lf = " + lf + " rf = " + rf + " lr = " + lr + " rr = " + rr
+                + "  sounds = " + Arrays.toString(result));
+        return result;
+    }
+
+    /**
      * 设置小球显示位置 发送功能数据 保存数据
      *
      * @param send
@@ -391,49 +459,9 @@ public class SoundFragment extends Fragment implements View.OnClickListener, Vie
         }
 
         if (sound) {
-            float x = ball[0] - center_w + ball_w / 2f;
-            float y = ball[1] - center_h + ball_h / 2f;
-            float lr, lf, rr, rf;
-            // dataScale_w 和 dataScale_h 是UI的坐标与要设置功能的比例值；
-            // 所以得出来的 lf,lr,rf,rr 都要x的除以dataScale_w，y的除以dataScale_h
-            if (x >= 0) {
-                if (y > 0) {
-                    lf = x > y ? center_w - x : center_h - y;
-                    lr = center_w - x;
-                    rf = center_h - y;
-                    rr = x > y ? center_w : center_h;
-                } else {
-                    lf = center_w - x;
-                    lr = x > -y ? center_w - x : center_h + y;
-                    rf = x > y ? center_w : center_h;
-                    rr = center_h + y;
-                }
-            } else {
-                if (y > 0) {
-                    lf = center_h - y;
-                    lr = x > y ? center_w : center_h;
-                    rf = -x > y ? center_w + x : center_h - y;
-                    rr = center_w + x;
-                } else {
-                    lf = x > y ? center_w : center_h;
-                    lr = center_h + y;
-                    rf = center_w + x;
-                    rr = -x > -y ? center_w + x : center_h + y;
-                }
-            }
-
-            lf -= ball_w / 2f;
-            lr -= ball_w / 2f;
-            rf -= ball_w / 2f;
-            rr -= ball_w / 2f;
-
-            LogUtil.i("x = " + x + " y = " + y + "  lf = " + lf + " rf = " + rf + " lr = " + lr + " rr = " + rr);
-            sounds = new int[4];
-            if (dataScale_h == 0 || dataScale_w == 0) return;
-            sounds[0] = new BigDecimal(lf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
-            sounds[1] = new BigDecimal(rf).divide(new BigDecimal(dataScale_h), 0, RoundingMode.HALF_UP).intValue();
-            sounds[2] = new BigDecimal(lr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
-            sounds[3] = new BigDecimal(rr).divide(new BigDecimal(dataScale_w), 0, RoundingMode.HALF_UP).intValue();
+            int[] computed = computeSounds();
+            if (computed == null) return;
+            sounds = computed;
         }
         if (!send) return;
         LogUtil.i("sound[0] = " + sounds[0] + " sound[1] = " + sounds[1] + " sound[2] = " + sounds[2] + " sound[3] = " + sounds[3]);
