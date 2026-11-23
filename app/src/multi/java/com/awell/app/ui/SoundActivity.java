@@ -7,15 +7,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -70,6 +66,11 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         int uiType = SkinConfig.uiType();
         mSkin = (uiType == SkinConfig.CAR_50 || uiType == SkinConfig.LAMBORGHINI)
                 ? uiType : SkinConfig.GONGBAN;
+        if (mSkin == SkinConfig.CAR_50) {
+            setTheme(R.style.Splash_Theme);
+        } else {
+            setTheme(R.style.SplashTheme);
+        }
         super.onCreate(savedInstanceState);
 
         if (mSkin == SkinConfig.CAR_50) {
@@ -182,7 +183,6 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
         setContentView(mCar50Binding.getRoot());
         // car_50 卡片按状态栏高度下移，保证状态栏显示/隐藏时上下留白一致。
         applyStatusBarPadding(mCar50Binding.getRoot());
-        applyCar50StatusBar();
 
         // Activity 重建（如切换分辨率）时，FragmentManager 会按 tag 恢复旧实例，
         // 这里必须复用恢复出来的实例，否则新实例不在 FragmentManager 里，页面会重叠。
@@ -244,18 +244,6 @@ public class SoundActivity extends AppCompatActivity implements View.OnClickList
             return insets;
         });
         ViewCompat.requestApplyInsets(root);
-    }
-
-    /**
-     * car_50 状态栏：不透明背景 + 黑色图标。
-     * 主题里的 windowTranslucentStatus 会让系统在状态栏区域盖一层半透明遮罩，
-     * 这里清掉该 flag，改由系统绘制不透明背景色，彻底去掉遮罩。
-     */
-    private void applyCar50StatusBar() {
-        Window window = getWindow();
-        WindowInsetsControllerCompat controller =
-                new WindowInsetsControllerCompat(window, window.getDecorView());
-        controller.setAppearanceLightStatusBars(true);
     }
 
     // ---------------------------------------------------------------------

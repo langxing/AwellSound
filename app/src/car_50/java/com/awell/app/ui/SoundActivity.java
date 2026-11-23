@@ -33,26 +33,7 @@ public class SoundActivity extends AppCompatActivity {
         mBinding = ActivityMain50Binding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
         applyStatusBarPadding(mBinding.getRoot());
-        applyCar50StatusBar();
         initView();
-    }
-
-    /**
-     * car_50 状态栏：不透明背景 + 黑色图标。
-     * 主题里的 windowTranslucentStatus 会让系统在状态栏区域盖一层半透明遮罩，
-     * 这里清掉该 flag，改由系统绘制不透明背景色，彻底去掉遮罩。
-     */
-    private void applyCar50StatusBar() {
-        Window window = getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.c50_status_bar_bg));
-        WindowInsetsControllerCompat controller =
-                new WindowInsetsControllerCompat(window, window.getDecorView());
-        controller.setAppearanceLightStatusBars(true);
-        // 部分车机 SystemUI 只认旧版 flag，双写兜底。
-        View decor = window.getDecorView();
-        decor.setSystemUiVisibility(decor.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     /**

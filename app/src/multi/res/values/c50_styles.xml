@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Splash_Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:colorBackground">@color/main_bg</item>
+        <item name="android:windowBackground">@color/main_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
     <style name="rbtn_mode_type">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
