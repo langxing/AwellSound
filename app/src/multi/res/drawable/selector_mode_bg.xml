@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true">
+    <item android:state_selected="true">
         <shape>
             <solid android:color="#DEEDFF"/>
             <corners android:radius="10dp"/>
@@ -9,7 +9,7 @@
     </item>
     <item>
         <shape>
-            <solid android:color="#EDF3FA"/>
+            <solid android:color="#EEF3F3"/>
             <corners android:radius="10dp"/>
         </shape>
     </item>

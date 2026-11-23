@@ -1,5 +1,5 @@
 <resources>
-    <string name="c50_reset_default">Restore defaults</string>
-    <string name="sound_field_location">Sound Positioning</string>
+    <string name="c50_reset_default">Defaults</string>
+    <string name="sound_field_location">Sound Field</string>
     <string name="focus">Focus</string>
 </resources>

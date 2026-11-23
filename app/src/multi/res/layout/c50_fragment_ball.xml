@@ -198,9 +198,9 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/c50_loudness_height"
         android:layout_marginBottom="20dp"
-        android:paddingHorizontal="25dp"
-        android:background="@drawable/shape_switch_bg"
+        android:background="@drawable/selector_mode_bg"
         android:gravity="center"
+        android:paddingHorizontal="25dp"
         app:layout_constraintBottom_toTopOf="@+id/iv_position"
         app:layout_constraintEnd_toEndOf="@+id/tv_default"
         app:layout_constraintStart_toStartOf="@+id/tv_default">
@@ -236,7 +236,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/position_bg"
+        android:src="@drawable/selector_mode_bg"
         app:layout_constraintBottom_toTopOf="@+id/tv_default"
         app:layout_constraintDimensionRatio="H,328:285"
         app:layout_constraintEnd_toEndOf="@+id/tv_default"
@@ -328,12 +328,12 @@
         app:layout_constraintEnd_toEndOf="@+id/iv_position"
         app:layout_constraintTop_toTopOf="@+id/iv_position" />
 
-    <Button
+    <TextView
         android:id="@+id/tv_default"
         android:layout_width="@dimen/c50_panel_width"
         android:layout_height="0dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/c50_selector_reset_bg"
+        android:background="@drawable/selector_mode_bg"
         android:gravity="center"
         android:text="@string/c50_reset_default"
         android:textColor="#5E718D"
@@ -341,4 +341,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_chair"
         app:layout_constraintDimensionRatio="H,328:90"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_reset_image"
+        android:backgroundTint="#5E718D"
+        android:layout_marginEnd="105dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_default"
+        app:layout_constraintEnd_toEndOf="@+id/tv_default"
+        app:layout_constraintStart_toStartOf="@+id/tv_default"
+        app:layout_constraintTop_toTopOf="@+id/tv_default" />
 </androidx.constraintlayout.widget.ConstraintLayout>

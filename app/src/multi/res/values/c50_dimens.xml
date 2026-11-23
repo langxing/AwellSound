@@ -11,7 +11,7 @@
     <dimen name="c50_card_margin_vertical">24dp</dimen>
 
     <!-- 顶部页签 -->
-    <dimen name="c50_tab_width">108dp</dimen>
+    <dimen name="c50_tab_width">110dp</dimen>
     <dimen name="c50_tab_height">48dp</dimen>
     <dimen name="c50_tab_text_size">17sp</dimen>
 
